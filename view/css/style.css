@@ -1,0 +1,714 @@
+#search-btn{
+  
+  appearance: none;
+  background-color: #000000;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100px;
+  height: 40px;
+  will-change: transform;
+}
+
+#search-btn:disabled {
+  pointer-events: none;
+}
+
+#search-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+#search-btn:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+
+
+
+#user_info a{
+  font-size: medium;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color:white;
+  
+}
+
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: 131px;
+  bottom: 700px;
+}
+#menu {
+  background-color: #222;
+  border-color: #080808;
+  height: 131px;
+  bottom: 700px;
+}
+
+
+/* Estilos para el texto del h5 en el carrusel de innovación */
+.carousel__elements_innovacion h5.tipo_name_innovacion {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente elegante y legible */
+  font-size: 30px; /* Tamaño del texto */
+  color: #000000; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+  margin-top: 10px; /* Espaciado superior */
+  margin-bottom: 5px; /* Espaciado inferior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Efecto de hover para el texto del h5 */
+.carousel__elements_innovacion h5.tipo_name_innovacion:hover {
+  transform: scale(1.1); /* Escala el texto al pasar el mouse para agregar un efecto de zoom */
+}
+
+/* Estilos para las imágenes del carrusel de innovación */
+.carousel__img_innovacion {
+  width: 100%; /* Ajusta el ancho de las imágenes al 100% del contenedor */
+  height: 300px; /* Establece una altura fija para las imágenes */
+  object-fit: cover; /* Escala la imagen para que cubra todo el contenedor */
+  border-radius: 8px; /* Agrega esquinas redondeadas */
+}
+
+/* Estilos para los elementos del carrusel de innovación */
+.carousel__elements_innovacion {
+  margin-right: 10px; /* Agrega espacio entre cada elemento */
+}
+
+/* Estilos para los botones de navegación del carrusel de innovación */
+.carousel__innovacion .glider-prev,
+.carousel__innovacion .glider-next {
+  background-color: #333; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  padding: 5px; /* Espaciado interno */
+  border: none; /* Quita el borde */
+  border-radius: 50%; /* Hace que los botones sean redondos */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  position: absolute; /* Posiciona los botones absolutamente */
+  top: 50%; /* Alinea los botones verticalmente al centro */
+  transform: translateY(-50%); /* Ajusta la posición verticalmente */
+  z-index: 1; /* Asegura que estén por encima del carrusel */
+}
+
+/* Estilos para el indicador de puntos del carrusel de innovación */
+.carousel__innovacion .dots {
+  text-align: center; /* Alinea los puntos al centro */
+  margin-top: 10px; /* Agrega espacio encima de los puntos */
+}
+
+.carousel__innovacion .dot {
+  display: inline-block; /* Hace que los puntos se muestren en línea */
+  width: 10px; /* Ancho de los puntos */
+  height: 10px; /* Altura de los puntos */
+  background-color: #bbb; /* Color de fondo de los puntos */
+  border-radius: 50%; /* Hace que los puntos sean redondos */
+  margin: 0 5px; /* Agrega espacio entre los puntos */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+
+
+
+
+
+
+
+
+.h2 {
+  font-size: 35px;
+  font-family: Verdana;
+  
+}
+
+
+#containerOperacion,
+#containerCiudad,
+#containerRecomendaciones,
+#containerMasVisitadas{
+  width: 100%;
+  height: auto;
+  display: inline;
+   margin: -100px; 
+}
+#port-sec #containerOperacion{
+  margin-left: -65px;
+}
+h2.cat{
+  margin: 30px;
+}
+.portfolio-item .item-main {
+  margin: 0 10px 10px 0;
+  text-align: center;
+  background: #fff;
+  padding: 10px;
+  border:0px solid #E8EAEE;
+  
+}
+/* Fuente de carrusel */
+.tipo_name{
+  font-family: Verdana;
+  font-size: 18px;
+  
+}
+
+
+.div_cate {
+  display: inline-block;
+  margin-right: 10px; /* Espacio entre cada categoría, ajusta según sea necesario */
+  position: relative;
+  
+}
+.div_op {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_ciu {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_recom {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_visit {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+
+/* Estilo para la imagen dentro del card */
+
+/* .portfolio-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;  
+
+} */
+.portfolio-image img {
+  width: 200px; /* Establece el ancho deseado para todas las imágenes */
+  height: 127px; /* Establece la altura deseada para todas las imágenes */
+  object-fit: cover; /* Mantiene la relación de aspecto y cubre el contenedor */
+  border-radius: 8px; /* Bordes redondeados, ajusta según sea necesario */  
+}
+
+/* Estilo para el card principal */
+.portfolio-item {
+  list-style: none;
+  width: 256px;
+  height: auto;
+  
+
+}
+
+/* #containerOperacion{
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+}
+#containerOperacion img{
+  scroll-snap-align: center;
+  object-fit: cover;
+} */
+
+.item-main h5 {
+  position: 100%;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  font-size: 20px; 
+  opacity: 0; 
+  transition: opacity 0.5s ease-in-out; 
+}
+
+
+
+.portfolio-item:hover .item-main h5 {
+  opacity:1;
+ 
+}
+
+.portfolio-item:hover{
+  
+  transform: scale(1.1);
+  
+}
+
+/* Estilo para la imagen dentro del card */
+.portfolio-image:hover img {
+  -webkit-box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
+  box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
+}
+
+
+
+.error { 
+	color: red;
+    font-family: arial;
+    font-size: 10pt;
+    font-style:italic;
+}
+.carousel__img{
+  width: 90px;
+  height: auto;
+}
+
+
+
+
+
+/*--------------------------------------- ESTILO VIVIENDAS CRUD ----------------------------------------*/
+
+
+
+#contenido_delete {
+  /* Estilos adicionales para tu div */
+  width: 300px;
+  height: 200px;
+  background-color: lightgray;
+  /* Estilos para centrar el div */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Button_green {
+	background-color:green;
+	-moz-border-radius:14px;
+	-webkit-border-radius:14px;
+	border-radius:14px;
+	border:1px solid green;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5px 18px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_green:hover {
+	background-color:greenyellow;
+}
+.Button_green:active {
+	position:relative;
+	top:1px;
+}
+.Button_blue {
+	background-color:blue;
+	-moz-border-radius:14px;
+	-webkit-border-radius:14px;
+	border-radius:14px;
+	border:1px solid blue;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5px 18px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_blue:hover {
+	background-color:cyan;
+}
+.Button_blue:active {
+	position:relative;
+	top:1px;
+}
+.Button_red {
+	background-color:crimson;
+	-moz-border-radius:14px;
+	-webkit-border-radius:14px;
+	border-radius:14px;
+	border:1px solid crimson;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5px 18px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_red:hover {
+	background-color:red;
+}
+.Button_red:active {
+	position:relative;
+	top:1px;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+   
+}
+.pad-top {
+    padding-top:60px;
+}
+.text-center {
+    text-align:center;
+}
+i.fa {
+    padding:5px;
+}
+
+
+p {
+    font-weight:300;
+    line-height:30px;
+}
+.pad-row {
+    padding-top:40px;
+    padding-bottom:40px;
+}
+.pad-bottom {
+    padding-bottom:50px;
+}
+
+/* NAVBAR STYLE */
+
+
+.navbar-inverse .navbar-nav > li > a {
+color: #FFF;
+}
+
+.navbar-inverse .navbar-brand {
+color: #FFF;
+}
+
+
+/* ADDED PADDING IN NAVBAR */
+
+
+.navbar {
+    padding:15px;
+     -webkit-transition: background .8s ease-out,padding .8s ease-out;
+        -moz-transition: background .8s ease-out,padding .8s ease-out;
+        transition: background .8s ease-out,padding .8s ease-out;
+}
+
+
+/* CLASS FOR REMOVING PADDING IN NAVBAR*/
+
+
+.navbar-pad-original {
+      padding:0px;
+}
+
+
+
+/* CARUOSEL STYLE OR SLIDESHOW STYLE*/
+
+
+.back-light {
+    background-color:rgba(0, 0, 0, 0.50);
+    padding:10px;
+}
+/*NOTE SECION STYLE*/
+.note-sec {
+     padding-bottom:50px;
+    background: url(../img/4.jpg) no-repeat 50% 50%;
+background-attachment: fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+width: 100%;
+display: block;
+height: auto;
+   min-height:300px;
+    color:#fff;
+}
+
+/*HEADINGS IMAGE STYLE*/
+
+
+.head-main-img {
+     padding-bottom:50px;
+    background: url(../img/4.jpg) no-repeat 50% 50%;
+background-attachment: fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+width: 100%;
+display: block;
+height: auto;
+   min-height:300px;
+    color:#fff;
+}
+    .head-main-img h1 {
+        padding: 50px 2px 2px 10px;
+        text-transform:uppercase;
+    }
+
+
+ /* PRICING STYLE */
+
+
+ .plan {
+padding: 0 0 15px 0;
+margin: 30px 0px;
+list-style: none;
+text-align: center;
+}
+
+.plan li {
+padding: 15px 0px;
+font-size: 16px;
+border-bottom: 1px dotted #e1e1e1;
+}
+
+.price {
+    font-size:45px!important;
+}
+
+small {
+    font-size:15px;
+    padding-left:10px;
+}
+
+    .plan li i {
+        padding-right:10px;
+    }
+.price-two {
+    font-size:30px!important;
+    padding: 15px 0px;
+background-color: rgba(162, 188, 253, 1);
+color: #fff;
+border: none;
+font-weight: 900;
+}
+
+.adjust-border-radius {
+    -webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+}
+
+.adjust-border {
+    border-top-left-radius: 0px;
+ border-top-right-radius: 0px;
+}
+
+
+
+
+/*CONTACT STYLES*/
+
+
+.cnt {
+width: 100%;
+min-height: 350px;
+border: 1px solid #e1e1e1;
+}
+.add {
+    font-size:20px;
+    font-weight:800;
+    padding:30px;
+}
+#contact-sec {
+  padding-top:0px;
+}
+
+
+/* FOOTER STYLE*/
+
+
+#footer-sec {
+    background-color:#000;
+    color:#808080;
+}
+#footer-sec h4 {
+    text-transform:uppercase;
+    color:#fff;
+}
+
+
+   
+
+/* CSS SEARCH */
+
+
+
+select.search_innovacion, select.search_operacion{
+  width: 150px;
+  height: auto;
+  margin: 5px;
+  border-radius: 5px;
+  margin-top: 35px;
+  align-items:baseline;
+}
+select.search_innovacion, select.search_operacion {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:0!important;
+  background: #5c6664;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color:#fff;
+  cursor:pointer;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #5c6664;
+  overflow: hidden;
+  border-radius: .25em;
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #2b2e2e;
+  cursor:pointer;
+  pointer-events:none;
+  transition:.25s all ease;
+}
+.select:hover::after {
+  color: #23b499;
+}
+
+
+#autocom{
+  width: 150px;
+  height: auto;
+
+  margin: 4px;
+  border-radius: 5px;
+  width: 150px;
+  height: auto;
+  margin: 5px;
+  border-radius: 5px;
+  margin-top: 35px;
+  align-items:baseline;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:0!important;
+  background: #5c6664;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color:#fff;
+  cursor:pointer;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: fit-content;
+}
+
+.log-icon img{
+  width: 70px;
+  margin-top: -20px;
+}
+.navbar-collapse .nav{
+  margin-top: -42px;
+
+}
+
+.navbar-collapse .nav #logout_div{
+  margin-top: 15px;
+  size: 200px;
+
+}
+.navbar-collapse .nav #logout_div #logout{
+  font-size: 13px;
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.navbar-collapse .nav #logout_div #logout:before {
+  height: 0%;
+  width: 2px;
+}
+.navbar-collapse .nav #logout_div #logout:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+#search_viv{
+  position: fixed;
+  color: #E8EAEE;
+  margin-left: 467px;
+  margin-right: 550px;
+  margin-top: 10px;
+  width: 130px;
+  height: auto; 
+  place-items: center;
+  border-radius: 12px;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,0.5547680253742122) 100%);
+
+}
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: 110px;
+}
+.navbar-header .navbar-brand{
+  margin-top: 20px;
+  margin-left: -200px;
+  }

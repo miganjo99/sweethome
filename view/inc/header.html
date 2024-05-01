@@ -1,0 +1,69 @@
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+    </head>
+    <body>
+
+
+
+        
+        <div class="navbar navbar-inverse navbar-fixed-top" id="menu">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php?page=ctrl_home&op=list">SWEET HOME </a>                  
+                </div>
+                
+                
+                <div class="div_search" style="display: inline; width: 5%; height: 5%;">
+                    <select class="search_operacion"></select>
+                    <select class="search_innovacion"></select>
+                    <input type="text" id="autocom" autocomplete="off" placeholder="Ciudad" style="width: 10%;" />
+                    <input type="button" value="search" id="search-btn" class="btna third" style="display:inline;" />
+                    <div id="search_viv">
+                    </div>
+                </div>
+                
+                
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.php?page=ctrl_home&op=list">HOME</a></li>
+                        <li><a href="index.php?page=ctrl_shop&op=list">SHOP</a></li>
+                        <li id="login-register_view"><a href="index.php?page=ctrl_login&op=login-register_view">LOGIN/REGISTER</a></li>
+                        <li>
+                            <li>
+                                <li><a class="log-icon" id="des_inf_user"></a></li>
+                            </li>
+                            <li id="logout_div">
+                                <button id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i>LOG OUT</button>
+                            </li>
+                        </li>
+                        <!-- <div>
+                            <ul>
+                                <li><a class="log-icon" id="des_inf_user"></a></li>
+                            </ul>
+                            <div id="logout_div">
+                                <button id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i>LOG OUT</button>
+                            </div>
+                        </div> -->
+                    </ul>
+                </div>
+
+               
+
+                
+            </div>
+            
+           
+       </section>
+        </div>
+    </body>
+</html>
