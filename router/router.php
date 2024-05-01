@@ -2,10 +2,11 @@
 
     //require 'autoload.php';
     
-    // $path = $_SERVER['DOCUMENT_ROOT'] . '/Ejercicios/Framework_PHP_OO_MVC/';
-    // include($path . "utils/common.inc.php");
-    // include($path . "utils/mail.inc.php");
-    // include($path . "paths.php");
+      $path = $_SERVER['DOCUMENT_ROOT'] . '/sweethome/';
+      include($path . "utils/common.inc.php");
+      include($path . "module/home/resources/function.xml");
+     //include($path . "utils/mail.inc.php");
+      include($path . "paths.php");
 
     ob_start();
     session_start();
@@ -40,49 +41,51 @@
         function routingStart() {
             try {
                 call_user_func(array($this -> loadModule(), $this -> loadFunction()));
+                
             }catch(Exception $e) {
                 common::load_error();
             }
         }
         
         private function loadModule() {
-            // if (file_exists('resources/modules.xml')) {
-            //     $modules = simplexml_load_file('resources/modules.xml');
-            //     foreach ($modules as $row) {
-            //         if (in_array($this -> uriModule, (Array) $row -> uri)) {
-            //             $path = MODULES_PATH . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
-            //             if (file_exists($path)) {
-            //                 require_once($path);
-            //                 $controllerName = 'controller_' . (String) $row -> name;
-            //                 $this -> nameModule = (String) $row -> name;
-            //                 return new $controllerName;
-            //             }
-            //         }
-            //     }
-            // }
-            // throw new Exception('Not Module found.');
+            if (file_exists('resources/modules.xml')) {
+                $modules = simplexml_load_file('resources/modules.xml');
+                foreach ($modules as $row) {
+                    if (in_array($this -> uriModule, (Array) $row -> uri)) {
+                        $path = MODULES_PATH . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
+                        if (file_exists($path)) {
+                            require_once($path);
+                            $controllerName = 'controller_' . (String) $row -> name;
+                            $this -> nameModule = (String) $row -> name;
+                            return new $controllerName;
+                        }
+                    }
+                }
+            }
+            throw new Exception('Not Module found.');
 
-            $path = 'module/homepage/controller/controller_home.class.php';
-            require_once($path);
+            // $path = 'module/home/controller/controller_home.class.php';
+            // require_once($path);
 
-            $controllerName = 'controller_home';
-            return new $controllerName;
+            // $controllerName = 'controller_home';
+            // return new $controllerName;
 
         }
         
         private function loadFunction() {
-            // $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
-            // if (file_exists($path)) {
-            //     $functions = simplexml_load_file($path);
-            //     foreach ($functions as $row) {
-            //         if (in_array($this -> uriFunction, (Array) $row -> uri)) {
-            //             return (String) $row -> name;
-            //         }
-            //     }
-            // }
-            // throw new Exception('Not Function found.');
+            $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
+            echo $path;
+            if (file_exists($path)) {
+                $functions = simplexml_load_file($path);
+                foreach ($functions as $row) {
+                    if (in_array($this -> uriFunction, (Array) $row -> uri)) {   
+                        return (String) $row -> name;
+                    }
+                }
+            }
+            throw new Exception('Not Function found.');
 
-            return (String) 'view';
+            //return (String) 'view';
 
         }
     }

@@ -1,14 +1,16 @@
 <?php
     require_once('utils/common.inc.php');
-
+    //require_once('paths.php');
+    //include("paths.php");
+    
     class controller_home {
         function view() {
-            echo 'hola view';
+            //echo 'hola view';
             //common::load_view('top_page_home.html', VIEW_PATH_HOME . 'home.html');
 
-            common::load_view('sweethome/view/inc/top_page_home.php', '/index.php?module=home&op=list' . 'homepage.html');
+            common::load_view('view\inc\top_page_home.html', 'module/home/view/' . 'home.html');
+            
         }
-        //http://localhost/crud/crud_MVC/index.php?module=home&op=list
         
 
         // function carrusel() {

@@ -10,8 +10,8 @@
         public static function load_view($topPage, $view) {
             //$topPage = VIEW_PATH_INC . $topPage;
             //$topPage = 'C:/xampp/htdocs/sweethome/view/inc/top_page_home.php';
-            echo($topPage)
-            echo($view)
+            // echo($topPage)
+            // echo($view)
             if(file_exists($topPage)){
                 echo(" Existe top page ");
             }else{
@@ -34,7 +34,7 @@
                 //require_once (VIEW_PATH_INC . 'footer.html');
                 require_once ('C:/xampp/htdocs/sweethome/view/inc/footer.html');
             }else {
-                echo("No existe borinot");
+                echo("No existe ***********");
                 // self::load_error();
             }
         }
