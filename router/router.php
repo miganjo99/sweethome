@@ -74,7 +74,6 @@
         
         private function loadFunction() {
             $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
-            echo $path;
             if (file_exists($path)) {
                 $functions = simplexml_load_file($path);
                 foreach ($functions as $row) {
@@ -86,6 +85,7 @@
             throw new Exception('Not Function found.');
 
             //return (String) 'view';
+            //return (String) 'carousel_innovacion';
 
         }
     }

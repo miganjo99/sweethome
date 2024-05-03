@@ -12,6 +12,7 @@
             //$topPage = 'C:/xampp/htdocs/sweethome/view/inc/top_page_home.php';
             // echo($topPage)
             // echo($view)
+            
             if(file_exists($topPage)){
                 echo(" Existe top page ");
             }else{
@@ -27,7 +28,7 @@
             if ((file_exists($topPage)) && (file_exists($view))) {
                 echo("Si que existe");
                 require_once ($topPage);
-                // require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
+                //require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
                 //require_once (VIEW_PATH_INC . 'header.html');
                 require_once ('C:/xampp/htdocs/sweethome/view/inc/header.html');
                 require_once ($view);
@@ -40,6 +41,8 @@
         }
         
         public static function load_model($model, $function = null, $args = null) {
+            
+            
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
             if (file_exists($path)) {
