@@ -8,12 +8,14 @@
         <name>carousel_innovacion</name>
         <uri>carousel_innovacion</uri>
     </function>
-    <!-- <function>
-        <name>category</name>
-        <uri>category</uri>
+    <function>
+        <name>carousel_tipo</name>
+        <uri>carousel_tipo</uri>
     </function>
+
+
     <function>
         <name>type</name>
         <uri>type</uri>
-    </function> -->
+    </function> 
 </functions>

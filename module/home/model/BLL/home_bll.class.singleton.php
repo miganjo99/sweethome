@@ -28,8 +28,8 @@
 			return $this -> dao -> select_data_carousel_innovacion($this -> db);
 		}
 
-		public function get_category_BLL() {
-			return $this -> dao -> select_data_category($this -> db);
+		public function get_carousel_tipo_BLL() {
+			return $this -> dao -> select_data_carousel_tipo($this -> db);
 		}
 
 		public function get_type_BLL() {

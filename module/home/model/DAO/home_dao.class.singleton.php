@@ -33,9 +33,9 @@
             return $db -> listar($stmt);
         }
 
-        public function select_data_category($db) {
+        public function select_data_carousel_tipo($db) {
 
-            $sql = "SELECT * FROM category LIMIT 3";
+            $sql = "SELECT * FROM `tipo` ORDER BY name_tipo ASC LIMIT 30;";
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);

@@ -1,7 +1,5 @@
 function carousel_innovacion() {
-  console.log("carousel_innovacion");
   ajaxPromise('index.php?module=home&op=carousel_innovacion','GET', 'JSON')
-  //module=home&op=carrusel
   .then(function(data) {   
 
       console.log(data);
@@ -33,12 +31,41 @@ function carousel_innovacion() {
       });
 }
 
+function carousel_tipo() {
+  ajaxPromise('index.php?module=home&op=carousel_tipo','GET', 'JSON')
+  .then(function(data) {        
+      //console.log(data);
+      
+      for (row in data) {
+              $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].id_tipo).appendTo(".carousel__list")
+              .html(
+                  "<img class='carousel__img' id='' src='" + data[row].img_tipo + "' alt='' >"
+                  +
+                  "<h5 class='tipo_name'>" + data[row].name_tipo + "</h5>" 
+              )
+          }
+          new Glider(document.querySelector('.carousel__list'), {
+              slidesToShow: 3,
+              dots: '.carousel__indicator',
+              draggable: true,
+              arrows: {
+                  prev: '.carousel__prev',
+                  next: '.carousel__next'
+              }
+          });
+      })
+      .catch(function() {
+        //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Carrusel_tipo HOME";
+        console.log("error en controllerhome, carousel tipo");
+    });
+}
+
+
 
 
   
 
 $(document).ready(function() {
-  //console.log("hola js");
   carousel_innovacion();
- 
+  carousel_tipo();
 });

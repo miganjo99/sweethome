@@ -19,9 +19,12 @@
             echo json_encode(common::load_model('home_model', 'get_carousel_innovacion'));
         }
 
-        // function category() {
-        //     echo json_encode(common::load_model('home_model', 'get_category'));
-        // }
+        function carousel_tipo() {
+
+            //echo "*************carousel_tipo*********************";
+
+            echo json_encode(common::load_model('home_model', 'get_carousel_tipo'));
+        }
         
         // function type() {
         //     // echo json_encode('Hola');

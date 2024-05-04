@@ -25,9 +25,9 @@
             return $this -> bll -> get_carousel_innovacion_BLL();
         }
 
-        // public function get_category() {
-        //     return $this -> bll -> get_category_BLL();
-        // }
+        public function get_carousel_tipo() {
+            return $this -> bll -> get_carousel_tipo_BLL();
+        }
 
         // public function get_type() {
         //     // return 'hola car type';
