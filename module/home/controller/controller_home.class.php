@@ -1,7 +1,7 @@
 <?php
     require_once('utils/common.inc.php');
     require_once('paths.php');
-    include("paths.php");
+    // include("paths.php");
     
     class controller_home {
         function view() {

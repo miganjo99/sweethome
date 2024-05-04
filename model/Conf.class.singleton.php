@@ -4,6 +4,7 @@
         private $_passdb;
         private $_hostdb;
         private $_db;
+        //private $_port;
         static $_instance;
 
         private function __construct() {
@@ -12,6 +13,7 @@
             $this->_passdb = $cnfg['pass'];
             $this->_hostdb = $cnfg['host'];
             $this->_db = $cnfg['db'];
+            //$this->_port = $cnfg['port'];
         }
 
         private function __clone() {
@@ -43,4 +45,9 @@
             $var = $this->_db;
             return $var;
         }
+
+        // public function getPort() {
+        //     $var = $this->_port;
+        //     return $var;
+        // }
     }

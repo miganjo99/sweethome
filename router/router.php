@@ -1,12 +1,11 @@
 <?php
 
-    //require 'autoload.php';
+    require 'autoload.php';
     
-      $path = $_SERVER['DOCUMENT_ROOT'] . '/sweethome/';
-      include($path . "utils/common.inc.php");
-      include($path . "module/home/resources/function.xml");
-     //include($path . "utils/mail.inc.php");
-      include($path . "paths.php");
+    //   $path = $_SERVER['DOCUMENT_ROOT'] . '/sweethome/';
+    //   include($path . "utils/common.inc.php");
+    //   include($path . "module/home/resources/function.xml");
+    //   include($path . "paths.php");
 
     ob_start();
     session_start();

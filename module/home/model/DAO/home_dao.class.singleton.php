@@ -2,6 +2,7 @@
 
 
     include_once('module/home/model/BLL/home_bll.class.singleton.php');
+    include_once('model/db.class.singleton.php');
 
 
     class home_dao {
@@ -19,7 +20,13 @@
 
         public function select_data_carousel_innovacion($db) {
 
-            $sql = "SELECT * FROM brand LIMIT 6";
+            //recibe $db?
+
+           // return "hola select_data_carousel_innovacion DAOOOOOOOOOOOO";
+            
+            $sql = "SELECT * FROM `innovacion` ORDER BY name_innovacion ASC LIMIT 30;";
+
+            //return $sql;
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);

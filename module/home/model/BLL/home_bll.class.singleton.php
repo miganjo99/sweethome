@@ -10,7 +10,8 @@
 
 		function __construct() {
 			$this -> dao = home_dao::getInstance();
-			$this -> db = db::getInstance();
+			
+			//$this -> db = db::getInstance();
 		}
 
 		public static function getInstance() {
@@ -21,6 +22,7 @@
 		}
 
 		public function get_carousel_innovacion_BLL() {
+			//return "hola get_carousel_innovacion_BLL";
 			return $this -> dao -> select_data_carousel_innovacion($this -> db);
 		}
 
