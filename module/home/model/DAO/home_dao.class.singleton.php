@@ -41,9 +41,9 @@
             return $db -> listar($stmt);
         }
 
-        public function select_data_type($db) {
+        public function select_data_loadCategorias($db) {
 
-            $sql = "SELECT * FROM type LIMIT 4";
+            $sql = "SELECT *FROM categoria;";
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);

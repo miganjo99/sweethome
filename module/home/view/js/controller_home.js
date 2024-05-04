@@ -60,7 +60,29 @@ function carousel_tipo() {
     });
 }
 
+function loadCategorias() {
+  ajaxPromise('index.php?module=home&op=loadCategorias','GET', 'JSON')
+  .then(function(data) {
+      for (row in data) {
+          $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].id_categoria }).appendTo('#containerCategories')
+              .html(
+                  "<li class='portfolio-item'>" +
+                  "<div class='item-main'>" +
+                  "<div class='portfolio-image'>" +
+                  "<img src = " + data[row].img_categoria + " alt='foto' </img> " +
+                  "</div>" +
+                  "<h5>" + data[row].name_categoria + "</h5>" +
+                  "</div>" +
+                  "</li>"
+              )
+      }
+  })
+ .catch(function() {
+     //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
+     console.log("error en controllerhome, carousel categorias");
 
+ });
+} 
 
 
   
@@ -68,4 +90,5 @@ function carousel_tipo() {
 $(document).ready(function() {
   carousel_innovacion();
   carousel_tipo();
+  loadCategorias();
 });

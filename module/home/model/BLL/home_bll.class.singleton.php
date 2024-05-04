@@ -32,6 +32,10 @@
 			return $this -> dao -> select_data_carousel_tipo($this -> db);
 		}
 
+		public function get_loadCategorias_BLL() {
+			return $this -> dao -> select_data_loadCategorias($this -> db);
+		}
+
 		public function get_type_BLL() {
 			return $this -> dao -> select_data_type($this -> db);
 		}
