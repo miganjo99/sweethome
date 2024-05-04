@@ -39,6 +39,9 @@
         public function get_loadCiudad() {
             return $this -> bll -> get_loadCiudad_BLL();
         }
+        public function get_loadRecomendaciones() {
+            return $this -> bll -> get_loadRecomendaciones_BLL();
+        }
 
         // public function get_type() {
         //     // return 'hola car type';

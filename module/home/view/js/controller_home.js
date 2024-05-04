@@ -131,6 +131,29 @@ function loadCiudad() {
    });
 }
   
+function loadRecomendaciones() {
+  ajaxPromise('index.php?module=home&op=loadRecomendaciones','GET', 'JSON')
+  .then(function(data) {
+      //console.log(data);
+      for (row in data) {
+          $('<div></div>').attr('class', "div_recom").attr({ 'id': data[row].id_vivienda }).appendTo('#containerRecomendaciones')
+              .html(
+                  "<li class='portfolio-item'>" +
+                  "<div class='item-main'>" +
+                  "<div class='portfolio-image'>" +
+                  "<img src = " + data[row].img_vivienda + " alt='foto' </img> " +
+                  "</div>" +
+                  "<h5>" + data[row].estado + ",   " +data[row].m2+" m2"+ "</h5>" +
+                  "</div>" +
+                  "</li>"
+              )
+      }
+  })
+ //.catch(function() {
+ //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
+ // });
+}
+
 
 $(document).ready(function() {
   carousel_innovacion();
@@ -138,4 +161,6 @@ $(document).ready(function() {
   loadCategorias();
   loadOperacion();
   loadCiudad();
+  loadRecomendaciones();
+
 });

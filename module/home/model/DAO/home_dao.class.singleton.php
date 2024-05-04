@@ -64,6 +64,16 @@
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
+        public function select_data_loadRecomendaciones($db) {
+
+            $sql = "SELECT * 
+			FROM vivienda 
+			ORDER BY id_vivienda ASC
+			LIMIT 5;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
 
     }
 ?>

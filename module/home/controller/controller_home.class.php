@@ -39,5 +39,9 @@
             // echo json_encode('Hola');
             echo json_encode(common::load_model('home_model', 'get_loadCiudad'));
         }
+        function loadRecomendaciones() {
+            // echo json_encode('Hola');
+            echo json_encode(common::load_model('home_model', 'get_loadRecomendaciones'));
+        }
     }
 ?>

@@ -42,5 +42,8 @@
 		public function get_loadCiudad_BLL() {
 			return $this -> dao -> select_data_loadCiudad($this -> db);
 		}
+		public function get_loadRecomendaciones_BLL() {
+			return $this -> dao -> select_data_loadRecomendaciones($this -> db);
+		}
 	}
 ?>
