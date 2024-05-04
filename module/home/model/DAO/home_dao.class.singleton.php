@@ -49,5 +49,13 @@
             return $db -> listar($stmt);
         }
 
+        public function select_data_loadOperacion($db) {
+
+            $sql = "SELECT *FROM operacion ORDER BY id_operacion DESC;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+
     }
 ?>

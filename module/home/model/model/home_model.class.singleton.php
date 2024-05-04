@@ -33,6 +33,10 @@
             return $this -> bll -> get_loadCategorias_BLL();
         }
 
+        public function get_loadOperacion() {
+            return $this -> bll -> get_loadOperacion_BLL();
+        }
+
         // public function get_type() {
         //     // return 'hola car type';
         //     return $this -> bll -> get_type_BLL();

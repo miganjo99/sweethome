@@ -23,8 +23,8 @@
 
 
     <function>
-        <name>type</name>
-        <uri>type</uri>
+        <name>loadOperacion</name>
+        <uri>loadOperacion</uri>
     </function> 
-    
+
 </functions>

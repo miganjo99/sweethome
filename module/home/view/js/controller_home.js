@@ -79,16 +79,40 @@ function loadCategorias() {
   })
  .catch(function() {
      //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
-     console.log("error en controllerhome, carousel categorias");
+     console.log("error en controllerhome,  categorias");
 
  });
 } 
 
+function loadOperacion() {
+  ajaxPromise('index.php?module=home&op=loadOperacion','GET', 'JSON')
+  .then(function(data) {
+      for (row in data) {
+          $('<div></div>').attr('class', "div_op").attr({ 'id': data[row].id_operacion }).appendTo('#containerOperacion')
+              .html(
+                  "<li class='portfolio-item'>" +
+                  "<div class='item-main'>" +
+                  "<div class='portfolio-image'>" +
+                  "<img src = " + data[row].img_operacion + " alt='foto'" +
+                  "</div>" +
+                  "<h5>" + data[row].name_operacion + "</h5>" +
+                  "</div>" +
+                  "</li>"
+              )
 
+      }
+  })
+  .catch(function() {
+      // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Types_car HOME";
+      console.log("error en controllerhome,  operacion");
+
+  });
+}
   
 
 $(document).ready(function() {
   carousel_innovacion();
   carousel_tipo();
   loadCategorias();
+  loadOperacion();
 });
