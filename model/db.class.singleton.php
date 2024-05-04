@@ -1,8 +1,7 @@
 <?php
 
-    include_once('module/home/model/DAO/home_dao.class.singleton.php');
 
-
+    
 
     class db {
         private $server;
@@ -40,6 +39,8 @@
         }
 
         private function conectar() {
+
+
             $this -> link = new mysqli($this -> server, $this -> user, $this -> password);
 
             // if ($this->link->connect_error) {

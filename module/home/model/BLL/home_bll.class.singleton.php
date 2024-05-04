@@ -3,6 +3,8 @@
 	include_once('module/home/model/model/home_model.class.singleton.php');
 	include_once('module/home/model/DAO/home_dao.class.singleton.php');
 
+	
+
 	class home_bll {
 		private $dao;
 		private $db;
@@ -11,7 +13,7 @@
 		function __construct() {
 			$this -> dao = home_dao::getInstance();
 			
-			//$this -> db = db::getInstance();
+			$this -> db = db::getInstance();
 		}
 
 		public static function getInstance() {
