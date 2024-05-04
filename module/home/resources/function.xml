@@ -26,5 +26,10 @@
         <name>loadOperacion</name>
         <uri>loadOperacion</uri>
     </function> 
+    
+    <function>
+        <name>loadCiudad</name>
+        <uri>loadCiudad</uri>
+    </function> 
 
 </functions>

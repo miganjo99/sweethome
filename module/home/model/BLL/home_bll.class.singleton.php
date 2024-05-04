@@ -39,8 +39,8 @@
 			return $this -> dao -> select_data_loadOperacion($this -> db);
 		}
 
-		public function get_type_BLL() {
-			return $this -> dao -> select_data_type($this -> db);
+		public function get_loadCiudad_BLL() {
+			return $this -> dao -> select_data_loadCiudad($this -> db);
 		}
 	}
 ?>

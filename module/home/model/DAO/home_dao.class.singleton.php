@@ -57,5 +57,13 @@
             return $db -> listar($stmt);
         }
 
+        public function select_data_loadCiudad($db) {
+
+            $sql = "SELECT * FROM ciudad ORDER BY id_ciudad DESC;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+
     }
 ?>

@@ -108,6 +108,28 @@ function loadOperacion() {
 
   });
 }
+
+function loadCiudad() {
+  ajaxPromise('index.php?module=home&op=loadCiudad','GET', 'JSON')
+  .then(function(data) {
+      for (row in data) {
+          $('<div></div>').attr('class', "div_ciu").attr({ 'id': data[row].id_ciudad }).appendTo('#containerCiudad')
+              .html(
+                  "<li class='portfolio-item'>" +
+                  "<div class='item-main'>" +
+                  "<div class='portfolio-image'>" +
+                  "<img src = " + data[row].img_ciudad + " alt='foto' </img> " +
+                  "</div>" +
+                  "<h5>" + data[row].name_ciudad + "</h5>" +
+                  "</div>" +
+                  "</li>"
+              )
+      }
+  })
+ .catch(function() {
+  console.log("error en controllerhome,  ciudad");
+   });
+}
   
 
 $(document).ready(function() {
@@ -115,4 +137,5 @@ $(document).ready(function() {
   carousel_tipo();
   loadCategorias();
   loadOperacion();
+  loadCiudad();
 });
