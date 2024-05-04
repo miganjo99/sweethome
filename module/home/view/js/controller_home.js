@@ -1,8 +1,11 @@
 function carousel_innovacion() {
-  ajaxPromise('module=home&op=Carrousel_innovacion','GET', 'JSON')
+  console.log("carousel_innovacion");
+  ajaxPromise('index.php?module=home&op=carousel_innovacion','GET', 'JSON')
   //module=home&op=carrusel
-  .then(function(data) {        
-      //console.log(data);
+  .then(function(data) {   
+
+      console.log(data);
+      console.log("promesa data");
       
       for (row in data) {
               $('<div></div>').attr('class', "carousel__elements_innovacion").attr('id', data[row].id_innovacion).appendTo(".carousel__innovacion")
@@ -35,8 +38,7 @@ function carousel_innovacion() {
   
 
 $(document).ready(function() {
-  console.log("hola js");
+  //console.log("hola js");
   carousel_innovacion();
-  category();
  
 });
