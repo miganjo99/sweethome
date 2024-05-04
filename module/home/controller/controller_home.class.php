@@ -16,7 +16,7 @@
         function carousel_innovacion() {
             //echo "hola carousel innovacion php ***********************";
             // echo "*****************************************************************************";
-            echo json_encode(common::load_model('home_model', 'get_carrusel'));
+            echo json_encode(common::load_model('home_model', 'get_carousel_innovacion'));
         }
 
         // function category() {

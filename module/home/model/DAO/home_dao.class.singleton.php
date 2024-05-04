@@ -1,4 +1,9 @@
 <?php
+
+
+    include_once('module/home/model/BLL/home_bll.class.singleton.php');
+
+
     class home_dao {
         static $_instance;
 
@@ -12,7 +17,7 @@
             return self::$_instance;
         }
 
-        public function select_data_carrusel($db) {
+        public function select_data_carousel_innovacion($db) {
 
             $sql = "SELECT * FROM brand LIMIT 6";
 

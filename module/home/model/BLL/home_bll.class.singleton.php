@@ -1,4 +1,8 @@
 <?php
+
+	include_once('module/home/model/model/home_model.class.singleton.php');
+	include_once('module/home/model/DAO/home_dao.class.singleton.php');
+
 	class home_bll {
 		private $dao;
 		private $db;
@@ -16,8 +20,8 @@
 			return self::$_instance;
 		}
 
-		public function get_carrusel_BLL() {
-			return $this -> dao -> select_data_carrusel($this -> db);
+		public function get_carousel_innovacion_BLL() {
+			return $this -> dao -> select_data_carousel_innovacion($this -> db);
 		}
 
 		public function get_category_BLL() {

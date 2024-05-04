@@ -1,4 +1,9 @@
 <?php
+
+
+    require_once('module/home/model/BLL/home_bll.class.singleton.php');
+
+
     class home_model {
 
         private $bll;
@@ -15,18 +20,19 @@
             return self::$_instance;
         }
 
-        public function get_carrusel() {
-            return $this -> bll -> get_carrusel_BLL();
+        public function get_carousel_innovacion() {
+            return "holaaaa get carusel innovacion singleton";
+            //return $this -> bll -> get_carousel_innovacion_BLL();
         }
 
-        public function get_category() {
-            return $this -> bll -> get_category_BLL();
-        }
+        // public function get_category() {
+        //     return $this -> bll -> get_category_BLL();
+        // }
 
-        public function get_type() {
-            // return 'hola car type';
-            return $this -> bll -> get_type_BLL();
-        }
+        // public function get_type() {
+        //     // return 'hola car type';
+        //     return $this -> bll -> get_type_BLL();
+        // }
 
     }
 ?>
