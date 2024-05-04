@@ -74,6 +74,16 @@
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
+        public function select_data_loadMasVisitadas($db) {
+
+            $sql = "SELECT * 
+			FROM vivienda v, visitas vi
+			WHERE v.id_vivienda=vi.id_vivienda 
+			ORDER BY vi.num_visitas DESC LIMIT 5;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
 
     }
 ?>

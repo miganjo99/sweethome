@@ -42,6 +42,9 @@
         public function get_loadRecomendaciones() {
             return $this -> bll -> get_loadRecomendaciones_BLL();
         }
+        public function get_loadMasVisitadas() {
+            return $this -> bll -> get_loadMasVisitadas_BLL();
+        }
 
         // public function get_type() {
         //     // return 'hola car type';

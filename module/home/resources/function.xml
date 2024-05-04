@@ -37,4 +37,9 @@
         <uri>loadRecomendaciones</uri>
     </function> 
 
+    <function>
+        <name>loadMasVisitadas</name>
+        <uri>loadMasVisitadas</uri>
+    </function> 
+
 </functions>

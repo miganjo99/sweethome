@@ -43,5 +43,9 @@
             // echo json_encode('Hola');
             echo json_encode(common::load_model('home_model', 'get_loadRecomendaciones'));
         }
+        function loadMasVisitadas() {
+            // echo json_encode('Hola');
+            echo json_encode(common::load_model('home_model', 'get_loadMasVisitadas'));
+        }
     }
 ?>

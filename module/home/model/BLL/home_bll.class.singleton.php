@@ -45,5 +45,8 @@
 		public function get_loadRecomendaciones_BLL() {
 			return $this -> dao -> select_data_loadRecomendaciones($this -> db);
 		}
+		public function get_loadMasVisitadas_BLL() {
+			return $this -> dao -> select_data_loadMasVisitadas($this -> db);
+		}
 	}
 ?>
