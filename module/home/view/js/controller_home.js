@@ -26,7 +26,6 @@ function carousel_innovacion() {
             });
       })
       .catch(function() {
-          //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Carrusel_tipo HOME";
           console.log("error en controllerhome, carousel inovacion");
       });
 }
@@ -55,7 +54,6 @@ function carousel_tipo() {
           });
       })
       .catch(function() {
-        //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Carrusel_tipo HOME";
         console.log("error en controllerhome, carousel tipo");
     });
 }
@@ -78,7 +76,6 @@ function loadCategorias() {
       }
   })
  .catch(function() {
-     //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
      console.log("error en controllerhome,  categorias");
 
  });
@@ -103,7 +100,6 @@ function loadOperacion() {
       }
   })
   .catch(function() {
-      // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Types_car HOME";
       console.log("error en controllerhome,  operacion");
 
   });

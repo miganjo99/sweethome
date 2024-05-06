@@ -21,12 +21,30 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
     });
 }
 
+/* FRIENDLY URL */
+// function friendlyURL(url) {
+//     var link = "";
+//     url = url.replace("?", "");
+//     url = url.split("&");
+//     cont = 0;
+//     for (var i = 0; i < url.length; i++) {
+//     	cont++;
+//         var aux = url[i].split("=");
+//         if (cont == 2) {
+//         	link += "/" + aux[1] + "/";	
+//         }else{
+//         	link += "/" + aux[1];
+//         }
+//     }
+//     return "http://localhost/Ejercicios/Framework_PHP_OO_MVC" + link;
+// }
+
 //================LOAD-HEADER================
 function load_menu() {
 
 
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=homepage&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
-    //$('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav_list');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php??module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav');
 
 
 
