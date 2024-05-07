@@ -52,6 +52,7 @@
                 foreach ($modules as $row) {
                     if (in_array($this -> uriModule, (Array) $row -> uri)) {
                         $path = MODULES_PATH . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
+                        
                         if (file_exists($path)) {
                             require_once($path);
                             $controllerName = 'controller_' . (String) $row -> name;
@@ -73,8 +74,10 @@
         
         private function loadFunction() {
             $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
+            
             if (file_exists($path)) {
                 $functions = simplexml_load_file($path);
+                
                 foreach ($functions as $row) {
                     if (in_array($this -> uriFunction, (Array) $row -> uri)) {   
                         return (String) $row -> name;
@@ -84,7 +87,7 @@
             throw new Exception('Not Function found.');
 
             //return (String) 'view';
-            //return (String) 'carousel_innovacion';
+            //return (String) 'loadViviendas';
 
         }
     }

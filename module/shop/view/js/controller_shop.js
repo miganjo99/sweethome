@@ -8,10 +8,10 @@ function loadViviendas() {
 
 
 
-    pagination();
+    //pagination();
 
 
-
+  
 
     
     // if (verificate_filters_home !=  null) {//un unico filters
@@ -50,8 +50,9 @@ function loadViviendas() {
           
     // }
     // else {
-       
-        ajaxForSearch('index.php?module=home&op=view','GET', 'JSON');
+       console.log("Holala load viviendas.........................");
+        ajaxForSearch('index.php?module=shop&op=list','POST', 'JSON');
+                    //index.php?module=home&op=carousel_innovacion
     // }
 }
 
@@ -59,32 +60,28 @@ function loadViviendas() {
 
 function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset = 0) {
     
-   
-    //ajaxPromise(url, type, JSON, data)
-    //ajaxPromise(url, type, JSON, data, num_pages, offset)
-    //ajaxPromise(url, 'POST', 'JSON', { 'filters_shop': filters_shop, 'filters_search': filters_search, 'filters_home': filters_home , 'num_pages': num_pages, 'offset': offset })
+    // console.log(url);
+    // console.log(type);
+    // console.log(JSON);
+    // console.log("Holala ayaxForSearch");
 
-    
-
-    //'filters_search': data ?????????
-    //, 'filters_home' : data ??????
     ajaxPromise(url, type, JSON, {'filters_shop': data , 'filters_home' : data , 'filters_search' : data, 'num_pages': num_pages, 'offset': offset})
         .then(function(data) {
 
             console.log("RETURN CONSULTA");
             console.log(data);
-           //alert("ajaxPromise shop dentro");
+           
+            
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
-            //  $('.date_img_array').empty();
-            //mis_likes();
-            var verificate_acces_token = localStorage.getItem('acces_token') || null;
+            
 
-            if (verificate_acces_token !=  null) {
-                mis_likes();     
-            }
+            // var verificate_acces_token = localStorage.getItem('acces_token') || null;
 
-            //Mejora para que cuando no hayan resultados en los filtros aplicados
+            // if (verificate_acces_token !=  null) {
+            //     mis_likes();     
+            // }
+
             
             if (data == "error") {
                 $('<div></div>').appendTo('#content_shop_viviendas')
@@ -113,12 +110,10 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                             "</ul>" +
                             "<div class='buttons'>" +
                             "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
-                            // "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
-
+                            
 
                             "<a id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
-                            //"<a class='details__heart' id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg'></i></a>" +
-                            //"<a class='fa-regular fa-heart fa-lg' id='" + data[row].id_vivienda + "'></a>" +
+                            
 
                             "</div>" +
                             "</div>" +
@@ -238,9 +233,8 @@ function pagination() {
 
 $(document).ready(function() {
     
-    console.log("HOLA SHOPPPPPPPPPPPPPPP.....");
 
     loadViviendas();
     
-    pagination();
+    //pagination();
 }); 

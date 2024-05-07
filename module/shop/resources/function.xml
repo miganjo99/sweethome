@@ -4,5 +4,9 @@
         <name>view</name>
         <uri>view</uri>
     </function>
+    <function>
+        <name>loadViviendas</name>
+        <uri>loadViviendas</uri>
+    </function>
    
 </functions>

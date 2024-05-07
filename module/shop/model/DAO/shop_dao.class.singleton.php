@@ -18,6 +18,7 @@
             FROM vivienda v  
             ORDER BY v.id_vivienda ASC
             LIMIT  $offset, $num_pages;";
+            
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

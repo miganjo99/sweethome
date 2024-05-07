@@ -21,6 +21,7 @@
             }
             
             if(file_exists($view)){
+                echo $view;
                 echo(" Existe view ");
             }else{
                 echo(" No existe view ");

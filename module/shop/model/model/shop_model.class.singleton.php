@@ -14,11 +14,12 @@
             return self::$_instance;
         }
 
-        public function get_list($args) {
+        public function get_loadViviendas($args) {
 
-            //return "hola gateta";
+            // return $args;
+            // return "shopmodelclass";
 
-            return $this -> bll -> get_list_BLL($args);
+            return $this -> bll -> get_loadViviendas_BLL($args);
         }
 
         

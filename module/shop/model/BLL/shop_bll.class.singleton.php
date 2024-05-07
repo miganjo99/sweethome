@@ -16,8 +16,9 @@
 			return self::$_instance;
 		}
 
-        public function get_list_BLL($args) {
+        public function get_loadViviendas_BLL($args) {
 			//return "hola BLL SHOP";
+			//return $args;
 			return $this -> dao -> select_all_viviendas($this->db, $args[0], $args[1]);
 		}
 
