@@ -12,10 +12,12 @@
             return self::$_instance;
         }
         
-        public function select_all_cars($db, $orderby, $total_prod, $items_page) {
+        public function select_all_viviendas($db, $offset, $num_pages) {
 
-            $sql = "SELECT c.*, b.*, t.*, ct.* FROM cars c INNER JOIN brand b INNER JOIN type t INNER JOIN category ct ON c.brand = b.cod_brand " 
-            . "AND c.type = t.cod_type AND c.category = ct.cod_category ORDER BY $orderby visits DESC LIMIT $total_prod, $items_page";
+            $sql = "SELECT * 
+            FROM vivienda v  
+            ORDER BY v.id_vivienda ASC
+            LIMIT  $offset, $num_pages;";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

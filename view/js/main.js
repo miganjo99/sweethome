@@ -43,8 +43,8 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 function load_menu() {
 
 
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=homepage&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php??module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav');
 
 
 

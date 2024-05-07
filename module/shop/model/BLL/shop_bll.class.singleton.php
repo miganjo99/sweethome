@@ -17,7 +17,8 @@
 		}
 
         public function get_list_BLL($args) {
-			return $this -> dao -> select_all_cars($this->db, $args[0], $args[1], $args[2]);
+			//return "hola BLL SHOP";
+			return $this -> dao -> select_all_viviendas($this->db, $args[0], $args[1]);
 		}
 
        

@@ -15,6 +15,9 @@
         }
 
         public function get_list($args) {
+
+            //return "hola gateta";
+
             return $this -> bll -> get_list_BLL($args);
         }
 

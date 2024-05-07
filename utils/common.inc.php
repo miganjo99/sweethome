@@ -1,19 +1,20 @@
 <?php
     class common {
-        // public static function load_error() {
-        //     require_once (VIEW_PATH_INC . 'top_page.html');
-        //     require_once (VIEW_PATH_INC . 'header.html');
-        //     require_once (VIEW_PATH_INC . 'error404.html');
-        //     require_once (VIEW_PATH_INC . 'footer.html');
-        // }
+        public static function load_error() {
+            require_once (VIEW_PATH_INC . 'top_page_home.html');
+            require_once (VIEW_PATH_INC . 'header.html');
+            //require_once (VIEW_PATH_INC . 'error404.html');
+            require_once (VIEW_PATH_INC . 'footer.html');
+        }
         
         public static function load_view($topPage, $view) {
-            //$topPage = VIEW_PATH_INC . $topPage;
+            $topPage = VIEW_PATH_INC . $topPage;
             //$topPage = 'C:/xampp/htdocs/sweethome/view/inc/top_page_home.php';
-            // echo($topPage)
+             //echo($topPage);
             // echo($view)
             
             if(file_exists($topPage)){
+                echo $topPage;
                 echo(" Existe top page ");
             }else{
                 echo(" No existe top page ");
@@ -26,17 +27,15 @@
             }
 
             if ((file_exists($topPage)) && (file_exists($view))) {
-                echo("Si que existe");
-                require_once ($topPage);
-                //require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
-                //require_once (VIEW_PATH_INC . 'header.html');
-                require_once ('C:/xampp/htdocs/sweethome/view/inc/header.html');
+                
+                require_once ($topPage);                
+                require_once (VIEW_PATH_INC . 'header.html');
                 require_once ($view);
-                //require_once (VIEW_PATH_INC . 'footer.html');
-                require_once ('C:/xampp/htdocs/sweethome/view/inc/footer.html');
+                require_once (VIEW_PATH_INC . 'footer.html');
+                
             }else {
-                echo("No existe ***********");
-                // self::load_error();
+                //echo("No existe ***********");
+                 //self::load_error();
             }
         }
         

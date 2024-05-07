@@ -6,6 +6,7 @@ function carousel_innovacion() {
       console.log("promesa data");
       
       for (row in data) {
+               
               $('<div></div>').attr('class', "carousel__elements_innovacion").attr('id', data[row].id_innovacion).appendTo(".carousel__innovacion")
               .html(
                   "<img class='carousel__img_innovacion' id='' src='" + data[row].img_innovacion + "' alt='' >"
