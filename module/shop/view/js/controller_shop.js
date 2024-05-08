@@ -50,90 +50,83 @@ function loadViviendas() {
           
     // }
     // else {
-       console.log("Holala load viviendas.........................");
-        ajaxForSearch('index.php?module=shop&op=list','POST', 'JSON');
+       //console.log("Holala load viviendas.........................");
+        //ajaxForSearch('index.php?module=shop&op=loadViviendas','POST', 'JSON');
                     //index.php?module=home&op=carousel_innovacion
+
+                    
+                    
     // }
 }
 
+ajaxPromise('index.php?module=shop&op=loadViviendas','POST', 'JSON',{'num_pages' : 3 , 'offset' : 0})
+.then(function(data) {
 
-
-function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset = 0) {
     
-    // console.log(url);
-    // console.log(type);
-    // console.log(JSON);
-    // console.log("Holala ayaxForSearch");
-
-    ajaxPromise(url, type, JSON, {'filters_shop': data , 'filters_home' : data , 'filters_search' : data, 'num_pages': num_pages, 'offset': offset})
-        .then(function(data) {
-
-            console.log("RETURN CONSULTA");
-            console.log(data);
-           
-            
-            $('#content_shop_viviendas').empty();
-            $('.date_vivienda' && '.date_img').empty();
-            
-
-            // var verificate_acces_token = localStorage.getItem('acces_token') || null;
-
-            // if (verificate_acces_token !=  null) {
-            //     mis_likes();     
-            // }
-
-            
-            if (data == "error") {
-                $('<div></div>').appendTo('#content_shop_viviendas')
-                    .html(
-                        '<h3>¡No se encuentarn resultados con los filtros aplicados!</h3>'
-                    )
-            } else {
-                
-                for (row in data) {
-                    
-                    
-                    $('<div></div>').attr({ 'id': data[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
-                        .html(
-                            "<div class='list_product'>" +
-                            "<div class='img-container'>" +
-                            "<img src= '" + data[row].img_vivienda + "'" + "</img>" +
-                            "</div>" +
-                            "<div class='product-info'>" +
-                            "<div class='product-content'>" +
-                            "<h1><b>" + data[row].precio + "\u20AC " + "</b></h1>" +
-                            "<p>Up-to-date maintenance and revisions</p>" +
-                            "<ul>" +
-                            "<li> <i id='col-ico' class='fa-solid fa-bath'></i>&nbsp;" + data[row].aseos + " aseos" + "</li>" +
-                            "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
-                            "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
-                            "</ul>" +
-                            "<div class='buttons'>" +
-                            "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
-                            
-
-                            "<a id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
-                            
-
-                            "</div>" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>"
-                        )
-                       
-                }
-                mapBox_all(data);
-            }
-        }).catch(function() {
-            console.log("entro al CATCH");
-
-           // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
-            // $('#content_shop_viviendas').empty();
-            //     $('<div></div>').appendTo('#content_shop_viviendas')
-            //     .html('<h1>No hay viviendas con estos filtros</h1>');
-        });
+        console.log(data);
+    
         
-}
+        $('#content_shop_viviendas').empty();
+        $('.date_vivienda' && '.date_img').empty();
+        
+
+        // var verificate_acces_token = localStorage.getItem('acces_token') || null;
+
+        // if (verificate_acces_token !=  null) {
+        //     mis_likes();     
+        // }
+
+        
+        if (data == "error") {
+            $('<div></div>').appendTo('#content_shop_viviendas')
+                .html(
+                    '<h3>¡No se encuentarn resultados con los filtros aplicados!</h3>'
+                )
+        } else {
+            
+            for (row in data) {
+                
+                
+                $('<div></div>').attr({ 'id': data[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
+                    .html(
+                        "<div class='list_product'>" +
+                        "<div class='img-container'>" +
+                        "<img src= '" + data[row].img_vivienda + "'" + "</img>" +
+                        "</div>" +
+                        "<div class='product-info'>" +
+                        "<div class='product-content'>" +
+                        "<h1><b>" + data[row].precio + "\u20AC " + "</b></h1>" +
+                        "<p>Up-to-date maintenance and revisions</p>" +
+                        "<ul>" +
+                        "<li> <i id='col-ico' class='fa-solid fa-bath'></i>&nbsp;" + data[row].aseos + " aseos" + "</li>" +
+                        "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
+                        "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
+                        "</ul>" +
+                        "<div class='buttons'>" +
+                        "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
+                        
+
+                        "<a id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
+                        
+
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>"
+                    )
+            }
+            }
+    
+}).catch(function() {
+    console.log("entro al CATCH");
+
+    // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
+    // $('#content_shop_viviendas').empty();
+    //     $('<div></div>').appendTo('#content_shop_viviendas')
+    //     .html('<h1>No hay viviendas con estos filtros</h1>');
+});
+
+
 
 function pagination() {
 
@@ -233,7 +226,7 @@ function pagination() {
 
 $(document).ready(function() {
     
-
+    
     loadViviendas();
     
     //pagination();
