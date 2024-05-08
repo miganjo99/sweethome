@@ -22,6 +22,27 @@
             return $this -> bll -> get_loadViviendas_BLL($args);
         }
 
+        public function get_filtro_operacion() {        
+
+            return $this -> bll -> get_filtro_operacion_BLL();
+        }
+        public function get_filtro_ciudad() {
+
+            return $this -> bll -> get_filtro_ciudad_BLL();
+        }
+        public function get_filtro_tipo() {
+
+            return $this -> bll -> get_filtro_tipo_BLL();
+        }
+        public function get_filtro_categoria() {
+
+            return $this -> bll -> get_filtro_categoria_BLL();
+        }
+        public function get_filtro_orientacion() {
+
+            return $this -> bll -> get_filtro_orientacion_BLL();
+        }
+
         
     }
 ?>

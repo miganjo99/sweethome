@@ -28,6 +28,26 @@
             //echo "*****************************************************************************";
             echo json_encode(common::load_model('shop_model', 'get_loadViviendas',[$_POST['offset'], $_POST['num_pages']]));
         }
+        function filtro_operacion() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_filtro_operacion'));
+        }
+        function filtro_ciudad() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_filtro_ciudad'));
+        }
+        function filtro_tipo() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_filtro_tipo'));
+        }
+        function filtro_categoria() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_filtro_categoria'));
+        }
+        function filtro_orientacion() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_filtro_orientacion'));
+        }
 
     }
 ?>

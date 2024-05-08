@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
+
     <function>
         <name>view</name>
         <uri>view</uri>
     </function>
+
     <function>
         <name>loadViviendas</name>
         <uri>loadViviendas</uri>
+    </function>
+    
+    <function>
+        <name>filtro_operacion</name>
+        <uri>filtro_operacion</uri>
+    </function>
+    <function>
+        <name>filtro_ciudad</name>
+        <uri>filtro_ciudad</uri>
+    </function>
+    <function>
+        <name>filtro_tipo</name>
+        <uri>filtro_tipo</uri>
+    </function>
+    <function>
+        <name>filtro_categoria</name>
+        <uri>filtro_categoria</uri>
+    </function>
+    <function>
+        <name>filtro_orientacion</name>
+        <uri>filtro_orientacion</uri>
     </function>
    
 </functions>

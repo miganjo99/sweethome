@@ -239,7 +239,10 @@ input[type='radio'],
 
 
 .filters_shop {
+  
   width: 100%; 
+  height: 10%;
+  /* modificacion despues de migrar por primera vez los filtros */
   margin: 20px;
 }
 

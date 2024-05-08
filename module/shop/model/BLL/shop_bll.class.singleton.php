@@ -22,6 +22,31 @@
 			return $this -> dao -> select_all_viviendas($this->db, $args[0], $args[1]);
 		}
 
+        public function get_filtro_operacion_BLL() {
+			
+			return $this -> dao -> select_filtro_operacion($this->db);
+		}
+
+        public function get_filtro_ciudad_BLL() {
+			
+			return $this -> dao -> select_filtro_ciudad($this->db);
+		}
+
+        public function get_filtro_tipo_BLL() {
+			
+			return $this -> dao -> select_filtro_tipo($this->db);
+		}
+
+        public function get_filtro_categoria_BLL() {
+			
+			return $this -> dao -> select_filtro_categoria($this->db);
+		}
+
+        public function get_filtro_orientacion_BLL() {
+			
+			return $this -> dao -> select_filtro_orientacion($this->db);
+		}
+
        
 	}
 ?>
