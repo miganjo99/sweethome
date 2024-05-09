@@ -156,12 +156,13 @@ function print_filters() {
     // });
     //     localStorage.removeItem('filters_shop');       
 }
+
 function clicks() {
     
     $(document).on("click", ".more_info_list", function() {
         
-        
         var id_vivienda = this.getAttribute('id');      
+        //console.log(id_vivienda);
         localStorage.setItem('id', id_vivienda);
         loadDetails(id_vivienda);
     });
@@ -180,7 +181,9 @@ function clicks() {
 }
 
 function loadDetails(id_vivienda) {
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=details_vivienda&id=' + id_vivienda, 'GET', 'JSON')
+    //ajaxPromise('index.php?module=shop&op=details_vivienda&id=' + id_vivienda, 'GET', 'JSON')
+    //console.log(id_vivienda);
+    ajaxPromise('index.php?module=shop&op=details_vivienda', 'GET', 'JSON',{id_vivienda:'id_vivienda'})
     .then(function(data) {
         //console.log(data);
         //alert("load details");
@@ -190,11 +193,11 @@ function loadDetails(id_vivienda) {
         $('.date_vivienda_dentro').empty();
         $('.pagination-container').empty();
 
-        var verificate_acces_token = localStorage.getItem('acces_token') || null;
+        // var verificate_acces_token = localStorage.getItem('acces_token') || null;
 
-            if (verificate_acces_token !=  null) {//un unico filters
-                mis_likes_details(id_vivienda);     
-            }
+        //     if (verificate_acces_token !=  null) {//un unico filters
+        //         mis_likes_details(id_vivienda);     
+        //     }
 
         for (row in data[1][0]) {
             $('<div></div>').attr({ 'id': data[1][0].id_img, class: 'date_img_dentro' }).appendTo('.date_img')

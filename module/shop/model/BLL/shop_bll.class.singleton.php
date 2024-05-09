@@ -46,6 +46,11 @@
 			
 			return $this -> dao -> select_filtro_orientacion($this->db);
 		}
+        public function get_details_vivienda_BLL($id_vivienda) {
+			
+			//return $id_vivienda;
+			return $this -> dao -> select_details_vivienda($this->db, $id_vivienda);
+		}
 
        
 	}

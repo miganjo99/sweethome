@@ -42,6 +42,10 @@
 
             return $this -> bll -> get_filtro_orientacion_BLL();
         }
+        public function get_details_vivienda($id_vivienda) {
+
+            return $this -> bll -> get_details_vivienda_BLL($id_vivienda);
+        }
 
         
     }

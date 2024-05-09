@@ -69,6 +69,25 @@
             return $db->listar($stmt);
         }
 
+        public function select_details_vivienda($db, $id_vivienda) {
+
+
+            //return $id_vivienda;
+
+            $sql = "SELECT *
+            FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
+            WHERE v.id_vivienda = '$id_vivienda'
+            AND  v.id_ciudad = c.id_ciudad 
+            AND v.id_categoria = ca.id_categoria
+            AND v.id_tipo = t.id_tipo
+            AND v.id_operacion = o.id_operacion;";
+            
+            return $sql;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
         
     }
 

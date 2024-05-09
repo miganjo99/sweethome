@@ -48,6 +48,10 @@
             
             echo json_encode(common::load_model('shop_model', 'get_filtro_orientacion'));
         }
+        function details_vivienda() {
+            //echo ($_GET['id_vivienda']);
+            echo json_encode(common::load_model('shop_model', 'get_details_vivienda',$_GET['id_vivienda']));
+        }
 
     }
 ?>
