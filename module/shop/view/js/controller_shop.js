@@ -60,7 +60,10 @@ function loadViviendas() {
                             "</div>"
                         )
                 }
-                }
+
+                mapBox_all(data);
+
+            }
         
     }).catch(function() {
         console.log("entro al CATCH");
@@ -194,47 +197,55 @@ function loadDetails(id_vivienda) {
         $('.pagination-container').empty();
         
         
+        console.log(data.vivienda[0].id_vivienda);
+        //console.log(data[0][0]);
+        //console.log(data.vivienda[0]);
+        
         // var verificate_acces_token = localStorage.getItem('acces_token') || null;
 
             // if (verificate_acces_token !=  null) {//un unico filters
             //     mis_likes_details(id_vivienda);     
             // }
 
-        for (row in data[1][0]) {
-            $('<div></div>').attr({ 'id': data[1][0].id_img, class: 'date_img_dentro' }).appendTo('.date_img')
+            for (row in data.imagenes) {
+            //console.log(data.imagenes[row].img_vivienda);
+            //console.log(data.imagenes[0][row].img_vivienda);
+
+            $('<div style="height: auto; "></div>').attr({ 'id': data.imagenes[0].id_img, class: 'date_img_dentro' }).appendTo('.date_img')
                 .html(
+                    
                     "<div class='content-img-details'>" +
-                    "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
+                    "<img src= '" + data.imagenes[row].img_vivienda + "'" + "</img>" +
                     "</div>"
                 )
         }
 
-        $('<div></div>').attr({ 'id': data[0][0].id_vivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
+        $('<div></div>').attr({ 'id': data.vivienda[0].id_vivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
             .html(
                 
                 "<div class='list_product_details'>" +
                 "<div class='product-info_details'>" +
                 "<div class='product-content_details'>" +
-                "<h1><b>" + data[0][0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i>"+"</b></h1>" +
+                "<h1><b>" + data.vivienda[0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i>"+"</b></h1>" +
                 "<hr class=hr-shop>" +
                 "<table id='table-shop'> <tr>" +
-                "<td> <i id='col-ico' class='fa-regular fa-calendar fa-2xl'></i> &nbsp;" + data[0][0].antiguedad + " años" + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-door-open fa-2xl'></i> &nbsp;" + data[0][0].num_habs + " habitaciones" + "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-calendar-days fa-2xl'></i> &nbsp;" + data[0][0].fecha_publicacion + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-bath fa-2xl'></i> &nbsp;" + data[0][0].aseos + " aseos"+ "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-house fa-2xl'></i> &nbsp;" + data[0][0].name_tipo + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-key fa-2xl'></i> &nbsp;" + data[0][0].name_operacion + "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-city fa-2xl'></i> &nbsp;" + data[0][0].name_ciudad + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-trowel fa-2xl'></i> &nbsp;" + data[0][0].name_categoria + "</td>" +
+                "<td> <i id='col-ico' class='fa-regular fa-calendar fa-2xl'></i> &nbsp;" + data.vivienda[0].antiguedad + " años" + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-door-open fa-2xl'></i> &nbsp;" + data.vivienda[0].num_habs + " habitaciones" + "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-calendar-days fa-2xl'></i> &nbsp;" + data.vivienda[0].fecha_publicacion + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-bath fa-2xl'></i> &nbsp;" + data.vivienda[0].aseos + " aseos"+ "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-house fa-2xl'></i> &nbsp;" + data.vivienda[0].name_tipo + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-key fa-2xl'></i> &nbsp;" + data.vivienda[0].name_operacion + "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-city fa-2xl'></i> &nbsp;" + data.vivienda[0].name_ciudad + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-trowel fa-2xl'></i> &nbsp;" + data.vivienda[0].name_categoria + "</td>" +
                 "</table>" +
                 "<hr class=hr-shop>" +
                 "<h3><b>" + "Descripción:" + "</b></h3>" +
-                "<p>" + data[0][0].descripcion + "</p>" +
+                "<p>" + data.vivienda[0].descripcion + "</p>" +
                 "<div class='buttons_details'>" +
                 "<a class='button add' href='#'>Contactar</a>" +
                 "<a class='button buy' href='#'>Guardar</a>" +
-                "<span class='button' id='price_details'>" + data[0][0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i> </span>" +
-                "<a id='" + data[0][0].id_vivienda + "'><i id=" + data[0][0].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
+                "<span class='button' id='price_details'>" + data.vivienda[0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i> </span>" +
+                "<a id='" + data.vivienda[0].id_vivienda + "'><i id=" + data.vivienda[0].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
                 "</div>" +
                 "</div>" +
                 "</div>" +
@@ -250,14 +261,63 @@ function loadDetails(id_vivienda) {
             autoplay: true,
             autoplaySpeed: 2600
         });
-        
+        console.log(data.vivienda[0])
         // more_viviendas_related(data[0].id_ciudad);//fsts. el que vullgam que estiga relacionat
-        // mapBox(data);
+         mapBox(data.vivienda[0]);
 
     }).catch(function() {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
 }
+
+function mapBox_all(data) {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-0.61667, 38.83966492354664], // starting position [lng, lat]
+        zoom: 6.5 // starting zoom
+    });
+
+    for (row in data) {
+        const marker = new mapboxgl.Marker()
+        const minPopup = new mapboxgl.Popup()
+        minPopup.setHTML('<h3 style="text-align:center;">' + data[row].precio + '€</h3>' +
+        '<p style="text-align:center;">Estado: <b>' + data[row].estado + '</b></p>' +
+        '<p style="text-align:center;">Descripcion: <b>' + data[row].descripcion + '</b></p>' +
+        '<img src="' + data[row].img_vivienda + '"/>' +
+        '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall more_info_list" ' +
+        'data-wow-delay=".4s" id="' + data[row].id_vivienda + '">Read More</a>')
+        marker.setPopup(minPopup)
+            .setLngLat([data[row].long, data[row].lat])
+            .addTo(map);
+    }
+}
+
+function mapBox(data) {
+    //console.log(data.long);
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [data.long, data.lat], 
+        zoom: 10
+    });
+
+    for (row in data) {
+        const marker = new mapboxgl.Marker()
+        const minPopup = new mapboxgl.Popup()
+        minPopup.setHTML('<h4>' + data.estado + '</h4><p>Categoria: ' + data.name_categoria + '</p>' +
+            '<p>Precio: ' + data.precio + '€</p>' +
+            '<img src=" ' + data.img_vivienda + '"/>')
+        marker.setPopup(minPopup)
+            .setLngLat([data.long, data.lat])
+            .addTo(map);
+    }
+}
+
 
 
 $(document).ready(function() {
