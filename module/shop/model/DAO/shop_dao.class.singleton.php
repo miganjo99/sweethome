@@ -73,6 +73,7 @@
 
 
             //return $id_vivienda;
+            $details_img = self::select_details_img($db, $id_vivienda);
 
             $sql = "SELECT *
             FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
@@ -82,7 +83,31 @@
             AND v.id_tipo = t.id_tipo
             AND v.id_operacion = o.id_operacion;";
             
-            return $sql;
+            //return $sql;
+
+            $stmt = $db->ejecutar($sql);
+
+            $array = array();
+            
+            if (mysqli_num_rows($stmt) > 0) {
+                foreach ($stmt as $row) {
+                    array_push($array, $row);
+                }
+            }
+
+            $rdo = array();
+            $rdo[0] = $array;
+            $rdo[1][] = $details_img;
+
+            return $rdo;
+
+            //return $db->listar($stmt);
+        }
+        function select_details_img($db, $id_vivienda){
+
+            $sql = "SELECT i.id_vivienda, i.img_vivienda
+            FROM img_vivienda i
+            WHERE i.id_vivienda = '$id_vivienda'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
