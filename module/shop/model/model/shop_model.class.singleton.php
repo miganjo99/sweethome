@@ -47,6 +47,15 @@
             return $this -> bll -> get_details_vivienda_BLL($id_vivienda);
         }
 
+        public function get_viviendas_related($args) {
+
+            return $this -> bll -> get_viviendas_related_BLL($args);
+        }
+        public function get_count_viviendas_related($args) {
+
+            return $this -> bll -> get_count_viviendas_related_BLL($args);
+        }
+
         
     }
 ?>

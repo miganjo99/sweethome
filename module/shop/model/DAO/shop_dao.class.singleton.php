@@ -69,40 +69,7 @@
             return $db->listar($stmt);
         }
 
-        // public function select_details_vivienda($db, $id_vivienda) {
-
-
-        //     //return $id_vivienda;
-        //     $details_img = self::select_details_img($db, $id_vivienda);
-
-        //     $sql = "SELECT *
-        //     FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
-        //     WHERE v.id_vivienda = '$id_vivienda'
-        //     AND  v.id_ciudad = c.id_ciudad 
-        //     AND v.id_categoria = ca.id_categoria
-        //     AND v.id_tipo = t.id_tipo
-        //     AND v.id_operacion = o.id_operacion;";
-            
-        //     //return $sql;
-
-        //     $stmt = $db->ejecutar($sql);
-
-        //     $array = array();
-            
-        //     if (mysqli_num_rows($stmt) > 0) {
-        //         foreach ($stmt as $row) {
-        //             array_push($array, $row);
-        //         }
-        //     }
-
-        //     $rdo = array();
-        //     $rdo[0] = $array;
-        //     $rdo[1][] = $details_img;
-
-        //     return $rdo;
-
-        //     //return $db->listar($stmt);
-        // }
+        
         public function select_details_vivienda($db, $id_vivienda) {
             $sql = "SELECT *
                     FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
@@ -134,15 +101,35 @@
 
 
 
-        // public function select_details_img($db, $id_vivienda){
+        public function select_viviendas_related($db , $type, $loaded, $items) {
+            $sql = "SELECT * 
+            FROM vivienda v, ciudad c
+            WHERE v.id_ciudad = c.id_ciudad 
+            AND v.id_ciudad = '$type'
+            LIMIT $loaded, $items;";
+    
+            $stmt = $db->ejecutar($sql);
+    
+            
+            return $db->listar($stmt);
 
-        //     $sql = "SELECT i.id_vivienda, i.img_vivienda
-        //     FROM img_vivienda i
-        //     WHERE i.id_vivienda = '$id_vivienda'";
+        }
 
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
+        public function select_count_viviendas_related($db , $related) {
+            $sql = "SELECT COUNT(*) AS n_prod
+            FROM vivienda v 
+            WHERE v.id_ciudad = '$related';";
+    
+            $stmt = $db->ejecutar($sql);
+    
+            
+            return $db->listar($stmt);
+
+        }
+
+
+
+       
 
         
     }

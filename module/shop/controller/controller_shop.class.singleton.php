@@ -53,5 +53,14 @@
             echo json_encode(common::load_model('shop_model', 'get_details_vivienda',$_GET['id_vivienda']));
         }
 
+        function viviendas_related() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_viviendas_related',[$_POST['type'],$_POST['loaded'],$_POST['items']]));
+        }
+        function count_viviendas_related() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_count_viviendas_related',$_POST['related']));
+        }
+
     }
 ?>

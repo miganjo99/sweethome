@@ -46,34 +46,43 @@
 			
 			return $this -> dao -> select_filtro_orientacion($this->db);
 		}
-
-
+		
+		
         // public function get_details_vivienda_BLL($id_vivienda) {
 			
-		// 	//return $id_vivienda;
-		// 	return $this -> dao -> select_details_vivienda($this->db, $id_vivienda);
-		// }
-
-
-		public function get_details_vivienda_BLL($id_vivienda) {
+			// 	//return $id_vivienda;
+			// 	return $this -> dao -> select_details_vivienda($this->db, $id_vivienda);
+			// }
 			
-			$details_vivienda = $this-> dao -> select_details_vivienda($this->db, $id_vivienda);
-	
 			
-			$details_img = $this-> dao -> select_details_img($this->db, $id_vivienda);
-	
+			public function get_details_vivienda_BLL($id_vivienda) {
+				
+				$details_vivienda = $this-> dao -> select_details_vivienda($this->db, $id_vivienda);
+				
+				
+				$details_img = $this-> dao -> select_details_img($this->db, $id_vivienda);
+				
+				
+				$details = array(
+					'vivienda' => $details_vivienda,
+					'imagenes' => $details_img
+				);
+				//$details = array($details_vivienda,$details_img);
+				
+				
+				//$details = array_merge($details_vivienda, $details_img)
+				return $details;
+			}
 			
-			$details = array(
-				'vivienda' => $details_vivienda,
-				'imagenes' => $details_img
-			);
-			//$details = array($details_vivienda,$details_img);
+			public function get_viviendas_related_BLL() {
+				
+				return $this -> dao -> select_viviendas_related($this->db , $args[0], $args[1], $args[2]);
+			}
 
-
-			//$details = array_merge($details_vivienda, $details_img)
-			return $details;
-		}
-
+			public function get_count_viviendas_related_BLL() {
+				
+				return $this -> dao -> select_count_viviendas_related($this->db , $args[0]);
+			}
        
 	}
 ?>

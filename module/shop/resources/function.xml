@@ -36,5 +36,14 @@
         <name>filtro_orientacion</name>
         <uri>filtro_orientacion</uri>
     </function>
+
+    <function>
+        <name>viviendas_related</name>
+        <uri>viviendas_related</uri>
+    </function>
+    <function>
+        <name>count_viviendas_related</name>
+        <uri>count_viviendas_related</uri>
+    </function>
    
 </functions>
