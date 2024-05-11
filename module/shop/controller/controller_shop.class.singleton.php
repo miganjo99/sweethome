@@ -61,6 +61,10 @@
             
             echo json_encode(common::load_model('shop_model', 'get_count_viviendas_related',$_POST['related']));
         }
+        function redirect_home() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_redirect_home',[$_POST['filters_home'], $_POST['offset'], $_POST['num_pages']]));
+        }
 
     }
 ?>

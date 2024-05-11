@@ -55,6 +55,10 @@
 
             return $this -> bll -> get_count_viviendas_related_BLL($args);
         }
+        public function get_redirect_home($args) {
+            //return $args;
+            return $this -> bll -> get_redirect_home_BLL($args);
+        }
 
         
     }

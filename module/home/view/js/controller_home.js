@@ -175,6 +175,60 @@ function loadMasVisitadas() {
 }
 
 
+function clicks(){
+    $(document).on("click",'div.carousel__elements', function (){
+        var filters_home = [];
+        filters_home.push({"tipo":[this.getAttribute('id')]});
+        
+
+        localStorage.removeItem('filters_home')
+       
+        localStorage.setItem('filters_home', JSON.stringify(filters_home)); //guardar en filters_shop
+            setTimeout(function(){ 
+            window.location.href = 'index.php?module=shop&op=view';
+            }, 1000);  
+    }); 
+
+    $(document).on("click",'div.div_cate', function (){ 
+      var filters_home = [];
+      filters_home.push({"categoria":[this.getAttribute('id')]});
+
+      localStorage.removeItem('filters_home')
+      localStorage.setItem('filters_home', JSON.stringify(filters_home)); 
+        setTimeout(function(){ 
+          window.location.href = 'index.php?module=shop&op=view';
+        }, 1000);  
+    });
+
+    $(document).on("click",'div.div_op', function (){
+      var filters_home = [];
+      filters_home.push({"operacion":[this.getAttribute('id')]});
+
+
+      localStorage.removeItem('filters_home')
+      localStorage.setItem('filters_home', JSON.stringify(filters_home)); 
+        setTimeout(function(){ 
+          window.location.href = 'index.php?module=shop&op=view';
+        }, 1000);  
+    });
+
+    $(document).on("click",'div.div_ciu', function (){
+      var filters_home = [];
+      filters_home.push({"ciudad":[this.getAttribute('id')]});
+
+
+      localStorage.removeItem('filters_home')
+      localStorage.setItem('filters_home', JSON.stringify(filters_home)); 
+        setTimeout(function(){ 
+          window.location.href = 'index.php?module=shop&op=view';
+        }, 1000);  
+    });
+
+   
+    
+  } 
+
+
 $(document).ready(function() {
   carousel_innovacion();
   carousel_tipo();
@@ -183,5 +237,5 @@ $(document).ready(function() {
   loadCiudad();
   loadRecomendaciones();
   loadMasVisitadas();
-
+  clicks();
 });

@@ -126,9 +126,43 @@
             return $db->listar($stmt);
 
         }
+        public function select_redirect_home($db ,$filters_home, $offset, $num_pages) {
+            $sql = "SELECT * FROM vivienda v WHERE";
+            
+            foreach ($filters_home as &$value) {
+                foreach ($value as $value_parsed) {
+
+                    //return $value_parsed['categoria'][0];
+
+                    if (isset($value_parsed['categoria'])) {
+                        $prueba = $value_parsed['categoria'][0];
+                        $sql .= " v.id_categoria = '$prueba'";
+                    } elseif (isset($value_parsed['tipo'])) {
+                        $prueba = $value_parsed['tipo'][0];
+                        $sql .= " v.id_tipo = '$prueba'";
+                    } elseif (isset($value_parsed['operacion'])) {
+                        $prueba = $value_parsed['operacion'][0];
+                        $sql .= " v.id_operacion = '$prueba'";
+                    } elseif (isset($value_parsed['ciudad'])) {
+                        $prueba = $value_parsed['ciudad'][0];
+                        $sql .= " v.id_ciudad = '$prueba'";
+                    }
+                }
+            
+            }	
+		    $sql .= " LIMIT $offset, $num_pages";
+    
+            //return $sql;
+
+            $stmt = $db->ejecutar($sql);
+    
+            
+            return $db->listar($stmt);
+
+        }
 
 
-
+        
        
 
         

@@ -45,5 +45,9 @@
         <name>count_viviendas_related</name>
         <uri>count_viviendas_related</uri>
     </function>
+    <function>
+        <name>redirect_home</name>
+        <uri>redirect_home</uri>
+    </function>
    
 </functions>
