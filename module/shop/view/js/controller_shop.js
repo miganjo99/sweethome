@@ -327,13 +327,16 @@ function viviendas_related(offset = 0, related, total_items) {
     let type = related;
     let total_item = total_items;
 
+    console.log(type);
+    console.log(loaded);
+    console.log(items);
     
-
     ajaxPromise("index.php?module=shop&op=viviendas_related", 'POST', 'JSON', { 'type': type, 'loaded': loaded, 'items': items })
         .then(function(data) {
             console.log(data);
+            console.log(loaded);
             console.log("hola viviendas related");
-
+             
             if (loaded == 0) {
                 $('<div></div>').attr({ 'id': 'title_content', class: 'title_content' }).appendTo('.results')
                     .html(
@@ -356,11 +359,7 @@ function viviendas_related(offset = 0, related, total_items) {
                             "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
                             "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
                             "</ul>" +
-                            //"<div class='buttons'>" +
-                            //"<button id='" + data[row].id_vivienda + "' class='more_info_list1 button add' >More Info</button>" +
-                            //"<button class='button buy' >Buy</button>" +
-                            //"<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
-                            //"</div>" +
+                            
                             "</div>" +
                             "</div>" +
                             "</div>"
@@ -391,11 +390,6 @@ function viviendas_related(offset = 0, related, total_items) {
                                 "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
                                 "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
                                 "</ul>" +
-                                "<div class='buttons'>" +
-                                "<button id='" + data[row].id_vivienda + "' class='more_info_list1 button add' >More Info</button>" +
-                                "<button class='button buy' >Buy</button>" +
-                                "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
-                                "</div>" +
                                 "</div>" +
                                 "</div>" +
                                 "</div>"
@@ -413,7 +407,7 @@ function viviendas_related(offset = 0, related, total_items) {
                     $('.more_viviendas_button').empty();
                     $('<div></div>').attr({ 'id': 'more_viviendas_button', 'class': 'more_viviendas_button' }).appendTo('.title_content')
                         .html(
-                            "</br><button class='btn-notexist' id='btn-notexist'></button>"
+                            "</br><button class='btn-notexist hidden' id='btn-notexist'></button>"
                         )
                 } else {
                     $('.more_viviendas_button').empty();
@@ -431,8 +425,8 @@ function viviendas_related(offset = 0, related, total_items) {
 function more_viviendas_related(data) {
     var related = data;
     var offset = 0;
-    console.log(data);
-    //console.log("Hola more viviendas");
+    console.log(related);
+    console.log("Hola more viviendas");
     ajaxPromise('index.php?module=shop&op=count_viviendas_related', 'POST', 'JSON', { 'related': related })
         .then(function(data) {
             
@@ -442,8 +436,14 @@ function more_viviendas_related(data) {
             console.log("COUNT RELATED");
             viviendas_related(0, related, total_items);
             $(document).on("click", '.more_viviendas_button', function() {
-                //alert("on click more info");
+                
+                // alert("on click more info");
                 offset = offset + 3;
+
+                // console.log(offset);
+                // console.log(related);
+                // console.log(total_items);
+                
                 $('.more_viviendas_button').empty();
                 viviendas_related(offset, related, total_items);
             });

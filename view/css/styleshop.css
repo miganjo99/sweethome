@@ -127,22 +127,23 @@
   padding: 10px; /* Relleno dentro del elemento */
 }
 
-/* Estilos para las imágenes */
+
 .more_info_list1 img {
-  max-width: 100%; /* Asegura que la imagen no se desborde del contenedor */
-  height: auto; /* Mantiene la proporción de aspecto de la imagen */
+  max-width: 100%; 
+  height: auto; 
 }
 
-/* Estilos para los botones y el precio */
+
 .more_info_list1 .buttons {
-  margin-top: 10px; /* Margen superior para los botones */
+  margin-top: 10px; 
 }
 
-/* Estilos para el botón de carga más */
+
 .more_viviendas_button {
-  width: 100%; /* Asegura que el botón de carga más ocupe todo el ancho */
-  text-align: center; /* Centra el botón */
-  margin-top: 20px; /* Margen superior */
+  z-index: 100;
+  width: 100%; 
+  text-align: center; 
+  margin-top: 20px; 
 }
 
 

@@ -74,12 +74,12 @@
 				return $details;
 			}
 			
-			public function get_viviendas_related_BLL() {
+			public function get_viviendas_related_BLL($args) {
 				
 				return $this -> dao -> select_viviendas_related($this->db , $args[0], $args[1], $args[2]);
 			}
 
-			public function get_count_viviendas_related_BLL() {
+			public function get_count_viviendas_related_BLL($args) {
 				
 				return $this -> dao -> select_count_viviendas_related($this->db , $args[0]);
 			}
