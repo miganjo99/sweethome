@@ -12,17 +12,7 @@
             return self::$_instance;
         }
         
-        // public function select_all_viviendas($db, $offset, $num_pages) {
-
-        //     $sql = "SELECT * 
-        //     FROM vivienda v  
-        //     ORDER BY v.id_vivienda ASC
-        //     LIMIT  $offset, $num_pages;";
-            
-
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
+        
 
         public function select_filtro_operacion($db) {
 
@@ -170,6 +160,43 @@
             LIMIT  $offset, $num_pages;";
     
           
+
+            $stmt = $db->ejecutar($sql);
+           
+            return $db->listar($stmt);
+
+        }
+
+        public function select_filter_shop($db , $filters_shop, $offset, $num_pages) {
+            $sql = "SELECT DISTINCT v.* FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i";
+		        //return $sql;
+		
+		        $index = 0;
+                foreach ($filters_shop as &$value) {
+                    foreach($value as &$value_parsed){
+                        // [id_operacion : 2]
+                        //echo " nombre: ";
+                        //echo $value_parsed[0];
+                        //echo " id: ";
+                        //echo $value_parsed[1];
+        
+
+                        if ($index == 0 ) {
+                            $sql .= " WHERE v." . $value_parsed[0] . "=" . $value_parsed[1]; 
+                        } else {
+                            $sql .= " AND v." . $value_parsed[0] . "=" . $value_parsed[1];
+                        }
+                        
+                        $index++;
+                    }
+                }
+
+
+	
+
+		        $sql.= " LIMIT  $offset, $num_pages ";
+    
+                //return $sql;
 
             $stmt = $db->ejecutar($sql);
            

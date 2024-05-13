@@ -88,6 +88,10 @@
 				//return $args[0];
 				return $this -> dao -> select_redirect_home($this->db , $args[0], $args[1], $args[2]);
 			}
+			public function get_filter_shop_BLL($args) {
+				//return $args[0];
+				return $this -> dao -> select_filter_shop($this->db , $args[0], $args[1], $args[2]);
+			}
 
 
 

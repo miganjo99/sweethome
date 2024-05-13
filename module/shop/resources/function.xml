@@ -50,6 +50,10 @@
         <uri>redirect_home</uri>
     </function>
     <function>
+        <name>filter</name>
+        <uri>filter</uri>
+    </function>
+    <function>
         <name>all_viviendas</name>
         <uri>all_viviendas</uri>
     </function>

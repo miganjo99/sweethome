@@ -60,6 +60,11 @@
             return $this -> bll -> get_redirect_home_BLL($args);
         }
 
+        public function get_filter_shop($args) {
+            //return $args;
+            return $this -> bll -> get_filter_shop_BLL($args);
+        }
+
         
         // public function get_all_viviendas($args) {
             
