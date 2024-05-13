@@ -61,5 +61,11 @@
         }
 
         
+        // public function get_all_viviendas($args) {
+            
+        //     return $this -> bll -> get_all_viviendas_BLL($args);
+        // }
+
+        
     }
 ?>

@@ -12,21 +12,21 @@
             return self::$_instance;
         }
         
-        public function select_all_viviendas($db, $offset, $num_pages) {
+        // public function select_all_viviendas($db, $offset, $num_pages) {
 
-            $sql = "SELECT * 
-            FROM vivienda v  
-            ORDER BY v.id_vivienda ASC
-            LIMIT  $offset, $num_pages;";
+        //     $sql = "SELECT * 
+        //     FROM vivienda v  
+        //     ORDER BY v.id_vivienda ASC
+        //     LIMIT  $offset, $num_pages;";
             
 
-            $stmt = $db->ejecutar($sql);
-            return $db->listar($stmt);
-        }
+        //     $stmt = $db->ejecutar($sql);
+        //     return $db->listar($stmt);
+        // }
 
         public function select_filtro_operacion($db) {
 
-            $sql = "SELECT *FROM operacion ORDER BY id_operacion ASC;";
+            $sql = "SELECT * FROM operacion ORDER BY id_operacion ASC;";
             
 
             $stmt = $db->ejecutar($sql);
@@ -126,10 +126,12 @@
             return $db->listar($stmt);
 
         }
+
         public function select_redirect_home($db ,$filters_home, $offset, $num_pages) {
             $sql = "SELECT * FROM vivienda v WHERE";
             
             foreach ($filters_home as &$value) {
+                
                 foreach ($value as $value_parsed) {
 
                     //return $value_parsed['categoria'][0];
@@ -156,7 +158,21 @@
 
             $stmt = $db->ejecutar($sql);
     
-            
+            return $db->listar($stmt);
+
+        }
+
+
+        public function select_all_viviendas($db , $offset, $num_pages) {
+            $sql = "SELECT * 
+            FROM vivienda v  
+            ORDER BY v.id_vivienda ASC
+            LIMIT  $offset, $num_pages;";
+    
+          
+
+            $stmt = $db->ejecutar($sql);
+           
             return $db->listar($stmt);
 
         }

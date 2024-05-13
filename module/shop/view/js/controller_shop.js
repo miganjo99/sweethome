@@ -1,18 +1,16 @@
-
-
 function loadViviendas() {
     
     //ajaxPromise('index.php?module=shop&op=loadViviendas','POST', 'JSON',{'num_pages' : 3 , 'offset' : 0})
     
     var verificate_filters_home = localStorage.getItem('filters_home') || null;
+    
+
+
     if (verificate_filters_home !=  null) {
         
 
         console.log(verificate_filters_home);
         var filters_home=JSON.parse(verificate_filters_home);
-
-        // console.log(filters_home[0]);
-        // console.log("filters_home");
 
         ajaxForSearch("index.php?module=shop&op=redirect_home", 'POST', 'JSON', {'filters_home' : filters_home });
   
@@ -22,7 +20,7 @@ function loadViviendas() {
 
 
 function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset = 0) {
-    
+    //console.log(url);
    
 
     ajaxPromise(url, 'POST', 'JSON', {'filters_shop': data , 'filters_home' : data , 'filters_search' : data, 'num_pages': num_pages, 'offset': offset})
@@ -160,15 +158,128 @@ function print_filters() {
     $('.filters_shop').html(filters_container);
                       
     
-    // $(document).on('click', '.filter_remove', function() {
-    //     remove_filters();
-    // });
+    $(document).on('click', '.filter_remove', function() {
+        remove_filters();
+    });
 
     // $(document).on('click', '.ultima_busqueda', function() {
     //     ultima_busqueda();
     // });
     //     localStorage.removeItem('filters_shop');       
 }
+
+
+// function filter_button() {
+
+    
+
+//     $(document).on('change', '.filter_ordenar', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_ordenar', this.value);
+//     });
+//     if (localStorage.getItem('filter_ordenar')) {
+//         $('.filter_ordenar').val(localStorage.getItem('filter_ordenar'));
+//     }
+
+
+
+//     $(document).on('change', '.filter_operacion', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_operacion', this.value);
+//     });
+//     if (localStorage.getItem('filter_operacion')) {
+//         $('.filter_operacion').val(localStorage.getItem('filter_operacion'));
+//     }
+
+
+    
+
+//     $(document).on('change', '.filter_ciudad', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_ciudad', this.value);
+//     });   
+//     if (localStorage.getItem('filter_ciudad')) {
+//         $('.filter_ciudad').val(localStorage.getItem('filter_ciudad'));
+//     }
+
+
+//     $(document).on('change', '.filter_tipo', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_tipo', this.value);
+//     });
+//     if (localStorage.getItem('filter_tipo')) {
+//         $('.filter_tipo').val(localStorage.getItem('filter_tipo'));
+//     }
+
+
+//     $(document).on('change', '.filter_categoria', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_categoria', this.value);
+//     });
+//     if (localStorage.getItem('filter_categoria')) {
+//         $('.filter_categoria').val(localStorage.getItem('filter_categoria'));
+//     }
+
+//     $(document).on('change', '.filter_orientacion', function() {
+//         console.log("Hola");
+//         console.log(this.value);
+//         localStorage.setItem('filter_orientacion', this.value);
+//     });
+//     if (localStorage.getItem('filter_orientacion')) {
+//         $('.filter_orientacion').val(localStorage.getItem('filter_orientacion'));
+//     }
+
+
+    
+
+
+
+
+
+
+//     $(document).on('click', '.filter_button', function () {
+//         var filters_shop = [];
+
+//         if (localStorage.getItem('filter_ordenar')) {
+//             filters_shop.push(['precio', localStorage.getItem('filter_ordenar')])
+//         }
+        
+//         if (localStorage.getItem('filter_operacion')) {
+//             filters_shop.push(['id_operacion', localStorage.getItem('filter_operacion')])
+//         }
+//         if (localStorage.getItem('filter_ciudad')) {
+//             filters_shop.push(['id_ciudad', localStorage.getItem('filter_ciudad')])
+//         }
+//         if (localStorage.getItem('filter_tipo')) {
+//             filters_shop.push(['id_tipo', localStorage.getItem('filter_tipo')])
+//         }
+//         if (localStorage.getItem('filter_categoria')) {
+//             filters_shop.push(['id_categoria', localStorage.getItem('filter_categoria')])
+//         }
+//         if (localStorage.getItem('filter_orientacion')) {
+//             filters_shop.push(['id_orientacion', localStorage.getItem('filter_orientacion')])
+//         }
+       
+    
+//         localStorage.removeItem('filters_shop'); 
+
+//         localStorage.setItem('filters_shop', JSON.stringify(filters_shop));   
+        
+
+
+//         location.reload();
+        
+
+        
+    
+//     });
+    
+// }
 
 function clicks() {
     
@@ -330,6 +441,23 @@ function mapBox(data) {
     }
 }
 
+function remove_filters() {
+    
+
+    localStorage.removeItem('filters_shop');
+    localStorage.removeItem('filters_search');
+    localStorage.removeItem('filters_home');
+
+    localStorage.removeItem('filter_operacion');
+    localStorage.removeItem('filter_ciudad');
+    localStorage.removeItem('filter_tipo');
+    localStorage.removeItem('filter_categoria');
+    localStorage.removeItem('filter_orientacion');
+    localStorage.removeItem('filter_ordenar');
+    // localStorage.removeItem('filter_habitaciones');
+    
+    location.reload();
+}
 
 function viviendas_related(offset = 0, related, total_items) {
     let items = 3;
@@ -465,6 +593,7 @@ function more_viviendas_related(data) {
 $(document).ready(function() {
     
     print_filters();
-    clicks();
     loadViviendas();
+    //filter_button();
+    clicks();
 }); 

@@ -23,11 +23,11 @@
             common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
         }
 
-        function loadViviendas() {
-            //echo json_encode("holayyyyy loadViviendas");  
-            //echo "*****************************************************************************";
-            echo json_encode(common::load_model('shop_model', 'get_loadViviendas',[$_POST['offset'], $_POST['num_pages']]));
-        }
+        // function loadViviendas() {
+        //     //echo json_encode("holayyyyy loadViviendas");  
+        //     //echo "*****************************************************************************";
+        //     echo json_encode(common::load_model('shop_model', 'get_loadViviendas',[$_POST['offset'], $_POST['num_pages']]));
+        // }
         function filtro_operacion() {
             
             echo json_encode(common::load_model('shop_model', 'get_filtro_operacion'));
@@ -62,9 +62,14 @@
             echo json_encode(common::load_model('shop_model', 'get_count_viviendas_related',$_POST['related']));
         }
         function redirect_home() {
-            
+            //echo "olaaaaaaaaaaaaaaaaa",
             echo json_encode(common::load_model('shop_model', 'get_redirect_home',[$_POST['filters_home'], $_POST['offset'], $_POST['num_pages']]));
         }
+
+        // function all_viviendas() {
+            
+        //     echo json_encode(common::load_model('shop_model', 'get_all_viviendas',[$_GET['offset'], $_GET['num_pages']]));
+        // }
 
     }
 ?>
