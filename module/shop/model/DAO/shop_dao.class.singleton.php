@@ -174,12 +174,6 @@
 		        $index = 0;
                 foreach ($filters_shop as &$value) {
                     foreach($value as &$value_parsed){
-                        // [id_operacion : 2]
-                        //echo " nombre: ";
-                        //echo $value_parsed[0];
-                        //echo " id: ";
-                        //echo $value_parsed[1];
-        
 
                         if ($index == 0 ) {
                             $sql .= " WHERE v." . $value_parsed[0] . "=" . $value_parsed[1]; 
