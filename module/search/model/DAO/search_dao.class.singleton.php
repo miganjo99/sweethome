@@ -12,9 +12,9 @@
             return self::$_instance;
         }
         
-        function select_car_type($db){
+        function select_search_operacion($db){
 
-			$sql = "SELECT DISTINCT type_name FROM type";
+			$sql = "SELECT * FROM operacion;";
 
 			$stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

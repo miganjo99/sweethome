@@ -14,8 +14,8 @@
         }
 
 
-        function car_type() {
-            echo json_encode(common::load_model('search_model', 'get_car_type'));
+        function search_operacion() {
+            echo json_encode(common::load_model('search_model', 'get_search_operacion'));
         }
 
         

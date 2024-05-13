@@ -16,8 +16,8 @@
 			return self::$_instance;
 		}
 
-		public function get_car_type_BLL() {
-			return $this -> dao -> select_car_type($this->db);
+		public function get_search_operacion_BLL() {
+			return $this -> dao -> select_search_operacion($this->db);
 		}
 
 		

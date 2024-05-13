@@ -14,8 +14,8 @@
             return self::$_instance;
         }
 
-        public function get_car_type() {
-            return $this -> bll -> get_car_type_BLL();
+        public function get_search_operacion() {
+            return $this -> bll -> get_search_operacion_BLL();
         }
 
        

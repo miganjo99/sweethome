@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>car_type</name>
-        <uri>car_type</uri>
+        <name>search_operacion</name>
+        <uri>search_operacion</uri>
     </function>
     <function>
         <name>car_brand</name>
