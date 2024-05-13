@@ -20,6 +20,14 @@
             return $db->listar($stmt);
         }
 
+        function select_search_innovacion_null($db){
+
+			$sql = "SELECT DISTINCT * FROM innovacion;";
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
        
         
     }

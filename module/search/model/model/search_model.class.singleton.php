@@ -18,6 +18,10 @@
             return $this -> bll -> get_search_operacion_BLL();
         }
 
+        public function get_search_innovacion_null() {
+            return $this -> bll -> get_search_innovacion_null_BLL();
+        }
+
        
 
     }
