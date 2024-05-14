@@ -24,6 +24,10 @@
             echo json_encode(common::load_model('search_model', 'get_search_innovacion',$_POST['operacion']));
         }
 
+        function autocomplete() {
+            echo json_encode(common::load_model('search_model', 'get_autocomplete',[$_POST['complete'], $_POST['operacion'], $_POST['innovacion']]));
+        }
+
         
     }
 ?>

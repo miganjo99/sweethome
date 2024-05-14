@@ -1,6 +1,5 @@
 function load_operacion() {
-    //console.log("HOLA LOAD CIUDAD SEARCH");
-    //alert("uep");
+
     ajaxPromise('index.php?module=search&op=search_operacion', 'POST', 'JSON')
     .then(function (data) {
         $('<option>Operacion</option>').attr('selected', true).attr('disabled', true).appendTo('.search_operacion')
@@ -17,7 +16,6 @@ function load_innovacion(operacion) {
     console.log(operacion);
     console.log("operacion");
     if (operacion == undefined) {
-        console.log("nulllllllllll")
         ajaxPromise('index.php?module=search&op=search_innovacion_null', 'POST', 'JSON')
             .then(function (data) {
                 $('<option>Innovacion</option>').attr('selected', true).attr('disabled', true).appendTo('.search_innovacion')
@@ -32,8 +30,6 @@ function load_innovacion(operacion) {
         console.log("hola search innovacion");
         ajaxPromise('index.php?module=search&op=search_innovacion', 'POST', 'JSON', operacion)
             .then(function (data) {
-                console.log(data);
-                console.log("data innovacion");
                 for (row in data) {
                     $('<option value="' + data[row].id_innovacion + '">' + data[row].name_innovacion + '</option>').appendTo('.search_innovacion')
                 }
@@ -48,7 +44,7 @@ function launch_search() {
     load_innovacion();
     $(document).on('change', '.search_operacion', function () {
         let operacion = $(this).val();
-        console.log("operacion:",operacion);
+        //  console.log("operacion:",operacion);
         if (operacion === 0) {
             load_innovacion();
         } else {
@@ -57,7 +53,50 @@ function launch_search() {
     });
 }
 
+function autocomplete() {
+    $("#autocom").on("keyup", function () {
+        let sdata = { complete: $(this).val() };
+        //console,log("sdata",sdata);
+        if (($('.search_operacion').val() != 0)) {
+            //console.log("search_operacion",$('.search_operacion').val());
+            sdata.operacion = $('.search_operacion').val();
+            if (($('.search_operacion').val() != 0) && ($('.search_innovacion').val() != 0)) {
+                sdata.innovacion = $('.search_innovacion').val();
+            }
+        }
+        if (($('.search_operacion').val() == undefined) && ($('.search_innovacion').val() != 0)) {
+            sdata.innovacion= $('.search_innovacion').val();
+        }
+        console.log("sdata",sdata);
 
+
+
+        ajaxPromise('index.php?module=search&op=autocomplete', 'POST', 'JSON', sdata)
+            .then(function (data) {
+                
+                
+                console.log(data);
+                console.log("data AUTOCOMPLETE:");
+
+                $('#search_viv').empty();
+                $('#search_viv').fadeIn(10000000);
+                for (row in data) {
+                    $('<div></div>').appendTo('#search_viv').html(data[row].name_ciudad).attr({ 'class': 'searchElement', 'id': data[row].name_ciudad });
+                }
+                $(document).on('click', '.searchElement', function () {
+                    $('#autocom').val(this.getAttribute('id'));
+                    $('#search_viv').fadeOut(1000);
+                });
+                $(document).on('click scroll', function (event) {
+                    if (event.target.id !== 'autocom') {
+                        $('#search_viv').fadeOut(1000);
+                    }
+                });
+            }).catch(function () {
+                $('#search_viv').fadeOut(500);
+            });
+    });
+}
 
 
 

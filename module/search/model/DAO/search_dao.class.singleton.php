@@ -39,6 +39,92 @@
             return $db->listar($stmt);
         }
 
+
+        function select_operacion_autocomplete($db, $operacion){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND v.id_operacion = $operacion ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        function select_innovacion_autocomplete($db, $innovacion){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND v.id_innovacion = $innovacion ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        function select_operacion_innovacion_autocomplete($db, $operacion, $innovacion){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND v.id_operacion = $operacion AND v.id_innovacion = $innovacion ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        function select_innovacion_ciudad_autocomplete($db, $complete, $innovacion){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND v.id_innovacion= $innovacion AND c.name_ciudad LIKE '$complete%' ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+
+        function select_operacion_ciudad_autocomplete($db, $complete, $operacion){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND v.id_operacion = $operacion AND c.name_ciudad LIKE '$complete%' ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        function select_ciudad_autocomplete($db, $complete){
+
+			$sql = "SELECT DISTINCT c.name_ciudad
+                 FROM vivienda v, operacion o, innovacion i, ciudad c
+                 WHERE v.id_operacion = o.id_operacion
+                 AND v.id_innovacion = i.id_innovacion
+                 AND v.id_ciudad = c.id_ciudad AND c.name_ciudad LIKE '$complete%' ;";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
        
         
     }

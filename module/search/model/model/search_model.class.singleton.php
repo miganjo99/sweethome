@@ -26,6 +26,10 @@
             return $this -> bll -> get_search_innovacion_BLL($args);
         }
 
+        public function get_autocomplete($args) {
+            return $this -> bll -> get_autocomplete_BLL($args);
+        }
+
        
 
     }
