@@ -9,6 +9,10 @@
         <uri>search_innovacion_null</uri>
     </function>
     <function>
+        <name>search_innovacion</name>
+        <uri>search_innovacion</uri>
+    </function>
+    <function>
         <name>autocomplete</name>
         <uri>autocomplete</uri>
     </function>

@@ -19,9 +19,14 @@
 		public function get_search_operacion_BLL() {
 			return $this -> dao -> select_search_operacion($this->db);
 		}
-		
+
 		public function get_search_innovacion_null_BLL() {
 			return $this -> dao -> select_search_innovacion_null($this->db);
+		}
+
+		public function get_search_innovacion_BLL($args) {
+			
+			return $this -> dao -> select_search_innovacion($this->db, $args);
 		}
 
 		

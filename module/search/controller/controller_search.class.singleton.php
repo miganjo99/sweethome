@@ -20,6 +20,9 @@
         function search_innovacion_null() {
             echo json_encode(common::load_model('search_model', 'get_search_innovacion_null'));
         }
+        function search_innovacion() {
+            echo json_encode(common::load_model('search_model', 'get_search_innovacion',$_POST['operacion']));
+        }
 
         
     }

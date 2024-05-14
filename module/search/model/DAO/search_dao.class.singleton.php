@@ -27,6 +27,17 @@
 			$stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
+        function select_search_innovacion($db, $operacion){
+
+			$sql = "SELECT DISTINCT i.*
+            FROM vivienda v, innovacion i
+            WHERE i.id_innovacion = v.id_innovacion AND v.id_operacion = '$operacion';";
+
+            //return $sql;
+
+			$stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
 
        
         

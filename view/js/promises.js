@@ -12,7 +12,7 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             resolve(data);
         }).fail((jqXHR, textStatus, errorThrow) => {
             console.error("Error en la solicitud AJAX:", errorThrow);
-            console.log("Respuesta del servidor:", jqXHR.responseText);
+            //console.log("Respuesta del servidor:", jqXHR.responseText);
             //console.log("Respuesta del servidor:", textStatus.responseText);
 
             reject(errorThrow);

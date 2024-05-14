@@ -14,8 +14,10 @@ function load_operacion() {
 
 function load_innovacion(operacion) {
     $('.search_innovacion').empty();
-
+    console.log(operacion);
+    console.log("operacion");
     if (operacion == undefined) {
+        console.log("nulllllllllll")
         ajaxPromise('index.php?module=search&op=search_innovacion_null', 'POST', 'JSON')
             .then(function (data) {
                 $('<option>Innovacion</option>').attr('selected', true).attr('disabled', true).appendTo('.search_innovacion')
@@ -27,8 +29,11 @@ function load_innovacion(operacion) {
             });
     }
     else {
+        console.log("hola search innovacion");
         ajaxPromise('index.php?module=search&op=search_innovacion', 'POST', 'JSON', operacion)
             .then(function (data) {
+                console.log(data);
+                console.log("data innovacion");
                 for (row in data) {
                     $('<option value="' + data[row].id_innovacion + '">' + data[row].name_innovacion + '</option>').appendTo('.search_innovacion')
                 }
