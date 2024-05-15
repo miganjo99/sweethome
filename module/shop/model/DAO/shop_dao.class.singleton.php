@@ -198,7 +198,7 @@
 
         }
         public function select_filter_search($db , $filters_search, $offset, $num_pages) {
-            
+
             $sql = "SELECT v.*
                     FROM vivienda v, ciudad c, innovacion i
                     WHERE v.id_innovacion = i.id_innovacion
@@ -229,9 +229,100 @@
 
         }
 
+        public function select_count_home($db, $filters_home) {
 
+            $sql = "SELECT DISTINCT COUNT(v.id_vivienda) contador
+            FROM vivienda v
+            WHERE";
+    
+            
+            if (isset($filters_home[0]['tipo'])){
+                $prueba = $filters_home[0]['tipo'][0];
+                $sql.= " v.id_tipo = '$prueba'";
+            }
+            else if (isset($filters_home[0]['categoria'])) {
+                $prueba = $filters_home[0]['categoria'][0];
+                $sql.= " v.id_categoria = '$prueba'";
+            }
+            else if (isset($filters_home[0]['operacion'])) {
+                $prueba = $filters_home[0]['operacion'][0];
+                $sql.= " v.id_operacion = '$prueba'";
+            }
+            else if (isset($filters_home[0]['ciudad'])) {
+                $prueba = $filters_home[0]['ciudad'][0];
+                $sql.= " v.id_ciudad = '$prueba'";
+            }
+            
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
         
-       
+        public function select_count_shop($db, $filters_shop) {
+
+
+
+            //return $filters_shop;
+
+            $sql = "SELECT DISTINCT COUNT(v.id_vivienda) contador
+            FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o 
+            WHERE v.id_ciudad=c.id_ciudad
+            AND v.id_categoria=ca.id_categoria
+            AND v.id_tipo=t.id_tipo
+            AND v.id_operacion=o.id_operacion";
+
+            for ($i = 0; $i < count($filters_shop); $i++) {
+                if ($i == 0 ) {
+                    $sql .= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1]; 
+                } else {
+                    $sql .= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+                }
+                
+            }  
+            //return $sql;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+        
+        public function select_count_search($db, $filters_search) {
+
+            $sql = "SELECT DISTINCT COUNT(v.id_vivienda) contador
+            FROM vivienda v, ciudad c, innovacion i
+            WHERE v.id_innovacion = i.id_innovacion
+            AND v.id_ciudad = c.id_ciudad ";
+            
+            
+            for ($i = 0; $i < count($filters_search); $i++) {
+                if (!empty($filters_search[$i]['id_operacion'][0])) {
+                    $sql .= " AND v.id_operacion = " . ($filters_search[$i]['id_operacion'][0]);
+                }
+                elseif (!empty($filters_search[$i]['id_innovacion'][0])) {
+                    $sql .= " AND v.id_innovacion = " . ($filters_search[$i]['id_innovacion'][0]);
+                }
+                elseif (!empty($filters_search[$i]['ciudad'][0])) {
+                    $sql .= " AND c.name_ciudad = '" . $filters_search[$i]['ciudad'][0] . "'";
+                }
+            } 
+            
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+        public function select_count_all($db) {
+
+            $sql = "SELECT DISTINCT COUNT(v.id_vivienda) contador
+            FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o 
+            WHERE v.id_ciudad=c.id_ciudad
+            AND v.id_categoria=ca.id_categoria
+            AND v.id_tipo=t.id_tipo
+            AND v.id_operacion=o.id_operacion";
+            
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+        
 
         
     }

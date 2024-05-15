@@ -68,13 +68,28 @@
             //return $args;
             return $this -> bll -> get_filter_search_BLL($args);
         }
-
-        
-        // public function get_all_viviendas($args) {
+ 
+        public function get_all_viviendas($args) {
             
-        //     return $this -> bll -> get_all_viviendas_BLL($args);
-        // }
+            return $this -> bll -> get_all_viviendas_BLL($args);
 
+        }
+        public function get_count_home($args) {
+
+            return $this -> bll -> get_count_home_BLL($args);
+        }
+        public function get_count_shop($args) {
+
+            return $this -> bll -> get_count_shop_BLL($args);
+        }
+        public function get_count_search($args) {
+
+            return $this -> bll -> get_count_search_BLL($args);
+        }
+        public function get_count_all() {
+
+            return $this -> bll -> get_count_all_BLL();
+        }
         
     }
 ?>

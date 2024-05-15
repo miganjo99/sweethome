@@ -6,7 +6,7 @@ function loadViviendas() {
     var verificate_filters_shop = localStorage.getItem('filters_shop') || null;
     var verificate_filters_search = localStorage.getItem('filters_search') || null;
 
-   
+    pagination();
 
     if (verificate_filters_home !=  null) {
         
@@ -47,10 +47,10 @@ function loadViviendas() {
         //   }, "1000");
           
     }
-    // else {
+    else {
        
-    //     ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas','GET', 'JSON');
-    // }
+        ajaxForSearch('index.php?module=shop&op=all_viviendas','POST', 'JSON');
+    }
 
 }
 
@@ -488,6 +488,100 @@ function remove_filters() {
     location.reload();
 }
 
+function pagination() {
+
+    var filters_search = JSON.parse(localStorage.getItem('filters_search'));
+    var filters_home = JSON.parse(localStorage.getItem('filters_home'));
+    var filters_shop = JSON.parse(localStorage.getItem('filters_shop'));
+
+
+    var url;
+    if (filters_search) {//Todo ifs
+    url = "index.php?module=shop&op=count_search";
+    }
+    if (filters_home) {
+    url = "index.php?module=shop&op=count_home";
+    }
+    if (filters_shop) {
+
+    url = "index.php?module=shop&op=count_shop";
+    }
+    if (!filters_search && !filters_home && !filters_shop) {
+    url = "index.php?module=shop&op=count_all";
+    }
+    //console.log("consulta", filters_home);
+   
+
+    ajaxPromise(url, 'POST', 'JSON', {'filters_search': filters_search, 'filters_home': filters_home, 'filters_shop': filters_shop})
+    .then(function(data) {
+            //alert("pagination");
+            //console.log("hola paginacion",url);
+            
+            var num_prod = data[0].contador;
+            console.log("num_prod",num_prod);
+            
+            if (num_prod >= 3) {
+                num_pages = Math.ceil(num_prod / 3)//.ceil redondea hacia arriba
+            } else {
+                num_pages = 1;
+            }
+
+            $('#pagination').empty();
+
+            for (var i = 1; i <= num_pages; i++) {
+                //console.log("HOLA FOR PAGINATION");
+                var pageButton = $('<button/>', {
+                    text: i,
+                    id: 'page_' + i ,
+                    click: function() {
+                        
+                        var pageNum = parseInt($(this).text());
+                        var offset = 3 * (pageNum - 1);
+                        //console.log("OFFSET",offset);
+                        //console.log("aaaaaaaaaaaaaaaaaa filters_shop aaaaaaaaaaaaaa",filters_shop);
+                        localStorage.setItem('Pag_actual', pageNum);
+
+                        $('button').removeClass('active');// borrar el ultimo pagina marcada
+
+                        $(this).addClass('active');//marcar la pagina correcta
+                        
+                        if (filters_shop != null) {
+                            console.log("HOLA IF PAGINATION SHOP");
+                            console.log(offset);
+                            console.log('offset');
+                            //ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter",'POST','JSON',{filters_shop : filters_shop, num_pages : 3, offset:  offset} );
+                            ajaxForSearch("index.php?module=shop&op=filter", 'POST', 'JSON', {'filters_shop' : filters_shop }, num_pages = 3 , offset );
+                        }
+                        if (filters_home != null) {
+                            console.log("HOLA IF PAGINATION HOME");
+                            console.log(filters_home);
+                            console.log('filters_home CHANGE PAG');
+                            ajaxForSearch("index.php?module=shop&op=redirect_home", 'POST', 'JSON', {'filters_home' : filters_home }, num_pages = 3 , offset );
+
+                        } 
+                        if (filters_search != null) {
+                            console.log("HOLA IF PAGINATION HOME");
+                            console.log(filters_search);
+                            console.log('filters_shop CHANGE PAG');
+                            ajaxForSearch("index.php?module=shop&op=search", 'POST', 'JSON', {'filters_search' : filters_search }, num_pages = 3 , offset );
+
+                        } else {
+                            console.log("HOLA ELSE PAGINATION");
+                            ajaxForSearch("index.php?module=shop&op=all_viviendas", 'GET', 'JSON', undefined, num_pages = 3 , offset);
+                        }
+                        $('html, body').animate({ scrollTop: $(".wrap") });
+                    }
+                });
+                $('#pagination').append(pageButton);
+            }
+
+            var pag_actual = localStorage.getItem('move') ? Math.floor(JSON.parse(localStorage.getItem('move'))[1] / 3) + 1 : 1;
+            $('#page_' + pag_actual).addClass('active'); 
+
+
+        })
+}
+
 function viviendas_related(offset = 0, related, total_items) {
     let items = 3;
     let loaded = offset;
@@ -625,4 +719,5 @@ $(document).ready(function() {
     loadViviendas();
     filter_button();
     clicks();
+    pagination();
 }); 

@@ -55,53 +55,75 @@
 			// }
 			
 			
-			public function get_details_vivienda_BLL($id_vivienda) {
-				
-				$details_vivienda = $this-> dao -> select_details_vivienda($this->db, $id_vivienda);
-				
-				
-				$details_img = $this-> dao -> select_details_img($this->db, $id_vivienda);
-				
-				
-				$details = array(
-					'vivienda' => $details_vivienda,
-					'imagenes' => $details_img
-				);
-				//$details = array($details_vivienda,$details_img);
-				
-				
-				//$details = array_merge($details_vivienda, $details_img)
-				return $details;
-			}
+		public function get_details_vivienda_BLL($id_vivienda) {
 			
-			public function get_viviendas_related_BLL($args) {
-				
-				return $this -> dao -> select_viviendas_related($this->db , $args[0], $args[1], $args[2]);
-			}
+			$details_vivienda = $this-> dao -> select_details_vivienda($this->db, $id_vivienda);
 			
-			public function get_count_viviendas_related_BLL($args) {
-				
-				return $this -> dao -> select_count_viviendas_related($this->db , $args[0]);
-			}
 			
-			public function get_redirect_home_BLL($args) {
-				//return $args[0];
-				return $this -> dao -> select_redirect_home($this->db , $args[0], $args[1], $args[2]);
-			}
-			public function get_filter_shop_BLL($args) {
-				//return $args[0];
-				return $this -> dao -> select_filter_shop($this->db , $args[0], $args[1], $args[2]);
-			}
-			public function get_filter_search_BLL($args) {
-				//return $args[0];
-				return $this -> dao -> select_filter_search($this->db , $args[0], $args[1], $args[2]);
-			}
+			$details_img = $this-> dao -> select_details_img($this->db, $id_vivienda);
+			
+			
+			$details = array(
+				'vivienda' => $details_vivienda,
+				'imagenes' => $details_img
+			);
+			//$details = array($details_vivienda,$details_img);
+			
+			
+			//$details = array_merge($details_vivienda, $details_img)
+			return $details;
+		}
+		
+		public function get_viviendas_related_BLL($args) {
+			
+			return $this -> dao -> select_viviendas_related($this->db , $args[0], $args[1], $args[2]);
+		}
+		
+		public function get_count_viviendas_related_BLL($args) {
+			
+			return $this -> dao -> select_count_viviendas_related($this->db , $args[0]);
+		}
+		
+		public function get_redirect_home_BLL($args) {
+			//return $args[0];
+			return $this -> dao -> select_redirect_home($this->db , $args[0], $args[1], $args[2]);
+		}
+		public function get_filter_shop_BLL($args) {
+			//return $args[0];
+			return $this -> dao -> select_filter_shop($this->db , $args[0], $args[1], $args[2]);
+		}
+		public function get_filter_search_BLL($args) {
+			//return $args[0];
+			return $this -> dao -> select_filter_search($this->db , $args[0], $args[1], $args[2]);
+		}
 
 
 
-			// public function get_all_viviendas_BLL($args) {
-				
-			// 	return $this -> dao -> select_all_viviendas($this->db , $args[0]);
-			// }
+		public function get_all_viviendas_BLL($args) {
+			
+			return $this -> dao -> select_all_viviendas($this->db , $args[0], $args[1]);
+		}
+
+		public function get_count_home_BLL($args) {
+			
+			return $this -> dao -> select_count_home($this->db, $args[0]);
+		}
+
+		public function get_count_shop_BLL($args) {
+			
+			return $this -> dao -> select_count_shop($this->db, $args[0]);
+		}
+
+		public function get_count_search_BLL($args) {
+			
+			return $this -> dao -> select_count_search($this->db, $args[0]);
+		}
+
+		public function get_count_all_BLL() {
+			
+			return $this -> dao -> select_count_all($this->db);
+		}
+
+
 	}
 ?>

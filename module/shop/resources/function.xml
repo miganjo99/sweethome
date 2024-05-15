@@ -61,5 +61,21 @@
         <name>all_viviendas</name>
         <uri>all_viviendas</uri>
     </function>
+    <function>
+        <name>count_home</name>
+        <uri>count_home</uri>
+    </function>
+    <function>
+        <name>count_search</name>
+        <uri>count_search</uri>
+    </function>
+    <function>
+        <name>count_shop</name>
+        <uri>count_shop</uri>
+    </function>
+    <function>
+        <name>count_all</name>
+        <uri>count_all</uri>
+    </function>
    
 </functions>

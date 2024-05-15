@@ -76,10 +76,27 @@
             echo json_encode(common::load_model('shop_model', 'get_filter_search',[$_POST['filters_search'], $_POST['offset'], $_POST['num_pages']]));
         }
 
-        // function all_viviendas() {
+        function all_viviendas() {
             
-        //     echo json_encode(common::load_model('shop_model', 'get_all_viviendas',[$_GET['offset'], $_GET['num_pages']]));
-        // }
+            echo json_encode(common::load_model('shop_model', 'get_all_viviendas',[$_POST['offset'], $_POST['num_pages']]));
+        }
+
+        function count_home() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_count_home',[$_POST['filters_home']]));
+        }
+        function count_shop() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_count_shop',[$_POST['filters_shop']]));
+        }
+        function count_search() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_count_search',[$_POST['filters_search']]));
+        }
+        function count_all() {
+            
+            echo json_encode(common::load_model('shop_model', 'get_count_all'));
+        }
 
     }
 ?>
