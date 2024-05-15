@@ -1,2 +1,10 @@
 **.ini
 ./.htaccess
+utils\vendor
+utils/vendor
+utils\composer.lock
+utils/composer.lock
+utils\db.ini
+utils/db.ini
+utils\resend.ini
+utils/resend.ini
