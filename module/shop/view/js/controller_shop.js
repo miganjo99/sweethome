@@ -4,6 +4,7 @@ function loadViviendas() {
     
     var verificate_filters_home = localStorage.getItem('filters_home') || null;
     var verificate_filters_shop = localStorage.getItem('filters_shop') || null;
+    var verificate_filters_search = localStorage.getItem('filters_search') || null;
 
    
 
@@ -31,7 +32,25 @@ function loadViviendas() {
             
         //   }, "1000");
           
+    }else if(verificate_filters_search !=  null){
+        
+        var filters_search=JSON.parse(verificate_filters_search);
+      
+        console.log(filters_search);
+        console.log("filters_search");
+
+        ajaxForSearch("index.php?module=shop&op=search", 'POST', 'JSON', { 'filters_search': filters_search });
+
+        // setTimeout(() => {
+        //     highlightFilters();
+            
+        //   }, "1000");
+          
     }
+    // else {
+       
+    //     ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas','GET', 'JSON');
+    // }
 
 }
 

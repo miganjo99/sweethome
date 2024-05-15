@@ -71,6 +71,11 @@
             echo json_encode(common::load_model('shop_model', 'get_filter_shop',[$_POST['filters_shop'], $_POST['offset'], $_POST['num_pages']]));
         }
 
+        function search() {
+            //echo "olaaaaaaaaaaaaaaaaa",
+            echo json_encode(common::load_model('shop_model', 'get_filter_search',[$_POST['filters_search'], $_POST['offset'], $_POST['num_pages']]));
+        }
+
         // function all_viviendas() {
             
         //     echo json_encode(common::load_model('shop_model', 'get_all_viviendas',[$_GET['offset'], $_GET['num_pages']]));

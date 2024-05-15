@@ -97,11 +97,40 @@ function autocomplete() {
             });
     });
 }
-
+function button_search() {
+    $('#search-btn').on('click', function () {
+        var search = [];
+        //console.log("search",search);
+        if ($('.search_operacion').val() != undefined) {
+            search.push({ "id_operacion": [$('.search_operacion').val()] })
+            if ($('.search_innovacion').val() != undefined) {
+                search.push({ "id_innovacion": [$('.search_innovacion').val()] })
+            }
+            if ($('#autocom').val() != undefined) {
+                search.push({ "ciudad": [$('#autocom').val()] })
+            }
+        } else if ($('.search_operacion').val() == undefined) {
+            if ($('.search_innovacion').val() != undefined) {
+                search.push({ "id_innovacion": [$('.search_innovacion').val()] })
+            }
+            if ($('#autocom').val() != undefined) {
+                search.push({ "ciudad": [$('#autocom').val()] })
+            }
+        }
+        localStorage.removeItem('filters_search');
+        if (search.length != 0) {
+            localStorage.setItem('filters_search', JSON.stringify(search));
+            //console.log(search);
+            //console.log("search filtersssssssss");
+            //alert("Hola filters_search");
+        }
+        window.location.href = 'index.php?module=shop&op=view';
+    });
+}
 
 
 $(document).ready(function() {
     launch_search();
     autocomplete();
-    search_button();
+    button_search();
 });

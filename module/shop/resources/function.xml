@@ -54,6 +54,10 @@
         <uri>filter</uri>
     </function>
     <function>
+        <name>search</name>
+        <uri>search</uri>
+    </function>
+    <function>
         <name>all_viviendas</name>
         <uri>all_viviendas</uri>
     </function>

@@ -64,6 +64,10 @@
             //return $args;
             return $this -> bll -> get_filter_shop_BLL($args);
         }
+        public function get_filter_search($args) {
+            //return $args;
+            return $this -> bll -> get_filter_search_BLL($args);
+        }
 
         
         // public function get_all_viviendas($args) {

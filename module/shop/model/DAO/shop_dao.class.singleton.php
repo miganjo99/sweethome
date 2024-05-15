@@ -197,6 +197,37 @@
             return $db->listar($stmt);
 
         }
+        public function select_filter_search($db , $filters_search, $offset, $num_pages) {
+            
+            $sql = "SELECT v.*
+                    FROM vivienda v, ciudad c, innovacion i
+                    WHERE v.id_innovacion = i.id_innovacion
+                    AND v.id_ciudad = c.id_ciudad ";
+                
+            foreach ($filters_search as &$value) {
+                foreach ($value as $value_parsed) {
+                    //return $value_parsed['id_operacion'][0];
+                    if (!empty($value_parsed['id_operacion'][0])) {
+                        $sql .= " AND v.id_operacion = " . ($value_parsed['id_operacion'][0]);
+                    }
+                    elseif (!empty($value_parsed['id_innovacion'][0])) {
+                        $sql .= " AND v.id_innovacion = " . ($value_parsed['id_innovacion'][0]);
+                    }
+                    elseif (!empty($value_parsed['ciudad'][0])) {
+                        $sql .= " AND c.name_ciudad = '" . $value_parsed['ciudad'][0] . "'";
+                    }
+                }
+            }
+
+            $sql.= " LIMIT $offset, $num_pages";
+    
+                //return $sql;
+
+            $stmt = $db->ejecutar($sql);
+           
+            return $db->listar($stmt);
+
+        }
 
 
         

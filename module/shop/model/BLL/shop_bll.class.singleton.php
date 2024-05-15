@@ -92,6 +92,10 @@
 				//return $args[0];
 				return $this -> dao -> select_filter_shop($this->db , $args[0], $args[1], $args[2]);
 			}
+			public function get_filter_search_BLL($args) {
+				//return $args[0];
+				return $this -> dao -> select_filter_search($this->db , $args[0], $args[1], $args[2]);
+			}
 
 
 
