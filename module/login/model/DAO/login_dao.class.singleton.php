@@ -14,7 +14,7 @@
 
         public function insert_user($db, $id, $username_reg, $hashed_pass, $email_reg, $avatar, $token_email) {
 
-            $sql = "INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)
+            $sql = "INSERT INTO users (id_user, username, password, email, type_user, avatar, token_email, is_active)
             VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0)";
 
             return $stmt = $db->ejecutar($sql);
@@ -22,12 +22,33 @@
        
         public function select_user($db, $username, $email){
 
-			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username' OR email = '$email'";
+			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active FROM users WHERE username = '$username' OR email = '$email'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
 
+        public function select_verify_email($db, $token_email){
+
+			$sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        } 
+
+        public function update_verify_email($db, $token_email){
+
+            $sql = "UPDATE users SET is_active = 1, token_email= '' WHERE token_email = '$token_email'";
+
+            $stmt = $db->ejecutar($sql);
+            return "update";
+        }
+
+
+
+
+
     }
+
 
 ?>
