@@ -13,19 +13,7 @@
              //echo($topPage);
             // echo($view)
             
-            if(file_exists($topPage)){
-                echo $topPage;
-                echo(" Existe top page ");
-            }else{
-                echo(" No existe top page ");
-            }
-            
-            if(file_exists($view)){
-                echo $view;
-                echo(" Existe view ");
-            }else{
-                echo(" No existe view ");
-            }
+          
 
             if ((file_exists($topPage)) && (file_exists($view))) {
                 

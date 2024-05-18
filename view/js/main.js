@@ -45,22 +45,22 @@ function load_content() {
     console.log("hola load content");
     console.log(path);
     console.log("path");
-    
 
 
-    if(path[4] === 'recover'){
+
+    if(path[3] === 'recover'){
         window.location.href = friendlyURL("?module=login&op=recover_view");
         localStorage.setItem("token_email", path[6]);
 
-    }else if (path[4] === 'verify') {
+    }else if (path[3] === 'verify') {
 
-        ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[5]})
+        ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
         .then(function(data) {
             console.log(data);
             console.log(" data load content ");
             toastr.options.timeOut = 3000;
             toastr.success('Email verified');
-            setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
+            //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
         })
         .catch(function() {
           console.log('Error: verify email error');

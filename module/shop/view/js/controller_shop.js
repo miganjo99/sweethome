@@ -89,7 +89,7 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                         .html(
                             "<div class='list_product'>" +
                             "<div class='img-container'>" +
-                            "<img src= '" + data[row].img_vivienda + "'" + "</img>" +
+                            "<img src= 'http://localhost/sweethome/" + data[row].img_vivienda + "'" + "</img>" +
                             "</div>" +
                             "<div class='product-info'>" +
                             "<div class='product-content'>" +
@@ -365,7 +365,7 @@ function loadDetails(id_vivienda) {
                 .html(
                     
                     "<div class='content-img-details'>" +
-                    "<img src= '" + data.imagenes[row].img_vivienda + "'" + "</img>" +
+                    "<img src= 'http://localhost/sweethome/" + data.imagenes[row].img_vivienda + "'" + "</img>" +
                     "</div>"
                 )
         }

@@ -16,7 +16,6 @@ function click_register(){
 }
 
 
-
 function validate_register(){
     var mail_exp = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
     var error = false;
@@ -89,6 +88,7 @@ function register(){
             }else{
                 toastr.options.timeOut = 2000;
                 toastr.success("Email sended");
+
                 //setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
 
                  //setTimeout('window.location.href = "index.php?module=login&op=view"', 1000);
@@ -99,6 +99,35 @@ function register(){
         }); 
     }
 }
+
+function load_form_recover_password(){
+    $(".login-wrap").hide();
+    $(".forget_html").show();
+    $('html, body').animate({scrollTop: $(".forget_html")});
+    click_recover_password();
+}
+
+function click_recover_password(){
+    $(".forget_html").keypress(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13){
+        	e.preventDefault();
+            send_recover_password();
+        }
+    });
+
+    $('#button_recover').on('click', function(e) {
+        e.preventDefault();
+        send_recover_password();
+    }); 
+}
+
+
+
+
+
+
+
 
 
 $(document).ready(function(){

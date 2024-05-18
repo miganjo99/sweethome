@@ -9,7 +9,7 @@ function carousel_innovacion() {
                
               $('<div></div>').attr('class', "carousel__elements_innovacion").attr('id', data[row].id_innovacion).appendTo(".carousel__innovacion")
               .html(
-                  "<img class='carousel__img_innovacion' id='' src='" + data[row].img_innovacion + "' alt='' >"
+                  "<img class='carousel__img_innovacion' id='' src='http://localhost/sweethome/" + data[row].img_innovacion + "' alt='' >"
                   +
                   "<h5 class='tipo_name_innovacion'>" + data[row].name_innovacion + "</h5>" 
                   +"<br><br><br>"+"<br><br><br>"
@@ -39,7 +39,7 @@ function carousel_tipo() {
       for (row in data) {
               $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].id_tipo).appendTo(".carousel__list")
               .html(
-                  "<img class='carousel__img' id='' src='" + data[row].img_tipo + "' alt='' >"
+                  "<img class='carousel__img' id='' src='http://localhost/sweethome/" + data[row].img_tipo + "' alt='' >"
                   +
                   "<h5 class='tipo_name'>" + data[row].name_tipo + "</h5>" 
               )
@@ -68,7 +68,7 @@ function loadCategorias() {
                   "<li class='portfolio-item'>" +
                   "<div class='item-main'>" +
                   "<div class='portfolio-image'>" +
-                  "<img src = " + data[row].img_categoria + " alt='foto' </img> " +
+                  "<img src = 'http://localhost/sweethome/" + data[row].img_categoria + "' alt='foto' </img> " +
                   "</div>" +
                   "<h5>" + data[row].name_categoria + "</h5>" +
                   "</div>" +
@@ -91,7 +91,7 @@ function loadOperacion() {
                   "<li class='portfolio-item'>" +
                   "<div class='item-main'>" +
                   "<div class='portfolio-image'>" +
-                  "<img src = " + data[row].img_operacion + " alt='foto'" +
+                  "<img src = 'http://localhost/sweethome/" + data[row].img_operacion + "' alt='foto'" +
                   "</div>" +
                   "<h5>" + data[row].name_operacion + "</h5>" +
                   "</div>" +
@@ -115,7 +115,7 @@ function loadCiudad() {
                   "<li class='portfolio-item'>" +
                   "<div class='item-main'>" +
                   "<div class='portfolio-image'>" +
-                  "<img src = " + data[row].img_ciudad + " alt='foto' </img> " +
+                  "<img src = 'http://localhost/sweethome/" + data[row].img_ciudad + "' alt='foto' </img> " +
                   "</div>" +
                   "<h5>" + data[row].name_ciudad + "</h5>" +
                   "</div>" +
@@ -138,7 +138,7 @@ function loadRecomendaciones() {
                   "<li class='portfolio-item'>" +
                   "<div class='item-main'>" +
                   "<div class='portfolio-image'>" +
-                  "<img src = " + data[row].img_vivienda + " alt='foto' </img> " +
+                  "<img src = 'http://localhost/sweethome/" + data[row].img_vivienda + "' alt='foto' </img> " +
                   "</div>" +
                   "<h5>" + data[row].estado + ",   " +data[row].m2+" m2"+ "</h5>" +
                   "</div>" +
@@ -161,7 +161,7 @@ function loadMasVisitadas() {
                   "<li class='portfolio-item'>" +
                   "<div class='item-main'>" +
                   "<div class='portfolio-image'>" +
-                  "<img src = " + data[row].img_vivienda + " alt='foto' </img> " +
+                  "<img src = 'http://localhost/sweethome/" + data[row].img_vivienda + "' alt='foto' </img> " +
                   "</div>" +
                   "<h5>" + data[row].estado + ",   " +data[row].m2+" m2"+ "</h5>" +
                   "</div>" +
