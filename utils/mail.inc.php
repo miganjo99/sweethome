@@ -13,12 +13,12 @@
 
                     $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://localhost/sweethome/login/verify/$email[token]'>Click here for verify your email.</a>";
                     break;
-                // case 'recover';
-                //$email['fromEmail'] = 'onboarding@resend.dev';
-                //    $email['inputEmail'] = 'onboarding@resend.dev';
-                //     $email['inputMatter'] = 'Recover password';
-                //     $email['inputMessage'] = "<a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/recover/$email[token]'>Click here for recover your password.</a>";
-                //     break;
+                case 'recover';
+                    $email['fromEmail'] = 'onboarding@resend.dev';
+                    $email['inputEmail'] = 'onboarding@resend.dev';
+                    $email['inputMatter'] = 'Recover password';
+                    $email['inputMessage'] = "<a href='http://localhost/sweethome/login/recover/$email[token]'>Click here for recover your password.</a>";
+                    break;
             }
             return self::send_resend($email);
         }

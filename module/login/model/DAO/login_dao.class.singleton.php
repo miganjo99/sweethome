@@ -20,9 +20,12 @@
             return $stmt = $db->ejecutar($sql);
         }
        
-        public function select_user($db, $username, $email){
+        public function select_user($db, $username_reg, $email_reg){
 
-			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active FROM users WHERE username = '$username' OR email = '$email'";
+			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active 
+                    FROM users 
+                    WHERE username = '$username_reg' OR email = '$email_reg'";
+
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -44,9 +47,17 @@
             return "update";
         }
 
+        public function select_recover_password($db, $email_forg){
+			$sql = "SELECT `email` FROM `users` WHERE email = '$email_forg' AND password NOT LIKE ('')";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
 
-
-
+        public function update_recover_password($db, $email, $token_email){
+			$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";
+            $stmt = $db->ejecutar($sql);
+            return "ok";
+        }
 
     }
 

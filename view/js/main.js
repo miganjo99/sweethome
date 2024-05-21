@@ -39,39 +39,37 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 //     return "http://localhost/Ejercicios/Framework_PHP_OO_MVC" + link;
 // }
 // ------------------- LOAD CONTENT ------------------------ //
-function load_content() {
-    let path = window.location.pathname.split('/');
+// function load_content() {
+//     let path = window.location.pathname.split('/');
+//     console.log(path);
     
-    console.log("hola load content");
-    console.log(path);
-    console.log("path");
+//     if(path[3] === 'recover'){
+//         //window.location.href = friendlyURL("?module=login&op=recover_view");
+//         window.location.href = "index.php?module=login&op=recover_view";
+//         localStorage.setItem("token_email", path[4]);
 
+//     }else if (path[3] === 'verify') {
 
+//         ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
+//         .then(function(data) {
+//             //console.log(data);
+//             //console.log(" data load content ");
+//             toastr.options.timeOut = 3000;
+//             toastr.success('Email verified');
+//             //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
+//         })
+//         .catch(function() {
+//           console.log('Error: verify email error');
+//         });
+//     }else if (path[3] === 'view') {
 
-    if(path[3] === 'recover'){
-        window.location.href = friendlyURL("?module=login&op=recover_view");
-        localStorage.setItem("token_email", path[6]);
-
-    }else if (path[3] === 'verify') {
-
-        ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
-        .then(function(data) {
-            console.log(data);
-            console.log(" data load content ");
-            toastr.options.timeOut = 3000;
-            toastr.success('Email verified');
-            //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
-        })
-        .catch(function() {
-          console.log('Error: verify email error');
-        });
-    }else if (path[4] === 'view') {
-        $(".login-wrap").show();
-        $(".forget_html").hide();
-    }else if (path[4] === 'recover_view') {
-        load_form_new_password();
-    }
-}
+//         $(".login-wrap").show();
+//         $(".forget_html").hide();
+        
+//     }else if (path[3] === 'recover_view') {
+//         load_form_new_password();
+//     }
+// }
 
 //================LOAD-HEADER================
 function load_menu() {
@@ -162,5 +160,5 @@ $(document).ready(function() {
     load_menu();
     click_logout();
     click_shop();
-    load_content();
+    //load_content();
 });
