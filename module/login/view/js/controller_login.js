@@ -291,7 +291,8 @@ function load_form_new_password(){
         if(data == "verify"){
             click_new_password(token_email); 
         }else {
-            console.log("error");
+            console.log("error load_form_new_password");
+            //toastr.error("vuelve al formulario de recuperacion");
         }
     }).fail(function( textStatus ) {
         console.log("Error: Verify token error");
@@ -301,10 +302,12 @@ function load_form_new_password(){
 function click_new_password(token_email){
 
 
-    $(".recover_html").keypress(function(e) {
+    $(".recover_html").keypress(function(e) {   
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
         	e.preventDefault();
+            console.log(token_email);
+            console.log("token_email");
             send_new_password(token_email);
         }
     });
@@ -345,6 +348,8 @@ function validate_new_password(){
 function send_new_password(token_email){
     if(validate_new_password() != 0){
         var data = {token_email: token_email, password : $('#pass_rec').val()};
+        console.log(data);
+
         $.ajax({
             //url: friendlyURL("?module=login&op=new_password"),
             url: "index.php?module=login&op=new_password",
@@ -352,11 +357,15 @@ function send_new_password(token_email){
             dataType: "JSON",
             data: data,
         }).done(function(data) {
+
+            console.log(data);
+            console.log("send_new_password");
+
             if(data == "done"){
                 toastr.options.timeOut = 3000;
                 toastr.success('New password changed');
                 //setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
-                setTimeout('window.location.href = index.php?module=login&op=view', 1000);
+                setTimeout('window.location.href = "index.php?module=login&op=view"', 1000);
             } else {
                 toastr.options.timeOut = 3000;
                 toastr.error('Error seting new password');

@@ -60,7 +60,7 @@
         }
 
         public function update_new_password($db, $token_email, $password){
-            $sql = "UPDATE `users` SET `password`= '$password', `token_email`= '' WHERE `token_email` = '$token_email'";
+            $sql = "UPDATE users SET password= '$password', token_email= '' WHERE token_email = '$token_email'";
             $stmt = $db->ejecutar($sql);
             return "ok";
         }
