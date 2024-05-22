@@ -35,7 +35,11 @@
                 if($_GET['op']==='verify'){
 
                     $this -> uriFunction = 'view';
-                }else{
+                }
+                else if($_GET['op']==='recover'){
+
+                    $this -> uriFunction = 'recover_view';
+                }else {
 
                     $this -> uriFunction = ($_GET['op'] === "") ? 'view' : $_GET['op'];
                 }

@@ -26,4 +26,14 @@ class login_model {
     public function get_recover_email($args) {
         return $this -> bll -> get_recover_email_BBL($args);
     }
+
+    public function get_verify_token($args) {
+        return $this -> bll -> get_verify_token_BLL($args);
+    }
+
+    public function get_new_password($args) {
+        return $this -> bll -> get_new_password_BLL($args);
+    }
+
+
 }

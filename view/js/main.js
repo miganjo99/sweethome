@@ -74,12 +74,13 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 //================LOAD-HEADER================
 function load_menu() {
 
+    $(".forget_html").hide();//aqui está correcto?
 
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=login&op=view") + '" class="nav_link">Login</a>').appendTo('.nav');
 
-
+       
 
     var token = localStorage.getItem('acces_token');
     if (token) {

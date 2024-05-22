@@ -4,8 +4,12 @@ function load_content() {
     
     if(path[3] === 'recover'){
         //window.location.href = friendlyURL("?module=login&op=recover_view");
-        window.location.href = "index.php?module=login&op=recover_view";
+        console.log("Hola recover load content");
+        //window.location.href = "index.php?module=login&op=recover_view";
         localStorage.setItem("token_email", path[4]);
+
+        load_form_new_password();
+
 
     }else if (path[3] === 'verify') {
 
@@ -14,7 +18,7 @@ function load_content() {
             //console.log(data);
             //console.log(" data load content ");
             toastr.options.timeOut = 3000;
-            toastr.success('Email verified');
+            toastr.success('Entra al correo para cambiar de contraseña');
             //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
         })
         .catch(function() {
@@ -22,14 +26,14 @@ function load_content() {
         });
     }
     
-    else if (path[3] === 'view') {
+    // else if (path[3] === 'view') {
         
-        $(".login-wrap").show();
-        $(".forget_html").hide();
+    //     $(".login-wrap").show();
+    //     $(".forget_html").hide();
         
-    }else if (path[4] === 'recover_view') {
-        load_form_new_password();
-    }
+    // }else if (path[3] === 'recover_view') {
+    //     load_form_new_password();
+    // }
 }
 
 function click_register(){
@@ -248,17 +252,22 @@ function send_recover_password(){
 
 
         $.ajax({
-            url: friendlyURL('?module=login&op=send_recover_email'),
+            url: 'index.php?module=login&op=send_recover_email',
             dataType: 'json',
             type: "POST",
             data: data,
         }).done(function(data) {
+
+            console.log(data);
+            console.log("send_recover_email");
+
             if(data == "error"){		
                 $("#error_email_forg").html("The email doesn't exist");
             } else{
                 toastr.options.timeOut = 3000;
                 toastr.success("Email sended");
-                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                //setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                //setTimeout('window.location.href = "index.php?module=login&op=view"', 1000);
             }
         }).fail(function( textStatus ) {
             console.log('Error: Recover password error');
@@ -269,8 +278,12 @@ function send_recover_password(){
 function load_form_new_password(){
     token_email = localStorage.getItem('token_email');
     localStorage.removeItem('token_email');
+
+    console.log("load form_new password");
+
     $.ajax({
-        url: friendlyURL('?module=login&op=verify_token'),
+        //url: friendlyURL('?module=login&op=verify_token'),
+        url: 'index.php?module=login&op=verify_token',
         dataType: 'json',
         type: "POST",
         data: {token_email: token_email},
@@ -286,6 +299,8 @@ function load_form_new_password(){
 }
 
 function click_new_password(token_email){
+
+
     $(".recover_html").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
@@ -331,7 +346,8 @@ function send_new_password(token_email){
     if(validate_new_password() != 0){
         var data = {token_email: token_email, password : $('#pass_rec').val()};
         $.ajax({
-            url: friendlyURL("?module=login&op=new_password"),
+            //url: friendlyURL("?module=login&op=new_password"),
+            url: "index.php?module=login&op=new_password",
             type: "POST",
             dataType: "JSON",
             data: data,
@@ -339,7 +355,8 @@ function send_new_password(token_email){
             if(data == "done"){
                 toastr.options.timeOut = 3000;
                 toastr.success('New password changed');
-                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                //setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                setTimeout('window.location.href = index.php?module=login&op=view', 1000);
             } else {
                 toastr.options.timeOut = 3000;
                 toastr.error('Error seting new password');

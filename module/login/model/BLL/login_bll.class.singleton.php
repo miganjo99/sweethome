@@ -63,14 +63,33 @@
                 $message = ['type' => 'recover', 
                             'token' => $token, 
                             'toEmail' => $args];
+							
                 $email = json_decode(mail::send_email($message), true);
+
 				if (!empty($email)) {
 					return;  
 				}   
             }else{
-                return 'error';
+                //return 'error';
+				echo json_encode("error");
+				exit;
             }
 		}
 
+
+		public function get_verify_token_BLL($args) {
+			if($this -> dao -> select_verify_email($this->db, $args)){
+				return 'verify';
+			}
+			return 'fail';
+		}
+
+		public function get_new_password_BLL($args) {
+			$hashed_pass = password_hash($args[1], PASSWORD_DEFAULT, ['cost' => 12]);
+			if($this -> dao -> update_new_password($this->db, $args[0], $hashed_pass)){
+				return 'done';
+			}
+			return 'fail';
+		}
 
 	}
