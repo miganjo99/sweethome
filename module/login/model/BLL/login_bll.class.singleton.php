@@ -21,8 +21,13 @@
 			$hashed_pass = password_hash($args[1], PASSWORD_DEFAULT);
 			$hashavatar = md5(strtolower(trim($args[2]))); 
 			$avatar = "https://robohash.org/$hashavatar";
-
 			$token_email = common::generate_Token_secure(20);
+			$time_token_email= time();
+			
+			// $token_email = middleware::create_token($args[2]);
+			// //echo json_encode($token_email);
+			// return $token_email;
+			
 
 			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[2]))) {
 				
@@ -32,7 +37,7 @@
 				//return "error";
 
             } else {
-				$this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email);
+				$this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email, $time_token_email);
 				$message = [ 'type' => 'validate', //envia la opcion email al mail::sendemail
 							 'token' => $token_email, 
 							 'toEmail' =>  $args[2]];
@@ -45,14 +50,45 @@
 			}
 		}
 
+		
 		public function get_verify_email_BLL($args) {
-			if($this -> dao -> select_verify_email($this->db, $args)){
-				$this -> dao -> update_verify_email($this->db, $args);
-				return 'verify';
+
+			$time_token_email = $this->dao->select_time_token_email($this->db, $args);//el time es VARCHAR en bd
+			$time_token_email = isset($time_token_email[0]['time_token_email']) ? intval($time_token_email[0]['time_token_email']) : null;
+			//acceder al array que nos devuelve para la posicion 0 poder restar con un entero
+			$time = time();
+			
+			if ($time_token_email !== null) {
+
+				$verify_time = $time - $time_token_email;
+
+				 //return $verify_time;
+
+
+				//if ($verify_time > 1300) { 
+				if ($verify_time > 13) { 
+
+					//return 'token_time_expired';
+					echo json_encode("token_time_expired");
+					exit;
+				} else {
+					if($this -> dao -> select_verify_email($this->db, $args)){
+						$this -> dao -> update_verify_email($this->db, $args);
+						//return 'verify';
+						echo json_encode("verify");
+						exit;
+					} else {
+						echo json_encode("fail");
+						exit;
+					}
+				}
 			} else {
-				return 'fail';
+				//return 'fail';
+				echo json_encode("fail");
+				exit;
 			}
 		}
+		
 
 		public function get_recover_email_BBL($args) {
 			$user = $this -> dao -> select_recover_password($this->db, $args);

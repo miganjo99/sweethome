@@ -12,10 +12,10 @@
             return self::$_instance;
         }
 
-        public function insert_user($db, $id, $username_reg, $hashed_pass, $email_reg, $avatar, $token_email) {
+        public function insert_user($db, $id, $username_reg, $hashed_pass, $email_reg, $avatar, $token_email, $time_token_email) {
 
-            $sql = "INSERT INTO users (id_user, username, password, email, type_user, avatar, token_email, is_active)
-            VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0)";
+            $sql = "INSERT INTO users (id_user, username, password, email, type_user, avatar, token_email, is_active, time_token_email)
+            VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0,'$time_token_email')";
 
             return $stmt = $db->ejecutar($sql);
         }
@@ -34,6 +34,14 @@
         public function select_verify_email($db, $token_email){
 
 			$sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        } 
+        
+        public function select_time_token_email($db, $token_email){
+
+			$sql = "SELECT time_token_email FROM users WHERE token_email = '$token_email'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

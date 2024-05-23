@@ -15,11 +15,22 @@ function load_content() {
 
         ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
         .then(function(data) {
-            //console.log(data);
-            //console.log(" data load content ");
-            toastr.options.timeOut = 3000;
-            toastr.success('Entra al correo para cambiar de contraseña');
-            //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
+
+            console.log(data);
+            console.log(" data load content ");
+
+            if(data == "token_time_expired"){
+                toastr.options.timeOut = 3000;
+                toastr.error('el token ha expirado, vuelve a registrarte');
+
+            }else if(data == "fail"){
+                
+                toastr.error('algo no ha ido bien, vuelve a registrarte');
+
+            }else if(data == "verify") {
+                toastr.success('Email verificado con éxito');
+            }
+            
         })
         .catch(function() {
           console.log('Error: verify email error');
