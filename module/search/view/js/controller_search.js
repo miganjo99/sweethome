@@ -1,6 +1,7 @@
 function load_operacion() {
-
-    ajaxPromise('index.php?module=search&op=search_operacion', 'POST', 'JSON')
+    
+    //ajaxPromise('index.php?module=search&op=search_operacion', 'POST', 'JSON')
+    ajaxPromise(friendlyURL('index.php?module=search&op=search_operacion'), 'POST', 'JSON')
     .then(function (data) {
         $('<option>Operacion</option>').attr('selected', true).attr('disabled', true).appendTo('.search_operacion')
         for (row in data) {
@@ -16,7 +17,8 @@ function load_innovacion(operacion) {
     console.log(operacion);
     console.log("operacion");
     if (operacion == undefined) {
-        ajaxPromise('index.php?module=search&op=search_innovacion_null', 'POST', 'JSON')
+        //ajaxPromise('index.php?module=search&op=search_innovacion_null', 'POST', 'JSON')
+        ajaxPromise(friendlyURL('index.php?module=search&op=search_innovacion_null'), 'POST', 'JSON')
             .then(function (data) {
                 $('<option>Innovacion</option>').attr('selected', true).attr('disabled', true).appendTo('.search_innovacion')
                 for (row in data) {
@@ -28,7 +30,8 @@ function load_innovacion(operacion) {
     }
     else {
         console.log("hola search innovacion");
-        ajaxPromise('index.php?module=search&op=search_innovacion', 'POST', 'JSON', operacion)
+        //ajaxPromise('index.php?module=search&op=search_innovacion', 'POST', 'JSON', operacion)
+        ajaxPromise(friendlyURL('index.php?module=search&op=search_innovacion'), 'POST', 'JSON', operacion)
             .then(function (data) {
                 for (row in data) {
                     $('<option value="' + data[row].id_innovacion + '">' + data[row].name_innovacion + '</option>').appendTo('.search_innovacion')
@@ -71,7 +74,8 @@ function autocomplete() {
 
 
 
-        ajaxPromise('index.php?module=search&op=autocomplete', 'POST', 'JSON', sdata)
+        //ajaxPromise('index.php?module=search&op=autocomplete', 'POST', 'JSON', sdata)
+        ajaxPromise(friendlyURL('index.php?module=search&op=autocomplete'), 'POST', 'JSON', sdata)
             .then(function (data) {
                 
                 

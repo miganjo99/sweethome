@@ -66,7 +66,7 @@
 
 
 				//if ($verify_time > 1300) { 
-				if ($verify_time > 13) { 
+				if ($verify_time > 130) { 
 
 					//return 'token_time_expired';
 					echo json_encode("token_time_expired");

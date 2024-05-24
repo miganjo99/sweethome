@@ -22,22 +22,23 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 }
 
 /* FRIENDLY URL */
-// function friendlyURL(url) {
-//     var link = "";
-//     url = url.replace("?", "");
-//     url = url.split("&");
-//     cont = 0;
-//     for (var i = 0; i < url.length; i++) {
-//     	cont++;
-//         var aux = url[i].split("=");
-//         if (cont == 2) {
-//         	link += "/" + aux[1] + "/";	
-//         }else{
-//         	link += "/" + aux[1];
-//         }
-//     }
-//     return "http://localhost/Ejercicios/Framework_PHP_OO_MVC" + link;
-// }
+function friendlyURL(url) {
+    var link = "";
+    url = url.replace("?", "");
+    url = url.split("&");
+    cont = 0;
+    for (var i = 0; i < url.length; i++) {
+    	cont++;
+        var aux = url[i].split("=");
+        if (cont == 2) {
+        	link += "/" + aux[1] + "/";	
+        }else{
+        	link += "/" + aux[1];
+        }
+    }
+    return "http://localhost/sweethome" + link;
+}
+
 // ------------------- LOAD CONTENT ------------------------ //
 // function load_content() {
 //     let path = window.location.pathname.split('/');
@@ -76,9 +77,10 @@ function load_menu() {
 
     $(".forget_html").hide();//aqui está correcto?
 
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=login&op=view") + '" class="nav_link">Login</a>').appendTo('.nav');
+    //$('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=home") + '" class="nav_link">Home</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login") + '" class="nav_link">Login</a>').appendTo('.nav');
 
        
 

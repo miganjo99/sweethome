@@ -5,15 +5,15 @@ function load_content() {
     if(path[3] === 'recover'){
         //window.location.href = friendlyURL("?module=login&op=recover_view");
         console.log("Hola recover load content");
-        //window.location.href = "index.php?module=login&op=recover_view";
         localStorage.setItem("token_email", path[4]);
 
         load_form_new_password();
 
 
     }else if (path[3] === 'verify') {
-
-        ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
+        
+        //ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
+        ajaxPromise(friendlyURL('index.php?module=login&op=verify_email'), 'POST', 'JSON', {token_email: path[4]})
         .then(function(data) {
 
             console.log(data);
@@ -136,8 +136,8 @@ function register(){
 
         console.log(data);
         $.ajax({
-            //url: friendlyURL("?module=login&op=register"),
-            url:"index.php?module=login&op=register",
+            url: friendlyURL("?module=login&op=register"),
+            //url:"index.php?module=login&op=register",
             type: "POST",
             dataType: "JSON",
             data: data,
@@ -200,7 +200,74 @@ function click_login(){
     }); 
 }
 
+function validate_login() {
+    var error = false;
 
+    if (document.getElementById('username').value.length === 0) {
+        document.getElementById('error_username').innerHTML = "Tienes que escribir el usuario";
+        error = true;
+    } else {
+        if (document.getElementById('username').value.length < 5) {
+            document.getElementById('error_username').innerHTML = "El usuario tiene que tener 5 caracteres como minimo";
+            error = true;
+        } else {
+            document.getElementById('error_username').innerHTML = "";
+        }
+    }
+
+    if (document.getElementById('pass').value.length === 0) {
+        document.getElementById('error_passwd').innerHTML = "Tienes que escribir la contraseña";
+        error = true;
+    } else {
+        document.getElementById('error_passwd').innerHTML = "";
+    }
+
+    if (error == true) {
+        return 0;
+    }
+}
+
+function login(){
+    if(validate_login() != 0){
+        var data = $('#login_form').serialize();
+
+        console.log(data);
+        console.log("data login_form");
+        
+        $.ajax({
+            //url: friendlyURL("?module=login&op=login"),
+            url: "index.php?module=login&op=login",
+            dataType: "JSON",
+            type: "POST",
+            data: data,
+        }).done(function(result) {
+
+            console.log(result);
+            console.log("result login");
+
+            // if(result == "user error"){		
+            //     $("#error_username").html("The email or username does't exist");
+            // } else if (result == "error"){
+            //     $("#error_password").html('Wrong password');
+            // } else if (result == "activate error"){
+            //     toastr.options.timeOut = 3000;
+            //     toastr.error("Verify the email");            
+            // } else {
+            //     localStorage.setItem("token", result);
+            //     toastr.options.timeOut = 3000;
+            //     toastr.success("Inicio de sesión realizado");
+            //     if(localStorage.getItem('likes') == null) {
+            //         setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+            //     } else {
+            //         console.log(localStorage.getItem('product'));
+            //         setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+            //     }
+            // }	
+        }).fail(function() {
+            console.log('Error: Login error');
+        });     
+    }
+}
 
 //______________________RECOVER_______________________________
 
@@ -263,7 +330,8 @@ function send_recover_password(){
 
 
         $.ajax({
-            url: 'index.php?module=login&op=send_recover_email',
+            //url: 'index.php?module=login&op=send_recover_email',
+            url: friendlyURL('index.php?module=login&op=send_recover_email'),
             dataType: 'json',
             type: "POST",
             data: data,
@@ -293,8 +361,8 @@ function load_form_new_password(){
     console.log("load form_new password");
 
     $.ajax({
-        //url: friendlyURL('?module=login&op=verify_token'),
-        url: 'index.php?module=login&op=verify_token',
+        //url: 'index.php?module=login&op=verify_token',
+        url: friendlyURL('?module=login&op=verify_token'),
         dataType: 'json',
         type: "POST",
         data: {token_email: token_email},
@@ -362,8 +430,8 @@ function send_new_password(token_email){
         console.log(data);
 
         $.ajax({
-            //url: friendlyURL("?module=login&op=new_password"),
-            url: "index.php?module=login&op=new_password",
+            //url: "index.php?module=login&op=new_password",
+            url: friendlyURL("?module=login&op=new_password"),
             type: "POST",
             dataType: "JSON",
             data: data,
@@ -375,8 +443,8 @@ function send_new_password(token_email){
             if(data == "done"){
                 toastr.options.timeOut = 3000;
                 toastr.success('New password changed');
-                //setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
-                setTimeout('window.location.href = "index.php?module=login&op=view"', 1000);
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                //setTimeout('window.location.href = "index.php?module=login&op=view"', 1000);
             } else {
                 toastr.options.timeOut = 3000;
                 toastr.error('Error seting new password');
