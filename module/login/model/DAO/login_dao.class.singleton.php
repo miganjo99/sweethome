@@ -30,6 +30,24 @@
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
+        public function select_user_login($db, $username){
+
+			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active 
+                    FROM users 
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function select_data_user($db, $username){
+
+			$sql = "SELECT * FROM users WHERE username = '$username'";
+            
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
 
         public function select_verify_email($db, $token_email){
 

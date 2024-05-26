@@ -215,7 +215,7 @@ function validate_login() {
         }
     }
 
-    if (document.getElementById('pass').value.length === 0) {
+    if (document.getElementById('password').value.length === 0) {
         document.getElementById('error_passwd').innerHTML = "Tienes que escribir la contraseña";
         error = true;
     } else {
@@ -229,14 +229,22 @@ function validate_login() {
 
 function login(){
     if(validate_login() != 0){
-        var data = $('#login_form').serialize();
+        // var data = $('#login_form').serialize();
 
+        // console.log(data);
+        // console.log("data login_form");
+
+        var data=[];
+        // data.ps2
+        console.log("PUSH");
+        
+        data.push({ name: 'username', value: document.getElementById('username').value });
+        data.push({ name: 'password', value: document.getElementById('password').value });
         console.log(data);
-        console.log("data login_form");
         
         $.ajax({
-            //url: friendlyURL("?module=login&op=login"),
-            url: "index.php?module=login&op=login",
+            //url: "index.php?module=login&op=login",
+            url: friendlyURL("?module=login&op=login"),
             dataType: "JSON",
             type: "POST",
             data: data,
@@ -245,24 +253,25 @@ function login(){
             console.log(result);
             console.log("result login");
 
-            // if(result == "user error"){		
-            //     $("#error_username").html("The email or username does't exist");
-            // } else if (result == "error"){
-            //     $("#error_password").html('Wrong password');
-            // } else if (result == "activate error"){
-            //     toastr.options.timeOut = 3000;
-            //     toastr.error("Verify the email");            
-            // } else {
-            //     localStorage.setItem("token", result);
-            //     toastr.options.timeOut = 3000;
-            //     toastr.success("Inicio de sesión realizado");
-            //     if(localStorage.getItem('likes') == null) {
-            //         setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-            //     } else {
-            //         console.log(localStorage.getItem('product'));
-            //         setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-            //     }
-            // }	
+            if(result == "user error"){		
+                $("#error_username").html("The email or username does't exist");
+            } else if (result == "error"){
+                $("#error_password").html('Wrong password');
+            } else if (result == "activate error"){
+                toastr.options.timeOut = 3000;
+                toastr.error("Verify the email");            
+            } else {
+                localStorage.setItem("token", result);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+                // if(localStorage.getItem('likes') == null) {
+                //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+                // } else {
+                //     console.log(localStorage.getItem('product'));
+                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                // }
+                     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+            }	
         }).fail(function() {
             console.log('Error: Login error');
         });     

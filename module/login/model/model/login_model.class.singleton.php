@@ -15,9 +15,17 @@ class login_model {
     }
 
     public function get_register($args) {
-        $res = $this -> bll -> get_register_BLL($args);
+        //$res = $this -> bll -> get_register_BLL($args);
+        return $this -> bll -> get_register_BLL($args);
     }
 
+    public function get_login($args) {
+        return $this -> bll -> get_login_BLL($args);
+    }
+
+    public function get_data_user($args) {
+        return $this -> bll -> get_data_user_BLL($args);
+    }
 
     public function get_verify_email($args) {
         return $this -> bll -> get_verify_email_BLL($args);

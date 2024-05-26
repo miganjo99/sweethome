@@ -1,5 +1,5 @@
 <?php
-class middleware{
+class middleware {
     public static function decode_username($get_token){
 		$jwt = parse_ini_file(UTILS . "jwt.ini");
 		$secret = $jwt['secret'];
@@ -9,7 +9,7 @@ class middleware{
 		$json = $JWT -> decode($token, $secret);
 		$json = json_decode($json, TRUE);
 
-        $decode_user = $json['name'];
+        $decode_user = $json['username'];
         return $decode_user;
     }
 
@@ -26,12 +26,14 @@ class middleware{
         return $decode_exp;
     }
 
-	public static function create_token($email_reg) {
+	public static function create_token($username) {
         $jwt = parse_ini_file(UTILS . "jwt.ini");
 
         $header = $jwt['header'];
         $secret = $jwt['secret'];
-        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'emial_reg' => $email_reg]);
+        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'user' => $username]);
+
+       
 
         $JWT = new jwt();
         return $JWT -> encode($header, $payload, $secret);

@@ -17,6 +17,8 @@ class jwt {
         $this->data = $this->base64url_encode($header) . '.' . $this->base64url_encode($payload);
         return $this->data.'.'.$this->JWS($header, $key);
     }
+
+    
     
     public function decode($token, $key) {
         list($header, $payload, $signature) = explode('.', $token);

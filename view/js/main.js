@@ -84,9 +84,9 @@ function load_menu() {
 
        
 
-    var token = localStorage.getItem('acces_token');
+    var token = localStorage.getItem('token');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'acces_token': token })
+        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'token': token })
             .then(function(data) {
 
                 console.log(data);
@@ -124,7 +124,7 @@ function load_menu() {
         $('.log-icon').empty();
         $('#log-icon').empty();
         $('#logout').hide();
-        $('<a href="index.php?module=ctrl_login&op=login-register_view"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
+        //$('<a href="index.php?module=ctrl_login&op=login-register_view"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
     }
 }
 

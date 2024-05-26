@@ -24,6 +24,10 @@ require_once('paths.php');
             common::load_view('top_page_login.html', VIEW_PATH_LOGIN . 'recover_pass.html');
         }
     
+        function login() {
+            echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username'], $_POST['password']]));
+        }
+
 
         function register() {
             echo json_encode(common::load_model('login_model', 'get_register', [$_POST['username_reg'], $_POST['pass_reg'], $_POST['email_reg']]));
@@ -49,6 +53,9 @@ require_once('paths.php');
             echo json_encode(common::load_model('login_model', 'get_new_password', [$_POST['token_email'], $_POST['password']]));
         }  
 
+        function data_user() {
+            echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['token']));
+        }
     }
 
     

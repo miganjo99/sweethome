@@ -50,7 +50,62 @@
 			}
 		}
 
-		
+		public function get_login_BLL($args) {
+			if (!empty($this -> dao -> select_user_login($this->db, $args[0]))) {
+				
+				$user = $this -> dao -> select_user_login($this->db, $args[0]);
+				//echo json_encode($user);
+				//  echo json_encode($user[0]['password']);
+				//  exit;
+
+				if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 1) {//comprobar ambos hashes sean iguales y que este active
+
+					//echo json_encode("passw correct");
+					// echo json_encode($user[0]['username']);
+					// exit;
+
+
+					//$jwt = middleware::create_token($user[0]['username']);
+					$jwt = middleware::create_token($user[0]['username']);
+
+					// echo json_encode($jwt);
+					// exit; 
+
+					$_SESSION['username'] = $user[0]['username'];
+					$_SESSION['tiempo'] = time();
+                    session_regenerate_id();
+					return json_encode($jwt);
+					//echo json_encode($jwt);
+					//exit;
+					
+
+				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 0) {
+					return 'activate error';
+				} else {
+					return 'error';
+				}
+            } else {
+				return 'user error';
+			}
+		}
+
+
+		public function get_data_user_BLL($args) {
+			$token = explode('"', $args);
+			//$decode = middleware::decode_username($token[1]);
+
+			// echo json_encode($token[1]);
+			// exit;
+
+			$decode = middleware::decode_username($token[1]);
+			if ($decode) {
+				return $this->dao->select_data_user($this->db, $decode);
+			} else {
+				error_log("Error al decodificar el token");
+				return null;
+			}
+		}
+
 		public function get_verify_email_BLL($args) {
 
 			$time_token_email = $this->dao->select_time_token_email($this->db, $args);//el time es VARCHAR en bd
