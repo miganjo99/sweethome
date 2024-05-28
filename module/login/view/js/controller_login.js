@@ -236,11 +236,9 @@ function login(){
 
         var data=[];
         // data.ps2
-        console.log("PUSH");
         
         data.push({ name: 'username', value: document.getElementById('username').value });
         data.push({ name: 'password', value: document.getElementById('password').value });
-        console.log(data);
         
         $.ajax({
             //url: "index.php?module=login&op=login",
@@ -256,11 +254,16 @@ function login(){
             if(result == "user error"){		
                 $("#error_username").html("The email or username does't exist");
             } else if (result == "error"){
-                $("#error_password").html('Wrong password');
+                $("#error_passwd").html('Wrong password');
             } else if (result == "activate error"){
                 toastr.options.timeOut = 3000;
-                toastr.error("Verify the email");            
+                toastr.error("Verify the email");
+
+            } else if (result == "attempts_error"){
+                toastr.options.timeOut = 3000;
+                toastr.error("Tu cuenta se ha bloqueado, revisa el whatsapp");            
             } else {
+
                 localStorage.setItem("token", result);
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
@@ -270,7 +273,10 @@ function login(){
                 //     console.log(localStorage.getItem('product'));
                 //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
                 // }
-                     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+
+
+
+                     //setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
             }	
         }).fail(function() {
             console.log('Error: Login error');

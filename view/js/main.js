@@ -89,27 +89,18 @@ function load_menu() {
         ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'token': token })
             .then(function(data) {
 
-                console.log(data);
-                console.log("data menu logeado ");
+                console.log(data[0].type_user);
+                console.log("data menu logeado ");               
 
 
-                if (data.type_user == "client") {
-                    console.log("Client loged");
-                    $('.opc_CRUD').empty();
-                    $('.opc_exceptions').empty();
-                } else {
-                    console.log("Admin loged");
-                    $('.opc_CRUD').show();
-                    $('.opc_exceptions').show();
-                }
                 $('.log-icon').empty();
                 $('#user_info').empty();
                 $('#login-register_view').empty();
-                $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
+                $('<img src="' + data[0].avatar + '"alt="Robot">').appendTo('.log-icon');
                 $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
                     .html(
                         //'<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
-                        '<a>' + data.username + '<a/>'
+                        '<a>' + data[0].username + '<a/>'
 
                     )
 

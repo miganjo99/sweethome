@@ -1,7 +1,8 @@
 <?php
     require_once("paths.php");
     require_once(SITE_ROOT . 'model/middleware_auth.inc.php');
-    
+    require_once(SITE_ROOT . 'utils/ultramsg.inc.php');
+   
     spl_autoload_extensions('.php,.inc.php,.class.php,.class.singleton.php');
     spl_autoload_register('loadClasses');
     

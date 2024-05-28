@@ -51,39 +51,75 @@
 		}
 
 		public function get_login_BLL($args) {
+
+
+
 			if (!empty($this -> dao -> select_user_login($this->db, $args[0]))) {
 				
+				// echo json_encode("antes del update");
+				// exit;
+
+				$attempts = $this -> dao -> update_attempts_login($this->db, $args[0]);
+				
+
 				$user = $this -> dao -> select_user_login($this->db, $args[0]);
-				//echo json_encode($user);
-				//  echo json_encode($user[0]['password']);
+
+
+				//echo json_encode("hola");
+				//  echo json_encode($user[0]['attempts_login']);
 				//  exit;
 
-				if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 1) {//comprobar ambos hashes sean iguales y que este active
+				if($user[0]['attempts_login'] < 3){
 
-					//echo json_encode("passw correct");
-					// echo json_encode($user[0]['username']);
-					// exit;
+					if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 1) {//comprobar ambos hashes sean iguales y que este active
 
+						//echo json_encode("passw correct");
+						// echo json_encode($user[0]['username']);
+						// exit;
 
-					//$jwt = middleware::create_token($user[0]['username']);
-					$jwt = middleware::create_token($user[0]['username']);
+						//updatear el attempts_login a 0!!!!!!!!!!
 
-					// echo json_encode($jwt);
-					// exit; 
+						//$jwt = middleware::create_token($user[0]['username']);
+						$jwt = middleware::create_token($user[0]['username']);
 
-					$_SESSION['username'] = $user[0]['username'];
-					$_SESSION['tiempo'] = time();
-                    session_regenerate_id();
-					return json_encode($jwt);
-					//echo json_encode($jwt);
-					//exit;
+						// echo json_encode($jwt);
+						// exit; 
+
+						$_SESSION['username'] = $user[0]['username'];
+						$_SESSION['tiempo'] = time();
+						session_regenerate_id();
+
+						//return json_encode($jwt);
+						echo json_encode($jwt);
+						exit;
+						
+
+					} else if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 0) {
+						return 'activate error';
+					} else {
+						return 'error';
+					}
+				}else{
+					//enviar whatsap
+					$inactive = $this -> dao -> inactive_user($this->db, $args[0]);
+
+					//require_once(SITE_ROOT . 'utils/ultramsg.inc.php');
+					if (ultramsg::send_whatsapp()) { 
+						echo json_encode('attempts_error');
+						exit;
+					} else {
+						echo json_encode('whatsapp_error');
+						exit;
+					}
 					
 
-				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 0) {
-					return 'activate error';
-				} else {
-					return 'error';
+
 				}
+
+
+
+
+
             } else {
 				return 'user error';
 			}

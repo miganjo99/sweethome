@@ -31,7 +31,7 @@ class middleware {
 
         $header = $jwt['header'];
         $secret = $jwt['secret'];
-        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'user' => $username]);
+        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'username' => $username]);
 
        
 

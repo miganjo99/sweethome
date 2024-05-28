@@ -32,13 +32,32 @@
         }
         public function select_user_login($db, $username){
 
-			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active 
+			$sql = "SELECT id_user, username, password, email, type_user, avatar, token_email, is_active, attempts_login 
                     FROM users 
                     WHERE username = '$username' OR email = '$username'";
 
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
+        }
+        
+        public function update_attempts_login($db, $username){
+
+			$sql = "UPDATE users SET attempts_login = attempts_login +1 
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            return $stmt = $db->ejecutar($sql);
+
+        }
+        public function inactive_user($db, $username){
+
+			$sql = "UPDATE `users` SET is_active = 0 
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            return $stmt = $db->ejecutar($sql);
+
         }
 
         public function select_data_user($db, $username){
