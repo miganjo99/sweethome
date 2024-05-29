@@ -78,6 +78,7 @@
 						// exit;
 
 						//updatear el attempts_login a 0!!!!!!!!!!
+						$recover = $this -> dao -> recover_attempts_login($this->db, $args[0]);
 
 						//$jwt = middleware::create_token($user[0]['username']);
 						$jwt = middleware::create_token($user[0]['username']);
@@ -104,14 +105,16 @@
 					$inactive = $this -> dao -> inactive_user($this->db, $args[0]);
 
 					//require_once(SITE_ROOT . 'utils/ultramsg.inc.php');
-					if (ultramsg::send_whatsapp()) { 
-						echo json_encode('attempts_error');
-						exit;
-					} else {
-						echo json_encode('whatsapp_error');
-						exit;
-					}
+					// ultramsg::send_whatsapp();
+					 
+					// echo json_encode('attempts_error');
+					// exit;
 					
+					$wha = json_decode(ultramsg::send_whatsapp(), true);
+
+					if (!empty($wha)) {
+						return 'attempts_error';
+					} 
 
 
 				}
@@ -125,13 +128,40 @@
 			}
 		}
 
+		public function get_actividad_BLL() {
+            if (!isset($_SESSION["tiempo"])) {  
+				return "inactivo";
+			} else {  
+				if((time() - $_SESSION["tiempo"]) >= 1800) {  
+						return "inactivo";
+				}else{
+					return (time() - $_SESSION["tiempo"]);
+				}
+			}
+		}
+
+		public function get_controluser_BLL($args) {
+			$token = explode('"', $args);
+			$void_email = "";
+			$decode = middleware::decode_username($token[1]);
+			$user = $this -> dao -> select_user($this->db, $decode, $void_email);
+
+			if (!isset ($_SESSION['username']) != $user){
+				if(isset ($_SESSION['username']) != $user) {
+					return 'Wrong_User';
+				}
+				return 'Correct_User';
+			}
+		}
 
 		public function get_data_user_BLL($args) {
 			$token = explode('"', $args);
+			
 			//$decode = middleware::decode_username($token[1]);
 
 			// echo json_encode($token[1]);
 			// exit;
+			//decode token????
 
 			$decode = middleware::decode_username($token[1]);
 			if ($decode) {

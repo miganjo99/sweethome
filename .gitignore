@@ -8,3 +8,4 @@ utils\db.ini
 utils/db.ini
 utils\resend.ini
 utils/resend.ini
+/view/js/credentials.js

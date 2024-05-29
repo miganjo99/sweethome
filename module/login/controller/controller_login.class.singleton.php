@@ -28,6 +28,21 @@ require_once('paths.php');
             echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username'], $_POST['password']]));
         }
 
+        function logout() {
+            echo json_encode('Done');
+        } 
+
+        function actividad() {
+            echo json_encode(common::load_model('login_model', 'get_actividad'));
+        }
+
+        function controluser() {
+            echo json_encode(common::load_model('login_model', 'get_controluser', $_POST['token']));
+        }
+
+        function refresh_cookie() {
+            session_regenerate_id();
+        } 
 
         function register() {
             echo json_encode(common::load_model('login_model', 'get_register', [$_POST['username_reg'], $_POST['pass_reg'], $_POST['email_reg']]));

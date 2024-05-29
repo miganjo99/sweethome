@@ -39,38 +39,7 @@ function friendlyURL(url) {
     return "http://localhost/sweethome" + link;
 }
 
-// ------------------- LOAD CONTENT ------------------------ //
-// function load_content() {
-//     let path = window.location.pathname.split('/');
-//     console.log(path);
-    
-//     if(path[3] === 'recover'){
-//         //window.location.href = friendlyURL("?module=login&op=recover_view");
-//         window.location.href = "index.php?module=login&op=recover_view";
-//         localStorage.setItem("token_email", path[4]);
 
-//     }else if (path[3] === 'verify') {
-
-//         ajaxPromise("index.php?module=login&op=verify_email", 'POST', 'JSON', {token_email: path[4]})
-//         .then(function(data) {
-//             //console.log(data);
-//             //console.log(" data load content ");
-//             toastr.options.timeOut = 3000;
-//             toastr.success('Email verified');
-//             //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
-//         })
-//         .catch(function() {
-//           console.log('Error: verify email error');
-//         });
-//     }else if (path[3] === 'view') {
-
-//         $(".login-wrap").show();
-//         $(".forget_html").hide();
-        
-//     }else if (path[3] === 'recover_view') {
-//         load_form_new_password();
-//     }
-// }
 
 //================LOAD-HEADER================
 function load_menu() {
@@ -85,9 +54,12 @@ function load_menu() {
        
 
     var token = localStorage.getItem('token');
+    
     if (token) {
-        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'token': token })
-            .then(function(data) {
+        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', token)
+        .then(function(data) {
+                console.log(token);
+                console.log("token");
 
                 console.log(data[0].type_user);
                 console.log("data menu logeado ");               
@@ -131,12 +103,12 @@ function click_logout() {
 
 //================LOG-OUT================
 function logout() {
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
+    //friendlyURL("?module=login&op=logout") 
+    ajaxPromise(friendlyURL("?module=login&op=logout"), 'POST', 'JSON')
         .then(function(data) {
-            //localStorage.removeItem('token');
-            localStorage.removeItem('acces_token');
-            localStorage.removeItem('refresh_token');
-            window.location.href = "index.php?module=ctrl_home&op=list";
+            localStorage.removeItem('token');
+            
+            window.location.href = friendlyURL("?module=home&op=view");
         }).catch(function() {
             console.log('Something has occured');
         });

@@ -50,6 +50,15 @@
             return $stmt = $db->ejecutar($sql);
 
         }
+        public function recover_attempts_login($db, $username){
+
+			$sql = "UPDATE users SET attempts_login = 0
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            return $stmt = $db->ejecutar($sql);
+
+        }
         public function inactive_user($db, $username){
 
 			$sql = "UPDATE `users` SET is_active = 0 

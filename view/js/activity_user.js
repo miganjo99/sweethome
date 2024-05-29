@@ -1,11 +1,12 @@
 function protecturl() {
-    var token_acc = localStorage.getItem('acces_token');
-    var token_ref = localStorage.getItem('refresh_token');
-    //  console.log(token_acc);
-    //  console.log(token_ref);
-    //  console.log("token_protecturl");
+    // var token_acc = localStorage.getItem('acces_token');
+    // var token_ref = localStorage.getItem('refresh_token');
+    var token = localStorage.getItem('token');
+   
 
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token_acc, 'refresh_token': token_ref })
+    //ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token_acc, 'refresh_token': token_ref })
+    
+    ajaxPromise(friendlyURL("?module=login&op=controluser"), 'POST', 'JSON', token)
         .then(function(data) {
             console.log(data);
             console.log("*********************************************************");
@@ -22,7 +23,8 @@ function protecturl() {
             } else if (data.length > 20){
                 console.log(data);
                 console.log("data.length");
-                localStorage.setItem("acces_token", data);
+                //localStorage.setItem("acces_token", data);
+                localStorage.setItem("token", data);
 
             }
         })
@@ -31,19 +33,17 @@ function protecturl() {
 
 function control_activity() {
     //var token = localStorage.getItem('token');
-    var token = localStorage.getItem('acces_token');
-    // console.log(token);
-    // console.log("token_control_activity");
+    var token = localStorage.getItem('token');
+    
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=actividad', 'POST', 'JSON')
+        //ajaxPromise('module/login/ctrl/ctrl_login.php?op=actividad', 'POST', 'JSON')
+        ajaxPromise(friendlyURL("?module=login&op=actividad"), 'POST', 'JSON')
             .then(function(response) {
-                // console.log(response);
-                // console.log("response");
+                
 
                 if (response == "inactivo") {
                     toastr.warning("Caducó la sesión");
                     console.log("usuario INACTIVO");
-                    //logout();
                     setTimeout('logout(); ', 1500);
                 } else {
                     console.log("usuario ACTIVO")
@@ -54,32 +54,18 @@ function control_activity() {
     }
 }
 
-// function refresh_token() {
-//     var token = localStorage.getItem('refresh_token');
-//     //var token = localStorage.getItem('refresh_token');
-//     if (token) {
-//         ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_token', 'POST', 'JSON', { 'refresh_token': token })
-//             .then(function(data_token) {
-//                 console.log("Refresh token correctly");
-//                 localStorage.setItem("refresh_token", data_token);
-//                 load_menu();
-//             });
-//     }
-// }
+
 
 function refresh_cookie() {
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_cookie', 'POST', 'JSON')
+    //ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_cookie', 'POST', 'JSON')
+    ajaxPromise(friendlyURL("?module=login&op=refresh_cookie"), 'POST', 'JSON')
         .then(function(response) {
             //console.log(response);
             console.log("Refresh cookie correctly");
         });
 }
 
-// function logout_auto() {
-//     localStorage.removeItem('token');
-//     toastr.warning("Se ha cerrado la cuenta por seguridad!!");
-//     setTimeout('window.location.href = "index.php?module=ctrl_login&op=login-register_view";', 2000);
-// }
+
 
 $(document).ready(function() {
     

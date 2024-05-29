@@ -21,9 +21,11 @@ require_once __DIR__ . '/vendor/autoload.php';
             $to= $ultramsg['to'];
             $body="Hemos desactivado tu cuenta en sweethome, cambia la contraseña"; 
             $api=$client->sendChatMessage($to,$body);
-            print_r($api);
+            //print_r($api);
             
-            
+            return true;
+
+            //return $api
 
         }
     }

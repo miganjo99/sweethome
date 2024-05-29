@@ -45,8 +45,8 @@
         <uri>data_user</uri>
     </function>
     <function>
-        <name>activity</name>
-        <uri>activity</uri>
+        <name>actividad</name>
+        <uri>actividad</uri>
     </function>
     <function>
         <name>controluser</name>

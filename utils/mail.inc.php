@@ -30,20 +30,6 @@
 
              $api_key = $resend['api_key'];
 
-            // $config = array();
-
-            // $config['api_key'] = $api_key; 
-
-            
-            // $message = array();
-
-            // $message['from'] = $values['fromEmail'];
-            // $message['to'] = 'miguelgandiajorda@gmail.com';
-            // $message['h:Reply-To'] = $values['inputEmail'];
-            // $message['subject'] = $values['inputMatter'];
-            // $message['html'] = $values['inputMessage'];
-            
-
 
             
             $resend = Resend::client($api_key);

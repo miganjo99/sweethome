@@ -23,6 +23,14 @@ class login_model {
         return $this -> bll -> get_login_BLL($args);
     }
 
+    public function get_actividad() {
+        return $this -> bll -> get_actividad_BLL();
+    }
+
+    public function get_controluser($args) {
+        return $this -> bll -> get_controluser_BLL($args);
+    }
+
     public function get_data_user($args) {
         return $this -> bll -> get_data_user_BLL($args);
     }
