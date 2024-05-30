@@ -141,9 +141,10 @@
 		}
 
 		public function get_controluser_BLL($args) {
-			$token = explode('"', $args);
+			// $token = explode('"', $args);
 			$void_email = "";
-			$decode = middleware::decode_username($token[1]);
+			//$decode = middleware::decode_username($token[1]);
+			$decode = middleware::decode_username($args);
 			$user = $this -> dao -> select_user($this->db, $decode, $void_email);
 
 			if (!isset ($_SESSION['username']) != $user){
@@ -155,22 +156,18 @@
 		}
 
 		public function get_data_user_BLL($args) {
-			$token = explode('"', $args);
 			
-			//$decode = middleware::decode_username($token[1]);
+			$username = middleware::decode_username($args);
 
-			// echo json_encode($token[1]);
-			// exit;
-			//decode token????
-
-			$decode = middleware::decode_username($token[1]);
-			if ($decode) {
-				return $this->dao->select_data_user($this->db, $decode);
+	
+			if ($username) {
+				return $this->dao->select_data_user($this->db, $username);
 			} else {
 				error_log("Error al decodificar el token");
 				return null;
 			}
 		}
+		
 
 		public function get_verify_email_BLL($args) {
 

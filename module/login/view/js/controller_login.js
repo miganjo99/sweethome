@@ -248,8 +248,8 @@ function login(){
             data: data,
         }).done(function(result) {
 
-            console.log(result);
-            console.log("result login");
+            // console.log(result);
+            // console.log("result login");
 
             if(result == "user error"){		
                 $("#error_username").html("The email or username does't exist");

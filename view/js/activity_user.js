@@ -6,7 +6,7 @@ function protecturl() {
 
     //ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token_acc, 'refresh_token': token_ref })
     
-    ajaxPromise(friendlyURL("?module=login&op=controluser"), 'POST', 'JSON', token)
+    ajaxPromise(friendlyURL("?module=login&op=controluser"), 'POST', 'JSON', {token : token})
         .then(function(data) {
             console.log(data);
             console.log("*********************************************************");

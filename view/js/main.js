@@ -54,9 +54,15 @@ function load_menu() {
        
 
     var token = localStorage.getItem('token');
+
+    console.log(token);
+    console.log("token");
+    
+    
     
     if (token) {
-        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', token)
+        //ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON',  token )
+        ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
         .then(function(data) {
                 console.log(token);
                 console.log("token");
