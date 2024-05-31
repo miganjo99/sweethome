@@ -61,11 +61,11 @@ function load_menu() {
     
     
     if (token) {
-        //ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON',  token )
-        ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
+        //ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
+        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', {token : token}  )
         .then(function(data) {
-                console.log(token);
-                console.log("token");
+                console.log(data);
+                console.log("data data_user");
 
                 console.log(data[0].type_user);
                 console.log("data menu logeado ");               

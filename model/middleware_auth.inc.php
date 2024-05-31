@@ -8,6 +8,8 @@ class middleware {
 		$secret = $jwt['secret'];
 		$token = $get_token;
 
+        // echo json_encode($token);
+        // exit;
 
 		$JWT = new jwt;
 		$json = $JWT -> decode($token, $secret);

@@ -123,6 +123,7 @@
 
 				//$user = $this -> dao -> select_user($this->db, $args[0], $args[1]);
 				//$jwt = middleware::create_token($user[0]['username']);
+
 				$jwt = middleware::create_token($args[0]);
 
 				return json_encode($jwt);
@@ -166,8 +167,13 @@
 
 		public function get_data_user_BLL($args) {
 			
-			$username = middleware::decode_username($args);
-
+			$json = json_decode($args);
+			// exit;
+			
+			$username = middleware::decode_username($json);
+			
+			// echo json_encode($username);
+			// exit;
 	
 			if ($username) {
 				return $this->dao->select_data_user($this->db, $username);

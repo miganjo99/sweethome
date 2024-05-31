@@ -23,11 +23,20 @@ class jwt {
     public function decode($token, $key) {
         list($header, $payload, $signature) = explode('.', $token);
         $this->data = $header . '.' . $payload;
+
+        // echo json_encode($header);
+        // exit;
+
         if ($signature == $this->JWS($this->base64url_decode($header), $key)) {
             return $this->base64url_decode($payload);
         }
+
+        // echo json_encode($signature);
+        // exit;
+
         exit('Invalid Signature');
     }
+
     
     private function setAlgorithm($algorithm) {
         switch ($algorithm[0]) {
@@ -73,6 +82,7 @@ class jwt {
         }
         return $this->base64url_encode(hash_hmac($this->hash, $this->data, $key, true));
     }
+    
 }
 
 ?>

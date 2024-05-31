@@ -14,8 +14,8 @@ function load_operacion() {
 
 function load_innovacion(operacion) {
     $('.search_innovacion').empty();
-    console.log(operacion);
-    console.log("operacion");
+    // console.log(operacion);
+    // console.log("operacion");
     if (operacion == undefined) {
         //ajaxPromise('index.php?module=search&op=search_innovacion_null', 'POST', 'JSON')
         ajaxPromise(friendlyURL('index.php?module=search&op=search_innovacion_null'), 'POST', 'JSON')

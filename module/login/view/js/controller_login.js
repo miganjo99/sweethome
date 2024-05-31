@@ -264,6 +264,7 @@ function login() {
                 toastr.error("Se ha bloqueado tu cuenta, revisa el whatsapp");
                 $('#otp_group').show();
                 $('.social_login').hide();
+                $('#button_login').hide();
             } else {
                 localStorage.setItem("token", result);
                 toastr.options.timeOut = 3000;
@@ -303,7 +304,9 @@ function verifyOtp() {
             localStorage.setItem("token", result);
             toastr.options.timeOut = 3000;
             toastr.success("Login successful");
-            setTimeout('friendlyURL("?module=home&op=view")', 1000);
+             setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+            //setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
+
 
         }
     }).fail(function() {
@@ -345,15 +348,18 @@ function social_login(param){
                 console.log(data);
                 console.log("data-social-login");
 
-                localStorage.setItem("token", data);
+                //localStorage.setItem("token", data);
+                localStorage.setItem('token', data);
+                
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
 
                 // if(localStorage.getItem('likes') == null) {
                 //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
                 // } else {
-                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-                // }
+                    //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                    // }
+                setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
             })
             .catch(function() {
                 console.log('Error: Social login error');
