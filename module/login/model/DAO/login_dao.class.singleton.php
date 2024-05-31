@@ -19,6 +19,14 @@
 
             return $stmt = $db->ejecutar($sql);
         }
+        public function insert_social_login($db, $username, $email, $provider, $avatar) {
+
+            $sql = "INSERT INTO users (`username`,  `email`, `type_user`, `provider`, `avatar`, `is_active`, `attempts_login`)
+            VALUES ('$username', '$email', 'client','$provider' ,'$avatar',1,0)";
+
+            return $stmt = $db->ejecutar($sql);
+        }
+
        
         public function select_user($db, $username_reg, $email_reg){
 
@@ -40,7 +48,26 @@
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
+        public function select_otp($db, $username){
+
+			$sql = "SELECT otp
+                    FROM users 
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
         
+        public function save_otp($db, $username, $token_wha){
+
+			$sql = "UPDATE users SET otp = '$token_wha'
+                    WHERE username = '$username' OR email = '$username'";
+
+
+            return $stmt = $db->ejecutar($sql);
+
+        }
         public function update_attempts_login($db, $username){
 
 			$sql = "UPDATE users SET attempts_login = attempts_login +1 
@@ -52,7 +79,7 @@
         }
         public function recover_attempts_login($db, $username){
 
-			$sql = "UPDATE users SET attempts_login = 0
+			$sql = "UPDATE users SET attempts_login = 0, is_active= 1
                     WHERE username = '$username' OR email = '$username'";
 
 

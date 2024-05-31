@@ -51,80 +51,89 @@
 		}
 
 		public function get_login_BLL($args) {
+			$username = $args[0];
+			$password = $args[1];
+		
+			$user = $this->dao->select_user_login($this->db, $username);
+		
+			if (!empty($user)) {
+				if ($user[0]['attempts_login'] < 3) {
+					if (password_verify($password, $user[0]['password']) && $user[0]['is_active'] == 1) {
 
+						$this->dao->recover_attempts_login($this->db, $username);
 
-
-			if (!empty($this -> dao -> select_user_login($this->db, $args[0]))) {
-				
-				// echo json_encode("antes del update");
-				// exit;
-
-				$attempts = $this -> dao -> update_attempts_login($this->db, $args[0]);
-				
-
-				$user = $this -> dao -> select_user_login($this->db, $args[0]);
-
-
-				//echo json_encode("hola");
-				//  echo json_encode($user[0]['attempts_login']);
-				//  exit;
-
-				if($user[0]['attempts_login'] < 3){
-
-					if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 1) {//comprobar ambos hashes sean iguales y que este active
-
-						//echo json_encode("passw correct");
-						// echo json_encode($user[0]['username']);
-						// exit;
-
-						//updatear el attempts_login a 0!!!!!!!!!!
-						$recover = $this -> dao -> recover_attempts_login($this->db, $args[0]);
-
-						//$jwt = middleware::create_token($user[0]['username']);
 						$jwt = middleware::create_token($user[0]['username']);
-
-						// echo json_encode($jwt);
-						// exit; 
-
 						$_SESSION['username'] = $user[0]['username'];
 						$_SESSION['tiempo'] = time();
 						session_regenerate_id();
-
-						//return json_encode($jwt);
 						echo json_encode($jwt);
 						exit;
-						
-
-					} else if (password_verify($args[1], $user[0]['password']) && $user[0]['is_active'] == 0) {
+					} else if (password_verify($password, $user[0]['password']) && $user[0]['is_active'] == 0) {
 						return 'activate error';
 					} else {
+						$this->dao->update_attempts_login($this->db, $username);
 						return 'error';
 					}
-				}else{
-					//enviar whatsap
-					$inactive = $this -> dao -> inactive_user($this->db, $args[0]);
-
-					//require_once(SITE_ROOT . 'utils/ultramsg.inc.php');
-					// ultramsg::send_whatsapp();
-					 
-					// echo json_encode('attempts_error');
-					// exit;
-					
-					$wha = json_decode(ultramsg::send_whatsapp(), true);
-
+				} else {
+					$this->dao->inactive_user($this->db, $username);
+					$token_wha = common::generate_Token_secure(3);
+					$this->dao->save_otp($this->db, $username, $token_wha);
+					$wha = json_decode(ultramsg::send_whatsapp($token_wha), true);
 					if (!empty($wha)) {
-						return 'attempts_error';
-					} 
-
-
+						echo json_encode('attempts_error');
+						exit;
+					}
 				}
-
-
-
-
-
-            } else {
+			} else {
 				return 'user error';
+			}
+		}
+		
+		public function get_verify_otp_BLL($args) {
+			
+		
+			$otp = $this->dao->select_otp($this->db, $args[0]);
+
+			//echo json_encode($otp);
+			//echo json_encode($args[1]);
+			//echo json_encode($otp[0]['otp']);
+			//echo json_encode($otp[1]);
+			//exit;
+
+		
+			if ($otp[0]['otp'] == $args[1]) {
+				$user = $this->dao->select_user_login($this->db, $args[0]);
+				$this->dao->recover_attempts_login($this->db, $args[0]);
+				$jwt = middleware::create_token($user[0]['username']);
+				$_SESSION['username'] = $user[0]['username'];
+				$_SESSION['tiempo'] = time();
+				session_regenerate_id();
+				echo json_encode($jwt);
+				exit;
+			} else {
+				return 'otp_error';
+			}
+		}
+		
+		
+
+		public function get_social_login_BLL($args) {
+
+			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[1]))) {
+
+				//$user = $this -> dao -> select_user($this->db, $args[0], $args[1]);
+				//$jwt = middleware::create_token($user[0]['username']);
+				$jwt = middleware::create_token($args[0]);
+
+				return json_encode($jwt);
+            } else {
+
+				$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
+				//$user = $this -> dao -> select_user($this->db, $args[0], $args[1]);
+				//$jwt = middleware::create_token($user[0]['username']);
+				$jwt = middleware::create_token($args[0]);
+				
+				return json_encode($jwt);
 			}
 		}
 

@@ -180,7 +180,16 @@ function click_login(){
     $('#button_login').on('click', function(e) {
         e.preventDefault();
         login();
+    });
+    
+    
+    $('#button_verify_otp').on('click', function(e) {
+        e.preventDefault();
+        verifyOtp();
     }); 
+
+
+
 
     $('#forget_pass').on('click', function(e) {
         e.preventDefault();
@@ -227,62 +236,81 @@ function validate_login() {
     }
 }
 
-function login(){
-    if(validate_login() != 0){
-        // var data = $('#login_form').serialize();
 
-        // console.log(data);
-        // console.log("data login_form");
-
-        var data=[];
-        // data.ps2
-        
+function login() {
+    if (validate_login() != 0) {
+        var data = [];
         data.push({ name: 'username', value: document.getElementById('username').value });
         data.push({ name: 'password', value: document.getElementById('password').value });
-        
+
         $.ajax({
-            //url: "index.php?module=login&op=login",
             url: friendlyURL("?module=login&op=login"),
             dataType: "JSON",
             type: "POST",
             data: data,
         }).done(function(result) {
-
-            // console.log(result);
-            // console.log("result login");
-
-            if(result == "user error"){		
-                $("#error_username").html("The email or username does't exist");
-            } else if (result == "error"){
+            if (result == "user error") {		
+                $("#error_username").html("Error nombre del usuario");
+            } else if (result == "error") {
                 $("#error_passwd").html('Wrong password');
-            } else if (result == "activate error"){
-                toastr.options.timeOut = 3000;
-                toastr.error("Verify the email");
 
-            } else if (result == "attempts_error"){
+            } else if (result == "activate error") {
+                
                 toastr.options.timeOut = 3000;
-                toastr.error("Tu cuenta se ha bloqueado, revisa el whatsapp");            
+                toastr.error("Verifica en el email");
+
+            } else if (result == "attempts_error") {
+                toastr.options.timeOut = 3000;
+                toastr.error("Se ha bloqueado tu cuenta, revisa el whatsapp");
+                $('#otp_group').show();
+                $('.social_login').hide();
             } else {
-
                 localStorage.setItem("token", result);
                 toastr.options.timeOut = 3000;
-                toastr.success("Inicio de sesión realizado");
-                // if(localStorage.getItem('likes') == null) {
-                //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-                // } else {
-                //     console.log(localStorage.getItem('product'));
-                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-                // }
+                toastr.success("Login successful");
+                setTimeout('window.location.href = "index.php?module=home&op=view"', 1000);
 
-
-
-                setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-            }	
+            }
         }).fail(function() {
             console.log('Error: Login error');
-        });     
+        });
     }
 }
+
+
+function verifyOtp() {
+    var data = [];
+
+    data.push({ name: 'username', value: document.getElementById('username').value });
+    data.push({ name: 'otp', value: document.getElementById('otp').value });
+
+    console.log(data);
+    console.log("verifyOtp");
+
+
+    $.ajax({
+        url: friendlyURL("?module=login&op=verify_otp"),
+        dataType: "JSON",
+        type: "POST",
+        data: data,
+    }).done(function(result) {
+
+        console.log(result);
+
+        if (result == "otp_error") {
+            $("#error_otp").html('Invalid OTP');
+        } else {
+            localStorage.setItem("token", result);
+            toastr.options.timeOut = 3000;
+            toastr.success("Login successful");
+            setTimeout('friendlyURL("?module=home&op=view")', 1000);
+
+        }
+    }).fail(function() {
+        console.log('Error: OTP verification error');
+    });
+}
+
 
 function social_login(param){
     authService = firebase_config();
@@ -291,30 +319,46 @@ function social_login(param){
         console.log('Hemos autenticado al usuario ', result.user);
         email_name = result.user.email;
         let username = email_name.split('@');
-        // let provider = 
+        //let type_user = result.user.providerData[0][3]
+        let provider = result.user.providerData[0].providerId;
+
+        console.log(provider);
+        console.log("provider");
+        //console.log(result.user.uid);
         console.log(username[0]);
+        console.log("username[0]");
+        console.log(result.user.email);
+        console.log("email");
+        console.log(result.user.photoURL);
+        console.log("avatar");
 
         //splitear el provider y enviarlo   a la consulta
 
 
-        social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
+        social_user = {username: username[0], email: result.user.email, provider, avatar: result.user.photoURL};
 
-        // if (result) {
-        //     ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
-        //     .then(function(data) {
-        //         localStorage.setItem("token", data);
-        //         toastr.options.timeOut = 3000;
-        //         toastr.success("Inicio de sesión realizado");
-        //         if(localStorage.getItem('likes') == null) {
-        //             setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-        //         } else {
-        //             setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-        //         }
-        //     })
-        //     .catch(function() {
-        //         console.log('Error: Social login error');
-        //     });
-        // }
+        if (result) {
+            ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
+            .then(function(data) {
+
+
+                console.log(data);
+                console.log("data-social-login");
+
+                localStorage.setItem("token", data);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+
+                // if(localStorage.getItem('likes') == null) {
+                //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+                // } else {
+                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                // }
+            })
+            .catch(function() {
+                console.log('Error: Social login error');
+            });
+        }
     })
     .catch(function(error) {
         var errorCode = error.code;

@@ -27,6 +27,9 @@ require_once('paths.php');
         function login() {
             echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username'], $_POST['password']]));
         }
+        function verify_otp() {
+            echo json_encode(common::load_model('login_model', 'get_verify_otp', [$_POST['username'], $_POST['otp']]));
+        }
 
         function logout() {
             echo json_encode('Done');
@@ -71,6 +74,15 @@ require_once('paths.php');
         function data_user() {
             echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['token']));
         }
+
+        function social_login() {
+            echo json_encode(common::load_model('login_model', 'get_social_login', [$_POST['username'], $_POST['email'],$_POST['provider'], $_POST['avatar']]));
+        } 
+    
+
+
+
+
     }
 
     

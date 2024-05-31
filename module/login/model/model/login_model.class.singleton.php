@@ -22,6 +22,12 @@ class login_model {
     public function get_login($args) {
         return $this -> bll -> get_login_BLL($args);
     }
+    public function get_verify_otp($args) {
+        return $this -> bll -> get_verify_otp_BLL($args);
+    }
+    public function get_social_login($args) {
+        return $this -> bll -> get_social_login_BLL($args);
+    }
 
     public function get_actividad() {
         return $this -> bll -> get_actividad_BLL();
