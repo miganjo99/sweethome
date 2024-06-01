@@ -89,6 +89,17 @@
 
         }
 
+        public function likes($db, $username, $id_vivienda){
+
+
+
+
+            $sql = "CALL procedure_like('$username', $id_vivienda)";
+
+            return $stmt = $db->ejecutar($sql);
+
+        }
+
 
 
         public function select_viviendas_related($db , $type, $loaded, $items) {

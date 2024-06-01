@@ -55,9 +55,17 @@ function load_menu() {
 
     var token = localStorage.getItem('token');
 
+    try {
+        var parsear_token = JSON.parse(token);
+        token = parsear_token;
+    } catch (e) {
+        console.log("No se ha podido parsear el token");
+    }
     console.log(token);
     console.log("token");
     
+    
+    //token = JSON.parse(token);
     
     
     if (token) {

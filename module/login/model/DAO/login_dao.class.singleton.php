@@ -104,6 +104,14 @@
             return $db->listar($stmt);
         }
 
+        // public function select_provider($db, $username){
+
+		// 	$sql = "SELECT provider FROM users WHERE username = '$username'";
+            
+        //     $stmt = $db->ejecutar($sql);
+        //     return $db->listar($stmt);
+        // }
+
         public function select_verify_email($db, $token_email){
 
 			$sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";

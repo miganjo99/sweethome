@@ -46,6 +46,28 @@
 			
 			return $this -> dao -> select_filtro_orientacion($this->db);
 		}
+
+
+
+        public function get_likes_BLL($args) {
+
+			// $token = decode_token($args[0]);
+			
+			// echo json_encode($token);
+			// exit;
+
+			$json = json_decode($args[0]);			
+			$username = middleware::decode_username($json);
+			
+			$result = $this-> dao -> likes($this->db, $username, $args[1]);
+
+		
+			echo json_encode(["result" => $result]);
+
+
+			exit;
+
+		}
 		
 		
         // public function get_details_vivienda_BLL($id_vivienda) {

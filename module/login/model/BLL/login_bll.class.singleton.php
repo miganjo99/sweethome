@@ -167,14 +167,9 @@
 
 		public function get_data_user_BLL($args) {
 			
-			$json = json_decode($args);
-			// exit;
-			
-			$username = middleware::decode_username($json);
-			
-			// echo json_encode($username);
-			// exit;
-	
+						
+			$username = middleware::decode_username($args);
+						
 			if ($username) {
 				return $this->dao->select_data_user($this->db, $username);
 			} else {
@@ -182,7 +177,53 @@
 				return null;
 			}
 		}
+
+
+
+		// public function get_data_user_social_BLL($args) {
+			
+		// 	$json = json_decode($args);
+		// 	// exit;
+			
+		// 	$username = middleware::decode_username($json);
+			
+		// 	// echo json_encode($username);
+		// 	// exit;
+	
+		// 	if ($username) {
+		// 		return $this->dao->select_data_user($this->db, $username);
+		// 	} else {
+		// 		error_log("Error al decodificar el token");
+		// 		return null;
+		// 	}
+		// }
 		
+		
+
+		// public function get_data_user_BLL($args) {
+
+		// 	// echo json_encode("Hola data user");
+		// 	// exit;
+
+		// 	$provider = $this->dao->select_provider($this->db, $args);
+
+		// 	// echo json_encode($provider['provider']);
+		// 	// exit;
+		
+		// 	if($provider == 'Local'){
+		// 		$username = middleware::decode_username($args);
+		// 	} else {
+		// 		$json = json_decode($args);
+		// 		$username = middleware::decode_username($json);
+		// 	}
+		
+		// 	if ($username) {
+		// 		return $this->dao->select_data_user($this->db, $username);
+		// 	} else {
+		// 		error_log("Error al decodificar el token");
+		// 		return null;
+		// 	}
+		// }
 
 		public function get_verify_email_BLL($args) {
 

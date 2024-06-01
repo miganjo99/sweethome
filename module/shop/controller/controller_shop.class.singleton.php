@@ -52,6 +52,9 @@
             //echo ($_GET['id_vivienda']);
             echo json_encode(common::load_model('shop_model', 'get_details_vivienda',$_GET['id_vivienda']));
         }
+        function likes() {
+            echo json_encode(common::load_model('shop_model', 'get_likes',[$_POST['token'],$_POST['id_vivienda']]));
+        }
 
         function viviendas_related() {
             
