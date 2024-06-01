@@ -51,14 +51,10 @@
 
         public function get_likes_BLL($args) {
 
-			// $token = decode_token($args[0]);
-			
-			// echo json_encode($token);
-			// exit;
 
-			$json = json_decode($args[0]);			
-			$username = middleware::decode_username($json);
-			
+			$username = middleware::decode_username($args[0]);
+
+
 			$result = $this-> dao -> likes($this->db, $username, $args[1]);
 
 		
@@ -68,13 +64,26 @@
 			exit;
 
 		}
+        public function get_mis_likes_BLL($args) {
+
+			$username = middleware::decode_username($args);
+    
+			$result = $this-> dao -> mis_likes($this->db, $username);
+
 		
 		
-        // public function get_details_vivienda_BLL($id_vivienda) {
-			
-			// 	//return $id_vivienda;
-			// 	return $this -> dao -> select_details_vivienda($this->db, $id_vivienda);
-			// }
+			if (!empty($result)) {
+				echo json_encode($result);
+				exit; 
+			} else {
+				echo json_encode(["message" => "Este usuario no tiene likes"]); 
+				exit;
+			}
+
+		}
+		
+		
+       
 			
 			
 		public function get_details_vivienda_BLL($id_vivienda) {

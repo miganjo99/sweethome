@@ -62,6 +62,11 @@
         <uri>likes</uri>
     </function>
     <function>
+        <name>mis_likes</name>
+        <uri>mis_likes</uri>
+    </function>
+   
+    <function>
         <name>all_viviendas</name>
         <uri>all_viviendas</uri>
     </function>

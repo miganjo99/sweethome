@@ -73,11 +73,15 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
             $('.date_vivienda' && '.date_img').empty();
         
            
-            // var verificate_acces_token = localStorage.getItem('acces_token') || null;
+            var verificate_token = localStorage.getItem('token') || null;
 
-            // if (verificate_acces_token !=  null) {
-            //     mis_likes();     
-            // }
+            // console.log(verificate_token);
+            // console.log("verificate_token");
+
+            if (verificate_token !=  null) {
+                //console.log("entro al verificate_token");
+                mis_likes();     
+            }
             
             if (data == "error") {
                 $('<div></div>').appendTo('#content_shop_viviendas')
@@ -382,7 +386,11 @@ function clicks() {
 
         localStorage.setItem("like",id_vivienda);
 
+
         likes(id_vivienda);
+
+
+
     });
 }
 
@@ -404,11 +412,11 @@ function loadDetails(id_vivienda) {
         //console.log(data[0][0]);
         //console.log(data.vivienda[0]);
         
-        // var verificate_acces_token = localStorage.getItem('acces_token') || null;
+        var verificate_token = localStorage.getItem('token') || null;
 
-            // if (verificate_acces_token !=  null) {//un unico filters
-            //     mis_likes_details(id_vivienda);     
-            // }
+            if (verificate_token !=  null) {//un unico filters
+                mis_likes_details(id_vivienda);     
+            }
 
             for (row in data.imagenes) {
             //console.log(data.imagenes[row].img_vivienda);
@@ -479,20 +487,24 @@ function loadDetails(id_vivienda) {
 function likes(id_vivienda) {
     let token = localStorage.getItem("token");
 
+    console.log(token);
+    console.log(id_vivienda);
+    console.log("token en likes");
+    
     if (token) {
         ajaxPromise(friendlyURL("?module=shop&op=likes"), 'POST', 'JSON', {"token": token,"id_vivienda": id_vivienda})
         .then(function(data) {
             
-            console.log(data);
+            console.log(data.result[0].result);
             console.log("***************likes**************");
 
 
-            if (data.result == 'add') {
+            if (data.result[0].result == 'add') {
 
                 $('#' + id_vivienda + ' .details__heart').addClass('fa-solid');
                 $('#' + id_vivienda + ' .details__heart').removeClass('fa-regular');
                 
-            } else if (data.result == 'borrar') {
+            } else if (data.result[0].result == 'borrar') {
                 
                 $('#' + id_vivienda + ' .details__heart').removeClass('fa-solid');
                 $('#' + id_vivienda + ' .details__heart').addClass('fa-regular');
@@ -511,12 +523,12 @@ function likes(id_vivienda) {
 }
 
 function mis_likes() {
-    var acces_token = localStorage.getItem('acces_token');
+    var token = localStorage.getItem('token');
 
-    console.log("Token de acceso:", acces_token);
+    //console.log(token);
 
-    if (acces_token != null) {
-        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=mis_likes', 'POST', 'JSON', {'acces_token': acces_token})
+    if (token != null) {
+        ajaxPromise(friendlyURL("?module=shop&op=mis_likes"), 'POST', 'JSON', {'token': token})
             .then(function(data) {
                 console.log("Datos recibidos:", data);
 
@@ -525,6 +537,8 @@ function mis_likes() {
                     $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-regular');
                     $('#' + item.id_vivienda + ' .details__heart').addClass('fa-solid');
                 });
+
+                
                 
             })
             .catch(function(error) {
@@ -535,35 +549,52 @@ function mis_likes() {
     } else {
         toastr.warning("Debes iniciar sesión para ver tus likes.");
         setTimeout(function() {
-            window.location.href = "index.php?page=ctrl_login&op=login-register_view";
+            window.location.href = friendlyURL("?module=login&op=view") ;
         }, 2000);
     }
 }
 
 function mis_likes_details(id_vivienda) {
-    var acces_token = localStorage.getItem('acces_token');
+    var token = localStorage.getItem('token');
 
-    console.log("Token de acceso:", acces_token);
+    console.log(token);
 
-    if (acces_token != null) {
-        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=mis_likes', 'POST', 'JSON', {'acces_token': acces_token})
+    if (token != null) {
+        ajaxPromise(friendlyURL("?module=shop&op=mis_likes"), 'POST', 'JSON', {'token': token})
             .then(function(data) {
                 console.log(data);
+                console.log(id_vivienda);
+
                 console.log("*************DETAILS********************");
 
                 
-                // data.forEach(function(item) {
-                //     console.log(item.id_vivienda);
-                //     $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-regular');
-                //     $('#' + item.id_vivienda + ' .details__heart').addClass('fa-solid');
-                // });
-                if(data.id_vivienda == id_vivienda){
-                    $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-regular');
-                    $('#' + item.id_vivienda + ' .details__heart').addClass('fa-solid');
-                }else{
-                    $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-solid');
-                    $('#' + item.id_vivienda + ' .details__heart').addClass('fa-regular');
-                }
+                data.forEach(function(item) {
+                    console.log(item.id_vivienda);
+                    console.log("item.id_vivienda");
+
+                    if(item.id_vivienda == id_vivienda){
+                        console.log(id_vivienda);
+                        console.log(item.id_vivienda);
+                        console.log("**********item.id_vivienda*********");
+
+                        $('#' + item.id_vivienda + ' .details__heart').addClass('fa-solid');
+                        $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-regular');
+
+                        
+
+                    }else{
+
+                        $('#' + item.id_vivienda + ' .details__heart').removeClass('fa-solid');
+                        $('#' + item.id_vivienda + ' .details__heart').addClass('fa-regular');
+                    }
+
+
+                });
+
+             
+
+                
+
                 
             })
             .catch(function(error) {
@@ -573,7 +604,7 @@ function mis_likes_details(id_vivienda) {
     } else {
         toastr.warning("Debes iniciar sesión para ver tus likes.");
         setTimeout(function() {
-            window.location.href = "index.php?page=ctrl_login&op=login-register_view";
+            window.location.href = friendlyURL("?module=login&op=view") ;
         }, 2000);
     }
 }
@@ -751,9 +782,9 @@ function viviendas_related(offset = 0, related, total_items) {
     let type = related;
     let total_item = total_items;
 
-    console.log(type);
-    console.log(loaded);
-    console.log(items);
+    // console.log(type);
+    // console.log(loaded);
+    // console.log(items);
     
     //ajaxPromise("index.php?module=shop&op=viviendas_related", 'POST', 'JSON', { 'type': type, 'loaded': loaded, 'items': items })
     ajaxPromise(friendlyURL("?module=shop&op=viviendas_related"), 'POST', 'JSON', { 'type': type, 'loaded': loaded, 'items': items })

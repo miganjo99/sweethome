@@ -88,15 +88,28 @@
             return $db->listar($stmt);
 
         }
-
+        
         public function likes($db, $username, $id_vivienda){
-
-
-
-
+            
+            
             $sql = "CALL procedure_like('$username', $id_vivienda)";
+            
+            $stmt = $db->ejecutar($sql);
+            
+            return $db->listar($stmt);            
+        }
 
-            return $stmt = $db->ejecutar($sql);
+        
+        public function mis_likes($db, $username) {
+            $sql = "SELECT id_vivienda
+            FROM likes l
+            JOIN users u ON l.id_user = u.id_user
+            WHERE u.username = '$username'";
+    
+            $stmt = $db->ejecutar($sql);
+    
+            
+            return $db->listar($stmt);
 
         }
 

@@ -55,6 +55,12 @@
 
             return $this -> bll -> get_likes_BLL($args);
         }
+        
+        public function get_mis_likes($args) {
+
+            return $this -> bll -> get_mis_likes_BLL($args);
+        }
+
         public function get_count_viviendas_related($args) {
 
             return $this -> bll -> get_count_viviendas_related_BLL($args);
