@@ -110,7 +110,11 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                             "</ul>" +
                             "<div class='buttons'>" +
                             "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
+                            "<button id='" + data[row].id_vivienda + "' class='comprar_sweethome'>comprar</button>" +
                             "<a id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg details__heart'></i></a>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
                             "</div>" +
                             "</div>" +
                             "</div>" +
@@ -380,18 +384,64 @@ function clicks() {
     
     $(document).on("click", ".details__heart", function() {
         //alert("click like");
+        let id_vivienda = this.getAttribute('id');
+        localStorage.setItem("like",id_vivienda);
+        likes(id_vivienda);
+
+    });
+    $(document).on("click", ".comprar_sweethome", function() {
+        //alert("click like");
 
 
         let id_vivienda = this.getAttribute('id');
 
         localStorage.setItem("like",id_vivienda);
 
-
-        likes(id_vivienda);
+        carrito(id_vivienda);
 
 
 
     });
+}
+
+
+function carrito(id_vivienda) {
+
+    var token = localStorage.getItem('token');
+
+    console.log(token);
+    console.log(id_vivienda);
+    console.log("token en likes");
+
+    var token = localStorage.getItem('token');
+
+    try {
+        var parsear_token = JSON.parse(token);
+        token = parsear_token;
+    } catch (e) {
+        console.log("No se ha podido parsear el token");
+    }
+
+    
+    if (token) {
+        ajaxPromise(friendlyURL("?module=shop&op=carrito"), 'POST', 'JSON', {"token": token,"id_vivienda": id_vivienda})
+        .then(function(data) {
+            
+            console.log(data);
+            //si se ha añadido correctamente toastr de que se ha añadido correctamente
+            //si no hay stock toastr de que no hay stock
+            
+    
+
+    
+        })   
+    }else{
+        toastr.warning("Inicia sesión para poder comprar");
+        setTimeout(function() {
+            window.location.href = friendlyURL("?module=login&op=view") ;
+        }, 2000);
+    }
+
 }
 
 function loadDetails(id_vivienda) {
@@ -485,11 +535,21 @@ function loadDetails(id_vivienda) {
 
 
 function likes(id_vivienda) {
-    let token = localStorage.getItem("token");
+   // let token = localStorage.getItem("token");
 
     console.log(token);
     console.log(id_vivienda);
     console.log("token en likes");
+
+    var token = localStorage.getItem('token');
+
+    try {
+        var parsear_token = JSON.parse(token);
+        token = parsear_token;
+    } catch (e) {
+        console.log("No se ha podido parsear el token");
+    }
+
     
     if (token) {
         ajaxPromise(friendlyURL("?module=shop&op=likes"), 'POST', 'JSON', {"token": token,"id_vivienda": id_vivienda})

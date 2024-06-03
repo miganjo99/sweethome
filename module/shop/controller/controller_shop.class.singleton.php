@@ -57,6 +57,9 @@
         function likes() {
             echo json_encode(common::load_model('shop_model', 'get_likes',[$_POST['token'],$_POST['id_vivienda']]));
         }
+        function carrito() {
+            echo json_encode(common::load_model('shop_model', 'get_carrito',[$_POST['token'],$_POST['id_vivienda']]));
+        }
 
         function mis_likes() {
             echo json_encode(common::load_model('shop_model', 'get_mis_likes', $_POST['token']));

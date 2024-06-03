@@ -50,6 +50,7 @@ function load_menu() {
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=home") + '" class="nav_link">Home</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login") + '" class="nav_link">Login</a>').appendTo('.nav');
+    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=cart") + '" class="nav_link"><i class="fa-solid fa-cart-shopping"></i> Cart</a>').appendTo('.nav');
 
        
 

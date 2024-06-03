@@ -55,6 +55,10 @@
 
             return $this -> bll -> get_likes_BLL($args);
         }
+        public function get_carrito($args) {
+
+            return $this -> bll -> get_carrito_BLL($args);
+        }
         
         public function get_mis_likes($args) {
 

@@ -56,6 +56,14 @@
     define('JS_VIEW_SHOP', SITE_PATH . 'module/shop/view/js/');
     define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
 
+    //MODEL_CART
+    define('UTILS_CART', SITE_ROOT . 'module/cart/utils/');
+    define('DAO_CART', SITE_ROOT . 'module/cart/model/DAO/');
+    define('BLL_CART', SITE_ROOT . 'module/cart/model/BLL/');
+    define('MODEL_CART', SITE_ROOT . 'module/cart/model/model/');
+    define('JS_VIEW_CART', SITE_PATH . 'module/cart/view/js/');
+    define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
+
     //MODEL_ERRORS
     // define('UTILS_ERRORS', SITE_ROOT . 'module/errors/utils/');
     // define('DAO_ERRORS', SITE_ROOT . 'module/errors/model/DAO/');

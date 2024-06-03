@@ -64,6 +64,19 @@
 			exit;
 
 		}
+
+        public function get_carrito_BLL($args) {
+			$username = middleware::decode_username($args[0]);
+
+			$result = $this-> dao -> carrito($this->db, $username, $args[1]);
+
+	
+			echo json_encode(["result" => $result]);
+
+
+			exit;
+
+		}
         public function get_mis_likes_BLL($args) {
 
 			$username = middleware::decode_username($args);
