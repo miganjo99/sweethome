@@ -395,7 +395,7 @@ function clicks() {
 
         let id_vivienda = this.getAttribute('id');
 
-        localStorage.setItem("like",id_vivienda);
+        //localStorage.setItem("like",id_vivienda);
 
         carrito(id_vivienda);
 
@@ -413,7 +413,6 @@ function carrito(id_vivienda) {
     console.log(id_vivienda);
     console.log("token en likes");
 
-    var token = localStorage.getItem('token');
 
     try {
         var parsear_token = JSON.parse(token);
@@ -430,7 +429,11 @@ function carrito(id_vivienda) {
             console.log(data);
             //si se ha añadido correctamente toastr de que se ha añadido correctamente
             //si no hay stock toastr de que no hay stock
-            
+            if (data.result == 'Vivienda_add') {
+                toastr.success("Se ha añadido correctamente");
+            }else if (data.result == 'No_stock') {
+                toastr.error("No hay stock");
+            }
     
 
     
@@ -479,7 +482,7 @@ function loadDetails(id_vivienda) {
                     "<img src= 'http://localhost/sweethome/" + data.imagenes[row].img_vivienda + "'" + "</img>" +
                     "</div>"
                 )
-        }
+            }
 
         $('<div></div>').attr({ 'id': data.vivienda[0].id_vivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
             .html(
@@ -586,6 +589,12 @@ function mis_likes() {
     var token = localStorage.getItem('token');
 
     //console.log(token);
+    try {
+        var parsear_token = JSON.parse(token);
+        token = parsear_token;
+    } catch (e) {
+        console.log("No se ha podido parsear el token");
+    }
 
     if (token != null) {
         ajaxPromise(friendlyURL("?module=shop&op=mis_likes"), 'POST', 'JSON', {'token': token})
@@ -604,7 +613,7 @@ function mis_likes() {
             .catch(function(error) {
                 console.error(error);
 
-                toastr.error("Ocurrió un error al obtener tus likes.");
+                //toastr.error("Ocurrió un error al obtener tus likes.");
             });
     } else {
         toastr.warning("Debes iniciar sesión para ver tus likes.");

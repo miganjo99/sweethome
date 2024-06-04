@@ -3,8 +3,8 @@ function carousel_innovacion() {
   ajaxPromise(friendlyURL('?module=home&op=carousel_innovacion'),'GET', 'JSON')
   .then(function(data) {   
 
-      console.log(data);
-      console.log("promesa data");
+    //   console.log(data);
+    //   console.log("promesa data");
       
       for (row in data) {
                

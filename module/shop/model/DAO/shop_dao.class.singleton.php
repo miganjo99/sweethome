@@ -98,15 +98,17 @@
             
             return $db->listar($stmt);            
         }
+        
+       
         public function carrito($db, $username, $id_vivienda){
-            
-            
-            $sql = "CALL control_carrito('$username', $id_vivienda)";
-            
-            $stmt = $db->ejecutar($sql);
-            
-            return $db->listar($stmt);            
+            $sql = "CALL control_carrito('$username', $id_vivienda, @result)";
+            $db->ejecutar($sql);
+            $result = $db->ejecutar("SELECT @result AS result");
+            //$row = $result->fetch_assoc();
+            $row = $result->fetch_assoc();
+            return $row['result'];            
         }
+
 
         
         public function mis_likes($db, $username) {

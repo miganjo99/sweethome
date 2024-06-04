@@ -11,7 +11,7 @@
 		static $_instance;
 
 		function __construct() {
-			$this -> dao = home_dao::getInstance();
+			$this -> dao = cart_dao::getInstance();
 			
 			$this -> db = db::getInstance();
 		}
@@ -21,6 +21,25 @@
 				self::$_instance = new self();
 			}
 			return self::$_instance;
+		}
+
+		public function get_carrito_usuario_BLL($args) {
+			
+				
+
+
+			$username = middleware::decode_username($args);
+
+		
+						
+			if ($username) {
+				return $this->dao->select_carrito_usuario($this->db, $username);
+
+				
+			} else {
+				error_log("Error al decodificar el token");
+				return null;
+			}
 		}
 
 	}

@@ -19,5 +19,13 @@
             return self::$_instance;
         }
 
+        public function select_carrito_usuario($db, $username) {
+
+            $sql = "SELECT * FROM `cart` WHERE username='$username'  ORDER BY precio";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+
     }
 ?>

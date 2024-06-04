@@ -68,6 +68,8 @@
         public function get_carrito_BLL($args) {
 			$username = middleware::decode_username($args[0]);
 
+			
+
 			$result = $this-> dao -> carrito($this->db, $username, $args[1]);
 
 	

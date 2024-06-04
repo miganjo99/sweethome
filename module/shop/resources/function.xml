@@ -65,6 +65,10 @@
         <name>mis_likes</name>
         <uri>mis_likes</uri>
     </function>
+    <function>
+        <name>carrito</name>
+        <uri>carrito</uri>
+    </function>
    
     <function>
         <name>all_viviendas</name>

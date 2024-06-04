@@ -20,6 +20,11 @@
             common::load_view('top_page_cart.html', VIEW_PATH_CART . 'cart.html');
             
         }
+        function carrito_usuario() {
+            
+
+            echo json_encode(common::load_model('cart_model', 'get_carrito_usuario', $_POST['token']));
+        }
         
     }
 ?>
