@@ -21,10 +21,52 @@
 
         public function select_carrito_usuario($db, $username) {
 
-            $sql = "SELECT * FROM `cart` WHERE username='$username'  ORDER BY precio";
+            $sql = "SELECT * 
+            FROM cart c, vivienda v 
+            WHERE c.username='$username'
+            AND c.id_vivienda=v.id_vivienda";
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
+        }
+        public function add_vivienda($db,$username, $id_vivienda) {
+
+            $sql = "CALL add_vivienda_carrito('$username', '$id_vivienda', @result)";
+
+            
+            $db->ejecutar($sql);
+            
+            $result = $db->ejecutar("SELECT @result AS result");
+            $row = $result->fetch_assoc();
+            return $row['result'];            
+            //return $db -> listar($row['result']);            
+            
+        }
+        public function quitar_vivienda($db,$username, $id_vivienda) {
+
+            $sql = "CALL quitar_vivienda_carrito('$username', '$id_vivienda', @result)";
+
+            
+            $db->ejecutar($sql);
+            
+            $result = $db->ejecutar("SELECT @result AS result");
+            $row = $result->fetch_assoc();
+            return $row['result'];            
+            //return $db -> listar($row['result']);            
+            
+        }
+        public function borrar_linea($db,$username, $id_vivienda) {
+
+            $sql = "CALL borrar_linea_carrito('$username', '$id_vivienda', @result)";
+
+            
+            $db->ejecutar($sql);
+            
+            $result = $db->ejecutar("SELECT @result AS result");
+            $row = $result->fetch_assoc();
+            return $row['result'];            
+            //return $db -> listar($row['result']);            
+            
         }
 
     }

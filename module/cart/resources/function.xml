@@ -9,6 +9,18 @@
         <name>carrito_usuario</name>
         <uri>carrito_usuario</uri>
     </function>
+    <function>
+        <name>add_vivienda</name>
+        <uri>add_vivienda</uri>
+    </function>
+    <function>
+        <name>quitar_vivienda</name>
+        <uri>quitar_vivienda</uri>
+    </function>
+    <function>
+        <name>borrar_linea</name>
+        <uri>borrar_linea</uri>
+    </function>
 
 
 </functions>
