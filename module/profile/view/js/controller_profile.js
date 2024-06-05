@@ -21,9 +21,7 @@ function carrito_usuario(){
           console.log("CARRITO USUARIO");
           console.log(data);
 
-          var total = 0;
-
-        if (data.length > 0) {
+          if (data.length > 0) {
             console.log("Hay productos en el carrito");
             data.forEach(function(data) {
                 var row = $("<div class='cart_tabla'></div>");
@@ -31,19 +29,16 @@ function carrito_usuario(){
                 row.append("<div>ID: " + data.id_vivienda + "</div>");
                 row.append("<div>Estado: " + data.estado + "</div>");
                 row.append("<div>m2: " + data.m2 + "</div>");
+                //row.append("<div>Nombre: Vivienda " + data.id_vivienda + "</div>"); 
                 row.append("<div>Precio: " + data.precio + "</div>");
                 row.append("<div>Cantidad: " + data.cantidad + "</div>");
-                var subtotal = data.precio * data.cantidad;
-                row.append("<div>Subtotal: " + subtotal + "</div>");
-                total += subtotal;
+                row.append("<div>Subtotal: " + (data.precio * data.cantidad) + "</div>");
                 row.append("<div class='buttons_cart'><button id='" + data.id_vivienda +
                  "' class='add_viv'>Añadir</button><button id='" + data.id_vivienda +
                   "' class='remove_viv'>Quitar</button><button id='" + data.id_vivienda +
                    "' class='delete_linea'>Borrar</button></div>");
                 $("#cartDiv").append(row);
             });
-            $("#cartDiv").append("<div class='buttons_cart'><button id='" + total + "' class='comprar_carrito'>Comprar</button></div>");
-            $("#cartDiv").append("<div class='total_cart'>Total: " + total + "</div>");
         } else {
             console.log("No hay productos en el carrito");
             $("#cartDiv").html("<p>No hay productos en el carrito</p>");
@@ -79,13 +74,6 @@ function clicks_carrito(){
       var id_vivienda = this.getAttribute('id');      
       console.log("hola delete_linea");
       borrar_linea(id_vivienda);
-  
-    });
-
-    $(document).on('click', '.comprar_carrito', function(e) {
-      var total = this.getAttribute('id');      
-      console.log("hola comprar carrito");
-      comprar(total);
   
     });
 }  
@@ -212,56 +200,12 @@ function borrar_linea(id_vivienda){
     
   } 
 
-}
 
-
-function comprar(total){
-
-
-  var token = localStorage.getItem('token');
-  console.log("hola comprar");
-  console.log(total);
-  console.log(token);
-
-  try {
-    var parsear_token = JSON.parse(token);
-    token = parsear_token;
-  } catch (e) {
-      //console.log("No se ha podido parsear el token");
-  }
-
-  if (token) {
-    console.log("hay token en el cart ");
-    ajaxPromise(friendlyURL("?module=cart&op=comprar"), 'POST', 'JSON', {'token': token, 'total': total})
-      .then(function(data) {
-          
-        console.log("COMPRAR");
-        console.log(data);
-        if(data.result == "Compra_realizada"){
-          toastr.success("Compra realizada con éxito");
-          setTimeout(function() {
-            window.location.href = friendlyURL("?module=profile&op=view") ;
-          }, 2000);
-        }
-        if(data.result == "No_encontrado"){
-        toastr.warning("No se ha podido realizar la compra");
-        }
-        
-        
-      }).catch(function() {
-          //error.log();
-
-          console.log("entro al CATCH");
-    });
-  }else{
-    //error.log()
-      toastr.warning("No tienes productos en el carrito");
-    
-  } 
 
 
 
 }
+
 
 $(document).ready(function() {
  

@@ -70,6 +70,10 @@ function load_menu() {
     
     
     if (token) {
+
+        $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=profile") + '" class="nav_link">Porfile</a>').appendTo('.nav');
+
+
         //ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
         ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', {token : token}  )
         .then(function(data) {

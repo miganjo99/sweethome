@@ -10,8 +10,8 @@
         public static function load_view($topPage, $view) {
             $topPage = VIEW_PATH_INC . $topPage;
             //$topPage = 'C:/xampp/htdocs/sweethome/view/inc/top_page_home.php';
-             //echo($topPage);
-            // echo($view)
+            //  echo($topPage);
+            // echo($view);
             
           
 

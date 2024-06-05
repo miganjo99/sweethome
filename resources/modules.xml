@@ -18,12 +18,8 @@
     </module>
     
     <module>
-        <name>contact</name>
-        <uri>contact</uri>
-    </module>
-    <module>
-        <name>errors</name>
-        <uri>errors</uri>
+        <name>profile</name>
+        <uri>profile</uri>
     </module>
    
     <module>
