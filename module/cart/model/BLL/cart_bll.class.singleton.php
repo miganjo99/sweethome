@@ -97,6 +97,27 @@
 
 			
 		}
+		public function get_comprar_BLL($args) {
+				
+			
+			$username = middleware::decode_username($args);	
+			
+
+			if ($username) {
+				$result =  $this->dao->comprar_carrito($this->db, $username);
+				
+
+				echo json_encode(["result" => $result]);
+				exit;
+						
+			} else {
+				error_log("Error al decodificar el token");
+				return null;
+			}
+
+
+			
+		}
 
 	}
 ?>

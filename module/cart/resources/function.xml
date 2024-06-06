@@ -21,6 +21,10 @@
         <name>borrar_linea</name>
         <uri>borrar_linea</uri>
     </function>
+    <function>
+        <name>comprar</name>
+        <uri>comprar</uri>
+    </function>
 
 
 </functions>

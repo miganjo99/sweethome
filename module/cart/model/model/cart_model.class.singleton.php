@@ -32,6 +32,9 @@
         public function get_borrar_linea($args) {
             return $this -> bll -> get_borrar_linea_BLL($args);
         }
+        public function get_comprar($args) {
+            return $this -> bll -> get_comprar_BLL($args);
+        }
 
     }
 ?>

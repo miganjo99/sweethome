@@ -15,7 +15,7 @@ function carrito_usuario(){
 
     if (token) {
       console.log("hay token en el cart ");
-      ajaxPromise(friendlyURL("?module=cart&op=carrito_usuario"), 'POST', 'JSON', {'token': token})
+      ajaxPromise(friendlyURL("?module=cart&op=carrito_usuario"), 'POST', 'JSON',   {'token': token})
         .then(function(data) {
             
           console.log("CARRITO USUARIO");
@@ -42,7 +42,7 @@ function carrito_usuario(){
                    "' class='delete_linea'>Borrar</button></div>");
                 $("#cartDiv").append(row);
             });
-            $("#cartDiv").append("<div class='buttons_cart'><button id='" + total + "' class='comprar_carrito'>Comprar</button></div>");
+            $("#cartDiv").append("<div class='buttons_cart'><button id='compra' class='comprar_carrito'>Comprar</button></div>");
             $("#cartDiv").append("<div class='total_cart'>Total: " + total + "</div>");
         } else {
             console.log("No hay productos en el carrito");
@@ -83,9 +83,8 @@ function clicks_carrito(){
     });
 
     $(document).on('click', '.comprar_carrito', function(e) {
-      var total = this.getAttribute('id');      
       console.log("hola comprar carrito");
-      comprar(total);
+      comprar();
   
     });
 }  
@@ -215,12 +214,11 @@ function borrar_linea(id_vivienda){
 }
 
 
-function comprar(total){
+function comprar(){
 
 
   var token = localStorage.getItem('token');
   console.log("hola comprar");
-  console.log(total);
   console.log(token);
 
   try {
@@ -232,7 +230,7 @@ function comprar(total){
 
   if (token) {
     console.log("hay token en el cart ");
-    ajaxPromise(friendlyURL("?module=cart&op=comprar"), 'POST', 'JSON', {'token': token, 'total': total})
+    ajaxPromise(friendlyURL("?module=cart&op=comprar"), 'POST', 'JSON', {'token': token})
       .then(function(data) {
           
         console.log("COMPRAR");
@@ -243,7 +241,7 @@ function comprar(total){
             window.location.href = friendlyURL("?module=profile&op=view") ;
           }, 2000);
         }
-        if(data.result == "No_encontrado"){
+        if(data.result == "No_carrito"){
         toastr.warning("No se ha podido realizar la compra");
         }
         

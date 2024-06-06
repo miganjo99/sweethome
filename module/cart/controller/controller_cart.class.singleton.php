@@ -32,6 +32,9 @@
         function borrar_linea() {            
             echo json_encode(common::load_model('cart_model', 'get_borrar_linea', [$_POST['token'], $_POST['id_vivienda']]));
         }
+        function comprar() {            
+            echo json_encode(common::load_model('cart_model', 'get_comprar', $_POST['token']));
+        }
         
     }
 ?>
