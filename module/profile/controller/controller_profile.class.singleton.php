@@ -20,6 +20,10 @@
             common::load_view('top_page_profile.html', VIEW_PATH_PROFILE . 'profile.html');       
         }
 
+        function facturas() {            
+            echo json_encode(common::load_model('profile_model', 'get_facturas', $_POST['token']));
+        }
+
        
         
     }

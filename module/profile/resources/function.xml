@@ -6,6 +6,10 @@
         <name>view</name>
         <uri>view</uri>
     </function>
+    <function>
+        <name>facturas</name>
+        <uri>facturas</uri>
+    </function>
     
 
 

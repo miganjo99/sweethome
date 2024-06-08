@@ -19,55 +19,19 @@
             return self::$_instance;
         }
 
-        public function select_carrito_usuario($db, $username) {
+        public function select_facturas_usuario($db, $username) {
 
-            $sql = "SELECT * 
-            FROM cart c, vivienda v 
-            WHERE c.username='$username'
-            AND c.id_vivienda=v.id_vivienda";
+            $sql = "SELECT *
+            FROM cart c
+            JOIN vivienda v ON c.id_vivienda = v.id_vivienda
+            WHERE c.username = '$username'
+            AND c.estado = 'Comprado'
+            GROUP BY c.id_vivienda, c.id_pedido, c.username, c.precio, c.estado";
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
-        public function add_vivienda($db,$username, $id_vivienda) {
-
-            $sql = "CALL add_vivienda_carrito('$username', '$id_vivienda', @result)";
-
-            
-            $db->ejecutar($sql);
-            
-            $result = $db->ejecutar("SELECT @result AS result");
-            $row = $result->fetch_assoc();
-            return $row['result'];            
-            //return $db -> listar($row['result']);            
-            
-        }
-        public function quitar_vivienda($db,$username, $id_vivienda) {
-
-            $sql = "CALL quitar_vivienda_carrito('$username', '$id_vivienda', @result)";
-
-            
-            $db->ejecutar($sql);
-            
-            $result = $db->ejecutar("SELECT @result AS result");
-            $row = $result->fetch_assoc();
-            return $row['result'];            
-            //return $db -> listar($row['result']);            
-            
-        }
-        public function borrar_linea($db,$username, $id_vivienda) {
-
-            $sql = "CALL borrar_linea_carrito('$username', '$id_vivienda', @result)";
-
-            
-            $db->ejecutar($sql);
-            
-            $result = $db->ejecutar("SELECT @result AS result");
-            $row = $result->fetch_assoc();
-            return $row['result'];            
-            //return $db -> listar($row['result']);            
-            
-        }
+       
 
     }
 ?>
