@@ -23,6 +23,12 @@
         public function get_facturas($args) {
             return $this -> bll -> get_facturas_BLL($args);
         }
+        public function get_user_likes($args) {
+            return $this -> bll -> get_user_likes_BLL($args);
+        }
+        public function get_datos_user($args) {
+            return $this -> bll -> get_datos_user_BLL($args);
+        }
         
 
     }

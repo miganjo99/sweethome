@@ -23,6 +23,12 @@
         function facturas() {            
             echo json_encode(common::load_model('profile_model', 'get_facturas', $_POST['token']));
         }
+        function user_likes() {            
+            echo json_encode(common::load_model('profile_model', 'get_user_likes', $_POST['token']));
+        }
+        function datos_user() {            
+            echo json_encode(common::load_model('profile_model', 'get_datos_user', $_POST['token']));
+        }
 
        
         

@@ -31,6 +31,26 @@
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
+        public function select_likes_usuario($db, $username) {
+
+            $sql = "SELECT * 
+                    FROM likes l, vivienda v, users u
+                    WHERE u.username='$username'
+                    AND u.id_user=l.id_user
+                    AND v.id_vivienda=l.id_vivienda";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+        public function select_datos_usuario($db, $username) {
+
+            $sql = "SELECT * 
+                    FROM users
+                    WHERE username='$username'";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
        
 
     }

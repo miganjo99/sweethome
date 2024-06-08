@@ -10,6 +10,14 @@
         <name>facturas</name>
         <uri>facturas</uri>
     </function>
+    <function>
+        <name>user_likes</name>
+        <uri>user_likes</uri>
+    </function>
+    <function>
+        <name>datos_user</name>
+        <uri>datos_user</uri>
+    </function>
     
 
 

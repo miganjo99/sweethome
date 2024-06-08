@@ -693,7 +693,7 @@ function mapBox_all(data) {
         minPopup.setHTML('<h3 style="text-align:center;">' + data[row].precio + '€</h3>' +
         '<p style="text-align:center;">Estado: <b>' + data[row].estado + '</b></p>' +
         '<p style="text-align:center;">Descripcion: <b>' + data[row].descripcion + '</b></p>' +
-        '<img src="' + data[row].img_vivienda + '"/>' +
+        "<img src= 'http://localhost/sweethome/" + data.imagenes[row].img_vivienda + "'" + "</img>" +
         '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall more_info_list" ' +
         'data-wow-delay=".4s" id="' + data[row].id_vivienda + '">Read More</a>')
         marker.setPopup(minPopup)

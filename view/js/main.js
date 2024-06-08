@@ -49,12 +49,16 @@ function load_menu() {
     //$('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + ("index.php?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=home") + '" class="nav_link">Home</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>').appendTo('.nav');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login") + '" class="nav_link">Login</a>').appendTo('.nav');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=cart") + '" class="nav_link"><i class="fa-solid fa-cart-shopping"></i> Cart</a>').appendTo('.nav');
+    
+    var token = localStorage.getItem('token');
+    
+    if (!token) {
+        $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login") + '" class="nav_link">Login</a>').appendTo('.nav');
 
+    }
        
 
-    var token = localStorage.getItem('token');
 
     try {
         var parsear_token = JSON.parse(token);
@@ -77,11 +81,11 @@ function load_menu() {
         //ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
         ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', {token : token}  )
         .then(function(data) {
-                console.log(data);
-                console.log("data data_user");
+                // console.log(data);
+                // console.log("data data_user");
 
-                console.log(data[0].type_user);
-                console.log("data menu logeado ");               
+                // console.log(data[0].type_user);
+                // console.log("data menu logeado ");               
 
 
                 $('.log-icon').empty();
