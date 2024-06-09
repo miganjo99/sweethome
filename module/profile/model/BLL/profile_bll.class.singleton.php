@@ -60,6 +60,19 @@
 			}
 		}
 		
+		public function get_update_user_BLL($args) {
+					
+			$username = middleware::decode_username($args[0]);						
+			if ($username) {
+				return $this->dao->update_avatar_usuario($this->db, $username, $args[1]);
+
+				
+			} else {
+				error_log("Error al decodificar el token");
+				return null;
+			}
+		}
+		
 
 	}
 ?>

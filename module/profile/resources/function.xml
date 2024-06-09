@@ -18,6 +18,10 @@
         <name>datos_user</name>
         <uri>datos_user</uri>
     </function>
+    <function>
+        <name>update_avatar</name>
+        <uri>update_avatar</uri>
+    </function>
     
 
 

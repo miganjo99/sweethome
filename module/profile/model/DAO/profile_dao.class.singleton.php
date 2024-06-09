@@ -51,6 +51,15 @@
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
+        public function update_avatar_usuario($db, $username, $avatar) {
+
+            $sql = "UPDATE users
+                    SET avatar='$avatar'
+                    WHERE username='$username'";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
        
 
     }

@@ -29,6 +29,9 @@
         function datos_user() {            
             echo json_encode(common::load_model('profile_model', 'get_datos_user', $_POST['token']));
         }
+        function update_avatar() {            
+            echo json_encode(common::load_model('profile_model', 'get_update_user', [$_POST['token'],$_POST['avatar']]));
+        }
 
        
         

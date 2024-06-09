@@ -29,7 +29,9 @@
         public function get_datos_user($args) {
             return $this -> bll -> get_datos_user_BLL($args);
         }
-        
+        public function get_update_user($args) {
+            return $this -> bll -> get_update_user_BLL($args);
+        }
 
     }
 ?>
