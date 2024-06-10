@@ -1,7 +1,8 @@
 {
     "require": {
         "resend/resend-php": "^0.12.0",
-        "ultramsg/whatsapp-php-sdk": "^2.0"
+        "ultramsg/whatsapp-php-sdk": "^2.0",
+        "tecnickcom/tcpdf": "^6.7"
     }
     
 }

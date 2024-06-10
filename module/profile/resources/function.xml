@@ -22,6 +22,10 @@
         <name>update_avatar</name>
         <uri>update_avatar</uri>
     </function>
+    <function>
+        <name>pdf_factura</name>
+        <uri>pdf_factura</uri>
+    </function>
     
 
 

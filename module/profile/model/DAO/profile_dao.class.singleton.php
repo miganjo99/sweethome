@@ -61,6 +61,18 @@
             return $db -> listar($stmt);
         }
        
+        public function select_pdf_usuario($db, $username, $id_pedido) {
+
+            $sql = "SELECT *
+            FROM cart c
+            JOIN vivienda v ON c.id_vivienda = v.id_vivienda
+            WHERE c.username = '$username'
+            AND c.id_pedido = '$id_pedido'
+            GROUP BY c.id_vivienda, c.id_pedido, c.username, c.precio, c.estado";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
 
     }
 ?>

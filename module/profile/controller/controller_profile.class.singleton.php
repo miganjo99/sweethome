@@ -32,6 +32,9 @@
         function update_avatar() {            
             echo json_encode(common::load_model('profile_model', 'get_update_user', [$_POST['token'],$_POST['avatar']]));
         }
+        function pdf_factura() {            
+            echo json_encode(common::load_model('profile_model', 'get_pdf_factura', [$_POST['token'],$_POST['id_pedido']]));
+        }
 
        
         

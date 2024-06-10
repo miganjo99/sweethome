@@ -72,6 +72,18 @@
 				return null;
 			}
 		}
+		public function get_pdf_factura_BLL($args) {
+					
+			$username = middleware::decode_username($args[0]);						
+			if ($username) {
+				return $this->dao->select_pdf_usuario($this->db, $username, $args[1]);
+
+				
+			} else {
+				error_log("Error al decodificar el token");
+				return null;
+			}
+		}
 		
 
 	}

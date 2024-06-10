@@ -30,8 +30,8 @@ function facturas(){
               <p>Precio Total: ${row.cantidad * row.precio}</p>
             </div>
             <div class="factura-buttons">
-              <button class="pdf_boton">FACTURA</button>
-              <button class="qr_boton">   QR  </button>
+              <button id="${row.id_pedido}" class="pdf_boton">FACTURA</button>
+              <button id="${row.id_pedido}" class="qr_boton">   QR  </button>
             </div>
           `;
           factura_contenedor.appendChild(facturaDiv);
@@ -47,6 +47,86 @@ function facturas(){
 
 }
 
+function clicks_profile(){
+
+  $(document).on('click', '.pdf_boton', function(e) {
+    
+      let id_pedido = this.getAttribute('id');      
+      console.log("hola factura id_pedido");
+      pdf_factura(id_pedido);
+
+
+  });
+
+
+}
+
+
+function pdf_factura(id_pedido) {
+  let token = localStorage.getItem("token");
+
+  console.log(id_pedido);
+
+  try {
+      var parsear_token = JSON.parse(token);
+      token = parsear_token;
+  } catch (e) {
+      //console.log("No se ha podido parsear el token");
+  }
+  if (token) {
+      ajaxPromise(friendlyURL("?module=profile&op=pdf_factura"), "POST", "JSON", { "token": token, "id_pedido": id_pedido})
+          .then(function(pdf) {
+              console.log(pdf);
+
+
+
+
+              generarPDF(pdf);
+          }).catch(function(error) {
+              console.log(error);
+          });
+  }
+
+
+
+  
+}
+
+function generarPDF(pdf) {
+  if (pdf) {
+      $.ajax({
+          url: "utils/tcpdf.inc.php",
+          type: "POST",
+          data: {
+              pdf: JSON.stringify(pdf) 
+          },
+          success: function(response) {
+            console.log(response);
+            console.log("response");
+
+            var jsonResponse = JSON.parse(response);
+           
+            console.log(jsonResponse);
+
+            var link = document.createElement('a');
+            link.href = "http://localhost/sweethome/view/uploads/pdf/" + 'factura_' + pdf[0].id_pedido + '.pdf';
+            link.download = 'factura_' + pdf[0].id_pedido + '.pdf';
+
+            console.log(pdf[0].id_pedido);
+            console.log("pdf[0].id_pedido");
+
+            document.body.appendChild(link); 
+            link.click();
+            document.body.removeChild(link);
+          },
+          error: function(xhr, status, error) {
+              console.error("Error al generar el PDF:", error);
+          }
+      });
+  }
+}
+
+
 function user_likes(){
 
   let token = localStorage.getItem("token");
@@ -60,7 +140,7 @@ function user_likes(){
 
     ajaxPromise(friendlyURL("?module=profile&op=user_likes"), "POST", "JSON", {"token":token})
     .then(function(data){
-      console.log(data);
+      // console.log(data);
         let likes_contenedor = document.getElementById('likes-container');
         likes_contenedor.innerHTML = ''; 
 
@@ -102,8 +182,8 @@ function datos_user() {
     ajaxPromise(friendlyURL("?module=profile&op=datos_user"), "POST", "JSON", { "token": token })
         .then(function (data) {
 
-            console.log("data de datos_user");
-            console.log(data);
+            // console.log("data de datos_user");
+            // console.log(data);
             let user_contenedor = document.getElementById('user-container');
             user_contenedor.innerHTML = '';
 
@@ -135,7 +215,7 @@ function datos_user() {
 
 
 function initDropzone() {
-  console.log("initDropzone");
+  // console.log("initDropzone");
   new Dropzone("#my-dropzone", {
       url: "utils/upload.inc.php", 
       paramName: "file", // El nombre que se utilizará para transferir el archivo
@@ -165,7 +245,8 @@ function initDropzone() {
 
                 ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
                 .then(function(data){
-                  console.log(data);
+                  // console.log(data);
+                  
                   datos_user();
                 }).catch(function(error){
                   console.log(error);
@@ -188,5 +269,5 @@ $(document).ready(function() {
   facturas();
   datos_user();
   user_likes();
-  //clicks_profile();
+  clicks_profile();
 });
