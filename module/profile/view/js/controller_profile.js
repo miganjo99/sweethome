@@ -246,8 +246,8 @@ function initDropzone() {
                 ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
                 .then(function(data){
                   // console.log(data);
-                  
-                  datos_user();
+                  location.reload();
+                  //datos_user();
                 }).catch(function(error){
                   console.log(error);
                 })
