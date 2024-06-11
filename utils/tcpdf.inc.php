@@ -1,69 +1,65 @@
 <?php
 require_once('vendor/autoload.php');
-require_once __DIR__ . '/vendor/autoload.php';
+
+class tcpdf_inc {
+
+    public static function create_pdf($pdf) {
+
+        // Verifica si se ha proporcionado algún dato
+        if ($pdf) {
+
+                $data = json_decode($pdf, true);
+
+                if (!is_array($data) || empty($data)) {
+                    return ['error' => 'No se ha proporcionado ningún dato válido para generar el PDF.'];
+                }
+
+                $tcpdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+                $tcpdf->SetCreator(PDF_CREATOR);
+                $tcpdf->SetAuthor('Autor');
+                $tcpdf->SetTitle('Factura');
+                $tcpdf->SetSubject('Factura del Pedido');
+                $tcpdf->SetKeywords('TCPDF, PDF, factura, pedido');
+
+                $tcpdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Factura', "Pedido ID: {$data[0]['id_pedido']}");
+                $tcpdf->setFooterData(array(0,64,0), array(0,64,128));
+
+                $tcpdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+                $tcpdf->SetFontSize(10);
+
+                $tcpdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+                $tcpdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+                $tcpdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+                $tcpdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+                $tcpdf->setFontSubsetting(true);
+
+                $tcpdf->AddPage();
+
+                foreach ($data as $row) {
+                    $tcpdf->Write(5, "ID Pedido: {$row['id_pedido']}\n");
+                    $tcpdf->Write(5, "Cantidad: {$row['cantidad']}\n");
+                    $tcpdf->Write(5, "Descripción: {$row['descripcion']}\n");
+                    $tcpdf->Write(5, "Fecha de Publicación: {$row['fecha_publicacion']}\n");
+                    $tcpdf->Write(5, "Precio Unitario: {$row['precio']}\n");
+                    $tcpdf->Write(5, "Precio Total: " . $row['cantidad'] * $row['precio'] . "\n");
+                    $tcpdf->Ln(); 
+                }
+
+                $relativa = '/sweethome/view/uploads/pdf/factura_' . $data[0]['id_pedido'] . '.pdf';
+                $filePath = $_SERVER['DOCUMENT_ROOT'] . $relativa;
 
 
-if (isset($_POST['pdf'])) {
-    $data = json_decode($_POST['pdf'], true); 
+                $tcpdf->Output($filePath, 'F');
 
-    
+                return ['filePath' => $relativa];
 
-    // Crea una nueva instancia de TCPDF
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-    // Establece la información del documento
-    $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetAuthor('Autor');
-    $pdf->SetTitle('Factura');
-    $pdf->SetSubject('Factura del Pedido');
-    $pdf->SetKeywords('TCPDF, PDF, factura, pedido');
-
-    // Establece el encabezado y el pie de página
-    $pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Factura', "Pedido ID: {$data[0]['id_pedido']}");
-    $pdf->setFooterData(array(0,64,0), array(0,64,128));
-
-    // Establece el tamaño de la fuente
-    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-    $pdf->SetFontSize(10);
-
-    // Establece los márgenes
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-    // Establece el espacio entre líneas
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-    // Establece el modo de subconjunto de la fuente
-    $pdf->setFontSubsetting(true);
-
-    // Agrega una página
-    $pdf->AddPage();
-
-    // Contenido del PDF
-    foreach ($data as $row) {
-        $pdf->Write(5, "ID Pedido: {$row['id_pedido']}\n");
-        $pdf->Write(5, "Cantidad: {$row['cantidad']}\n");
-        $pdf->Write(5, "Descripción: {$row['descripcion']}\n");
-        $pdf->Write(5, "Fecha de Publicación: {$row['fecha_publicacion']}\n");
-        $pdf->Write(5, "Precio Unitario: {$row['precio']}\n");
-        $pdf->Write(5, "Precio Total: " . $row['cantidad'] * $row['precio'] . "\n");
-        $pdf->Ln(); 
+            } else {
+                return ['error' => 'No se ha proporcionado ningún dato para generar el PDF.'];
+            }
+        }
     }
-
-    // Define la ruta donde se guardará el PDF
-    $filePath = $_SERVER['DOCUMENT_ROOT'] . 'sweethome/view/uploads/pdf/factura_' . $data[0]['id_pedido'] . '.pdf';
-
-    // Guarda el PDF en el archivo especificado
-    $pdf->Output($filePath, 'F');
-
-    // Envía la ruta del archivo de vuelta al cliente
-    echo json_encode(['filePath' => $filePath]);
-} else {
-    die("No se ha proporcionado ningún dato para generar el PDF.");
-}
-
-
-
 
 ?>

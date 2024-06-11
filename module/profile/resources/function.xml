@@ -23,6 +23,14 @@
         <uri>update_avatar</uri>
     </function>
     <function>
+        <name>generar_pdf</name>
+        <uri>generar_pdf</uri>
+    </function>
+    <function>
+        <name>generar_qr</name>
+        <uri>generar_qr</uri>
+    </function>
+    <function>
         <name>pdf_factura</name>
         <uri>pdf_factura</uri>
     </function>

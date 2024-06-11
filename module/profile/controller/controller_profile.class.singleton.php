@@ -32,6 +32,21 @@
         function update_avatar() {            
             echo json_encode(common::load_model('profile_model', 'get_update_user', [$_POST['token'],$_POST['avatar']]));
         }
+        function generar_pdf() { 
+            
+            $args = json_decode($_POST['pdf'], true);
+            $result = common::load_model('profile_model', 'get_generar_pdf', $args);
+            echo json_encode($result);
+                
+            //echo json_encode(common::load_model('profile_model', 'get_generar_pdf', $_POST['pdf']));
+        }
+
+        public function generar_qr() {
+            $args = json_decode($_POST['data'], true);
+            $result = common::load_model('profile_model', 'get_generar_qr', $args);
+            echo json_encode($result);
+        }
+        
         function pdf_factura() {            
             echo json_encode(common::load_model('profile_model', 'get_pdf_factura', [$_POST['token'],$_POST['id_pedido']]));
         }

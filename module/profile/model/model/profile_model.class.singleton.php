@@ -32,6 +32,13 @@
         public function get_update_user($args) {
             return $this -> bll -> get_update_user_BLL($args);
         }
+        public function get_generar_pdf($args) {
+            return $this -> bll -> get_generar_pdf_BLL($args);
+        }
+
+        public function get_generar_qr($args) {
+            return $this -> bll -> get_generar_qr_BLL($args);
+        }
         public function get_pdf_factura($args) {
             return $this -> bll -> get_pdf_factura_BLL($args);
         }

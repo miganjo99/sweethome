@@ -57,6 +57,15 @@ function clicks_profile(){
 
 
   });
+  $(document).on('click', '.qr_boton', function(e) {
+    
+      let data = this.getAttribute('id'); 
+      
+      console.log("hola qr data");
+      generarQR(data);
+
+
+  });
 
 
 }
@@ -78,9 +87,6 @@ function pdf_factura(id_pedido) {
           .then(function(pdf) {
               console.log(pdf);
 
-
-
-
               generarPDF(pdf);
           }).catch(function(error) {
               console.log(error);
@@ -93,38 +99,69 @@ function pdf_factura(id_pedido) {
 }
 
 function generarPDF(pdf) {
+
   if (pdf) {
-      $.ajax({
-          url: "utils/tcpdf.inc.php",
-          type: "POST",
-          data: {
-              pdf: JSON.stringify(pdf) 
-          },
-          success: function(response) {
+      ajaxPromise(friendlyURL("?module=profile&op=generar_pdf"), "POST", "JSON", { "pdf": JSON.stringify(pdf) })  
+          .then(function(response) {
             console.log(response);
             console.log("response");
 
-            var jsonResponse = JSON.parse(response);
-           
-            console.log(jsonResponse);
-
             var link = document.createElement('a');
-            link.href = "http://localhost/sweethome/view/uploads/pdf/" + 'factura_' + pdf[0].id_pedido + '.pdf';
+            link.href = "http://localhost" + response.filePath;
             link.download = 'factura_' + pdf[0].id_pedido + '.pdf';
-
-            console.log(pdf[0].id_pedido);
-            console.log("pdf[0].id_pedido");
-
             document.body.appendChild(link); 
             link.click();
             document.body.removeChild(link);
-          },
-          error: function(xhr, status, error) {
-              console.error("Error al generar el PDF:", error);
-          }
-      });
+
+
+
+          }).catch(function() {
+            error.log('error total_items');
+            console.log('error total_items');
+        });
   }
 }
+
+function generarQR(data) {
+
+  console.log(data);
+  console.log("data");
+
+  if (data) {
+    ajaxPromise(friendlyURL("?module=profile&op=generar_qr"), "POST", "JSON", { "data": data })  
+        .then(function(response) {
+          console.log(response);
+
+            if (response.error) {
+                console.error("Error del servidor: " + response.error);
+                return;
+            }
+
+           
+              console.log(response.filePath);
+              console.log(data);
+
+
+              // var link = document.createElement('a');
+              // link.href = "http://localhost/" + response.filePath;
+              // //link.download = 'qrcode_' + id_pedido + '.png'; 
+              // link.download = 'qrcode_' + data + '.png'; 
+
+              // // console.log(link);
+              // // console.log("link");
+              // document.body.appendChild(link); 
+              // link.click();
+              // document.body.removeChild(link);
+
+
+              window.open(response.filePath['filePath'], '_blank');
+
+        }).catch(function(error) {
+            console.error("Error en la solicitud AJAX:", error);
+        });
+  }
+}
+
 
 
 function user_likes(){
@@ -166,7 +203,6 @@ function user_likes(){
       })
     }
 }
-
 
 
 function datos_user() {
@@ -212,8 +248,6 @@ function datos_user() {
   }
 }
 
-
-
 function initDropzone() {
   // console.log("initDropzone");
   new Dropzone("#my-dropzone", {
@@ -223,44 +257,45 @@ function initDropzone() {
       acceptedFiles: "image/*",
       init: function() {
 
-          this.on("success", function(file, response) {
+        this.on("success", function(file, response) {
 
-            var jsonrespone = JSON.parse(response);
-            console.log("Respuesta parseada:", jsonrespone);
-            //var avatar= jsonrespone['file'];
-            var avatar = 'http://localhost' + jsonrespone['file'].substring(15);//para que me salte parte de la ruta absolua(xamp//y htdocs)
-            //de este modo se guarda bien la ruta en bbdd para mostrarla luego 
-            console.log("Ruta del archivo:", avatar);
-
-
-
-              let token = localStorage.getItem("token");
-              try {
-                var parsear_token = JSON.parse(token);
-                token = parsear_token;
-              } catch (e) {
-                  //console.log("No se ha podido parsear el token");
-              }
-              if(token){
-
-                ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
-                .then(function(data){
-                  // console.log(data);
-                  location.reload();
-                  //datos_user();
-                }).catch(function(error){
-                  console.log(error);
-                })
-              }
+          var jsonrespone = JSON.parse(response);
+          console.log("Respuesta parseada:", jsonrespone);
+          //var avatar= jsonrespone['file'];
+          var avatar = 'http://localhost' + jsonrespone['file'].substring(15);//para que me salte parte de la ruta absolua(xamp//y htdocs)
+          //de este modo se guarda bien la ruta en bbdd para mostrarla luego 
+          console.log("Ruta del archivo:", avatar);
 
 
-          });
-          this.on("error", function(file, errorMessage) {
-              console.error("Error al subir el archivo:", errorMessage);
-          });
+
+            let token = localStorage.getItem("token");
+            try {
+              var parsear_token = JSON.parse(token);
+              token = parsear_token;
+            } catch (e) {
+                //console.log("No se ha podido parsear el token");
+            }
+            if(token){
+
+              ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
+              .then(function(data){
+                // console.log(data);
+                location.reload();
+                //datos_user();
+              }).catch(function(error){
+                console.log(error);
+              })
+            }
+
+
+        });
+        this.on("error", function(file, errorMessage) {
+            console.error("Error al subir el archivo:", errorMessage);
+        });
       }
   });
 }
+
 
 
 $(document).ready(function() {
