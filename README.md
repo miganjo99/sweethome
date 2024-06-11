@@ -10,6 +10,9 @@ Este proyecto es parte del curso de 1º de Desarrollo de Aplicaciones Web (DAW) 
 - Autenticación social (Social Auth)
 - Carrito de compras
 - Sistema de Likes
+- Filtros (Dentro del shop)
+- Search
+  
 
 <h2 align="center">Tecnologias usadas en el proyecto</h2>
 <div align="center">
