@@ -27,6 +27,10 @@
         <uri>generar_pdf</uri>
     </function>
     <function>
+        <name>upload</name>
+        <uri>upload</uri>
+    </function>
+    <function>
         <name>generar_qr</name>
         <uri>generar_qr</uri>
     </function>

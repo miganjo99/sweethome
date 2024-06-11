@@ -42,6 +42,9 @@
         public function get_pdf_factura($args) {
             return $this -> bll -> get_pdf_factura_BLL($args);
         }
+        public function get_upload_avatar($args) {
+            return $this -> bll -> get_upload_avatar_BLL($args);
+        }
 
     }
 ?>

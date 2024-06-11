@@ -4,6 +4,7 @@
 	// include_once('module/home/model/DAO/home_dao.class.singleton.php');
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/sweethome/utils/tcpdf.inc.php');
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/sweethome/utils/qrgenerator.inc.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/sweethome/utils/upload.inc.php');
 
 	
 
@@ -94,16 +95,11 @@
 				$filePath = QRCodeGenerator::create_qr(json_encode($args));
 				return ['filePath' => $filePath];
 			} else {
-				// Manejar el caso en el que no se ha proporcionado ningún dato válido
 				return ['error' => 'No se ha proporcionado ningún dato válido para generar el QR code.'];
 			}
 			
-			// if (isset($filePath['filePath'])) {
-			// 	return ['filePath' => $filePath['filePath']];
-			// } else {				
-			// 	echo "La clave 'filePath' no está definida en el array devuelto por QRCodeGenerator::create_qr.";
-			// 	return ['error' => "La clave 'filePath' no está definida en el array devuelto por QRCodeGenerator::create_qr."];
-			// }
+			
+			
 		}
 		
 
@@ -118,6 +114,17 @@
 			} else {
 				error_log("Error al decodificar el token");
 				return null;
+			}
+		}
+		
+		public function get_upload_avatar_BLL($args) {
+			if (isset($_FILES['file'])) {
+				error_log("Archivo recibido: " . print_r($_FILES['file'], true)); 
+				$result = FileUploader::uploadFile($_FILES['file']);
+				return $result;
+			} else {
+				error_log("No se recibió ningún archivo."); 
+				return "No se recibió ningún archivo.";
 			}
 		}
 		

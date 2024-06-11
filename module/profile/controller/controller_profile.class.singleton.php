@@ -51,7 +51,9 @@
             echo json_encode(common::load_model('profile_model', 'get_pdf_factura', [$_POST['token'],$_POST['id_pedido']]));
         }
 
-       
+       function upload(){
+            echo json_encode(common::load_model('profile_model', 'get_upload_avatar', $_FILES['file']));
+        }
         
     }
 ?>

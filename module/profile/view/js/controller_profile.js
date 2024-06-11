@@ -142,16 +142,7 @@ function generarQR(data) {
               console.log(data);
 
 
-              // var link = document.createElement('a');
-              // link.href = "http://localhost/" + response.filePath;
-              // //link.download = 'qrcode_' + id_pedido + '.png'; 
-              // link.download = 'qrcode_' + data + '.png'; 
-
-              // // console.log(link);
-              // // console.log("link");
-              // document.body.appendChild(link); 
-              // link.click();
-              // document.body.removeChild(link);
+              
 
 
               window.open(response.filePath['filePath'], '_blank');
@@ -227,20 +218,42 @@ function datos_user() {
                 let userDiv = document.createElement('div');
                 userDiv.className = 'div_user';
                 userDiv.innerHTML = `
-                <div>
-                    <img class="user-img" src="${row.avatar}" >
-                    <form action="upload.inc.php" class="dropzone" id="my-dropzone"></form>
+                <div style="text-align: center;">
+                  <img class="user-img" src="${row.avatar}" >
+                  <form id="uploadForm" enctype="multipart/form-data">
+                    <br>
+                    <input type="file" name="file" id="file">
+                    <br>
+                    <button type="submit" id="uploadBtn">Upload</button>
+                  </form>
                 </div>
                 <div class="user-info">
-                    <p><strong>Nombre:</strong> ${row.username}</p>
-                    <p><strong>Email:</strong> ${row.email}</p>
-                    <p><strong>Id:</strong> ${row.id_user}</p>
+                  <p><strong>Nombre:</strong> ${row.username}</p>
+                  <p><strong>Email:</strong> ${row.email}</p>
+                  <p><strong>Id:</strong> ${row.id_user}</p>
                 </div>
-            `;
+                `;
                 user_contenedor.appendChild(userDiv);
-            });
 
-            initDropzone();
+
+
+
+                let uploadForm = userDiv.querySelector('#uploadForm');
+                uploadForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    let formData = new FormData(this);
+  
+                    console.log(formData);
+                    console.log("formData");
+                    uploadFile(formData, token); 
+                });
+
+                
+                
+                
+                });
+                
+            //initFileUpload();
 
         }).catch(function (error) {
             console.log(error);
@@ -248,53 +261,96 @@ function datos_user() {
   }
 }
 
-function initDropzone() {
-  // console.log("initDropzone");
-  new Dropzone("#my-dropzone", {
-      url: "utils/upload.inc.php", 
-      paramName: "file", // El nombre que se utilizará para transferir el archivo
-      maxFilesize: 2, // MB
-      acceptedFiles: "image/*",
-      init: function() {
+function uploadFile(formData, token) {
+  $.ajax({
+      url: friendlyURL("?module=profile&op=upload"),
+      method: "POST",
+      dataType: "JSON",
+      data: formData,
+      processData: false,
+      contentType: false,
+     
+      success: function(data) {
+        data = JSON.parse(data);
+        console.log(data.avatarUrl);
 
-        this.on("success", function(file, response) {
-
-          var jsonrespone = JSON.parse(response);
-          console.log("Respuesta parseada:", jsonrespone);
-          //var avatar= jsonrespone['file'];
-          var avatar = 'http://localhost' + jsonrespone['file'].substring(15);//para que me salte parte de la ruta absolua(xamp//y htdocs)
-          //de este modo se guarda bien la ruta en bbdd para mostrarla luego 
-          console.log("Ruta del archivo:", avatar);
+          //let avatarUrl = data.avatarUrl.replace(/\\/g, '');
+          //let avatarUrl = 'http:/' + data.avatarUrl;
 
 
-
-            let token = localStorage.getItem("token");
-            try {
-              var parsear_token = JSON.parse(token);
-              token = parsear_token;
-            } catch (e) {
-                //console.log("No se ha podido parsear el token");
-            }
-            if(token){
-
-              ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
-              .then(function(data){
-                // console.log(data);
-                location.reload();
-                //datos_user();
-              }).catch(function(error){
-                console.log(error);
-              })
-            }
-
-
-        });
-        this.on("error", function(file, errorMessage) {
-            console.error("Error al subir el archivo:", errorMessage);
-        });
+        Update_avatar(token, data.avatarUrl);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.error(textStatus + ': ' + errorThrown);
       }
   });
 }
+
+
+function Update_avatar(token, avatarUrl) {
+
+  console.log(avatarUrl);
+  console.log("avatarUrl"); 
+
+  ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatarUrl})
+      .then(function(data){
+          // console.log(data);
+          location.reload();
+          //datos_user();
+      }).catch(function(error){
+          console.log(error);
+      });
+}
+
+
+
+// function initDropzone() {
+//   // console.log("initDropzone");
+//   new Dropzone("#my-dropzone", {
+//       url: "utils/upload.inc.php", 
+//       paramName: "file", // El nombre que se utilizará para transferir el archivo
+//       maxFilesize: 2, // MB
+//       acceptedFiles: "image/*",
+//       init: function() {
+
+//         this.on("success", function(file, response) {
+
+//           var jsonrespone = JSON.parse(response);
+//           console.log("Respuesta parseada:", jsonrespone);
+//           //var avatar= jsonrespone['file'];
+//           var avatar = 'http://localhost' + jsonrespone['file'].substring(15);//para que me salte parte de la ruta absolua(xamp//y htdocs)
+//           //de este modo se guarda bien la ruta en bbdd para mostrarla luego 
+//           console.log("Ruta del archivo:", avatar);
+
+
+
+//             let token = localStorage.getItem("token");
+//             try {
+//               var parsear_token = JSON.parse(token);
+//               token = parsear_token;
+//             } catch (e) {
+//                 //console.log("No se ha podido parsear el token");
+//             }
+//             if(token){
+
+//               ajaxPromise(friendlyURL("?module=profile&op=update_avatar"), "POST", "JSON", {"token":token, "avatar":avatar})
+//               .then(function(data){
+//                 // console.log(data);
+//                 location.reload();
+//                 //datos_user();
+//               }).catch(function(error){
+//                 console.log(error);
+//               })
+//             }
+
+
+//         });
+//         this.on("error", function(file, errorMessage) {
+//             console.error("Error al subir el archivo:", errorMessage);
+//         });
+//       }
+//   });
+// }
 
 
 
